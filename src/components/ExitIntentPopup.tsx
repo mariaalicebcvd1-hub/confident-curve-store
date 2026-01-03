@@ -51,8 +51,16 @@ const ExitIntentPopup = () => {
   };
 
   const handleAcceptOffer = () => {
-    window.open("https://pay.caminhodasaude.com/nWrxGWAr01X3654", "_blank");
+    // Fecha o popup e rola até a seção de seleção de cor/tamanho
     setIsVisible(false);
+    
+    // Aguarda um momento para o popup fechar e então rola
+    setTimeout(() => {
+      const productInfo = document.getElementById("product-options");
+      if (productInfo) {
+        productInfo.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }, 100);
   };
 
   if (!isVisible) return null;
@@ -74,16 +82,17 @@ const ExitIntentPopup = () => {
           </p>
         </div>
 
-        {/* Close Button */}
+        {/* Close Button - Melhorado para mobile e desktop */}
         <button
           onClick={handleClose}
-          className="absolute top-14 right-3 p-1.5 hover:bg-secondary rounded-full transition-colors z-10 bg-card/80"
+          className="absolute top-2 right-2 p-3 hover:bg-secondary rounded-full transition-colors z-20 bg-card shadow-lg border border-border"
+          aria-label="Fechar popup"
         >
-          <X className="w-5 h-5 text-muted-foreground" />
+          <X className="w-6 h-6 text-foreground" />
         </button>
 
         {/* Content */}
-        <div className="p-6 sm:p-8 text-center space-y-5">
+        <div className="p-6 sm:p-8 text-center space-y-5 pt-10">
           {/* Headline Principal */}
           <div className="space-y-3">
             <h2 className="text-2xl sm:text-3xl font-black text-foreground leading-tight">
@@ -145,7 +154,7 @@ const ExitIntentPopup = () => {
               size="xl"
               className="w-full text-base sm:text-lg font-black uppercase tracking-wide shadow-lg shadow-success/30 hover:shadow-success/50 transition-all"
             >
-              SIM, QUERO ME SENTIR MELHOR AGORA
+              SIM, QUERO ESCOLHER MINHA COR
             </Button>
             
             {/* Anti-CTA */}
