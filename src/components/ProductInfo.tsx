@@ -62,7 +62,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
         <p className="text-xs text-destructive font-bold animate-pulse">🔥 PROMOÇÃO ACABA EM BREVE - 70% OFF</p>
         <div className="flex flex-wrap items-baseline justify-center sm:justify-start gap-2 sm:gap-3">
           <span className="price-old text-base sm:text-lg">R$ 289,99</span>
-          <span className="price-new text-2xl sm:text-3xl">R$ 87,00</span>
+          <span className="price-new text-2xl sm:text-3xl">R$ 87,90</span>
           <span className="badge-discount text-xs">-70% OFF</span>
         </div>
         
