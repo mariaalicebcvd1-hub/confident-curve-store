@@ -78,7 +78,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       </div>
 
       {/* Color Selection */}
-      <div>
+      <div id="product-options">
         <p className="font-semibold mb-3 text-center sm:text-left">Cor: <span className="text-primary">{selectedColorData?.name}</span></p>
         <div className="flex justify-center sm:justify-start gap-3">
           {colors.map((color) => (
