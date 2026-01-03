@@ -132,7 +132,7 @@ const ExitIntentPopup = () => {
                 Leve <span className="text-primary">3 calcinhas modeladoras</span> por apenas
               </p>
               <p className="text-3xl sm:text-4xl font-black text-success mt-1">
-                R$ 78,30 <span className="text-base font-bold text-muted-foreground">no PIX</span>
+                R$ 79,11 <span className="text-base font-bold text-muted-foreground">no PIX</span>
               </p>
             </div>
           </div>
