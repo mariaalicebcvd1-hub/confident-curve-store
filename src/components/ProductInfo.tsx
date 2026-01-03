@@ -73,7 +73,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
         
         <div className="flex items-center justify-center sm:justify-start gap-2 text-success font-bold text-sm sm:text-base bg-success/10 py-2 px-3 rounded-lg">
           <Zap className="w-4 h-4" />
-          <span>PIX COM 10% EXTRA = R$ 78,30 (só hoje!)</span>
+          <span>PIX COM 10% EXTRA = R$ 79,11 (só hoje!)</span>
         </div>
       </div>
 
