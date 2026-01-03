@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 12%;
+
+    /* Rosa vibrante como cor primária - feminilidade + desejo */
+    --primary: 340 82% 52%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Fundo rosado suave */
+    --secondary: 340 30% 96%;
+    --secondary-foreground: 0 0% 12%;
+
+    --muted: 340 15% 95%;
+    --muted-foreground: 0 0% 40%;
+
+    /* Dourado sutil para acentos premium */
+    --accent: 35 90% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Verde para CTAs de ação - "sinal verde para comprar" */
+    --success: 145 70% 40%;
+    --success-foreground: 0 0% 100%;
+
+    /* Vermelho intenso para urgência máxima */
+    --destructive: 0 85% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 340 15% 90%;
+    --input: 340 15% 90%;
+    --ring: 340 82% 52%;
+
+    --radius: 0.5rem;
+
+    /* Custom colors for the store - tons mais quentes e urgentes */
+    --rose: 340 75% 55%;
+    --rose-light: 340 50% 95%;
+    --rose-dark: 340 80% 40%;
+    --bege: 25 40% 92%;
+    --bege-dark: 25 30% 70%;
+    --preto: 0 0% 10%;
+    
+    /* Urgency colors - vermelho intenso */
+    --urgency: 0 90% 48%;
+    --urgency-bg: 0 80% 97%;
+    
+    /* Trust colors - verde confiança */
+    --trust: 145 70% 38%;
+    --trust-bg: 145 50% 95%;
+    
+    /* Price colors */
+    --price-old: 0 0% 50%;
+    --price-new: 0 85% 48%;
+    --price-savings: 145 70% 35%;
+
+    /* Top bar - vermelho urgente */
+    --topbar-bg: 0 85% 48%;
+    --topbar-text: 0 0% 100%;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -4px hsl(0 0% 0% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.1), 0 8px 10px -6px hsl(0 0% 0% / 0.1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html, body {
+    @apply overflow-x-hidden;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-primary-foreground font-bold py-4 px-8 rounded-lg 
+           hover:opacity-90 transition-all duration-200 
+           shadow-lg hover:shadow-xl transform hover:-translate-y-0.5
+           text-lg uppercase tracking-wide;
+  }
+
+  .btn-success {
+    @apply bg-success text-success-foreground font-bold py-4 px-8 rounded-lg 
+           hover:opacity-90 transition-all duration-200 
+           shadow-lg hover:shadow-xl transform hover:-translate-y-0.5
+           text-lg uppercase tracking-wide;
+  }
+
+  .badge-urgency {
+    @apply bg-urgency text-white px-3 py-1 rounded-full text-sm font-semibold
+           animate-pulse;
+  }
+
+  .badge-trust {
+    @apply bg-trust-bg text-trust px-3 py-1.5 rounded-lg text-sm font-medium
+           border border-trust/20;
+  }
+
+  .badge-discount {
+    @apply bg-primary text-primary-foreground px-2.5 py-1 rounded text-xs font-bold
+           uppercase tracking-wide;
+  }
+
+  .price-old {
+    @apply text-price-old line-through text-lg;
+  }
+
+  .price-new {
+    @apply text-price-new font-bold text-3xl;
+  }
+
+  .card-product {
+    @apply bg-card rounded-xl shadow-lg border border-border/50 p-6;
+  }
+
+  .input-quantity {
+    @apply border-2 border-border rounded-lg px-4 py-2 text-center font-semibold
+           focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none
+           transition-all duration-200;
+  }
+
+  .size-option {
+    @apply border-2 border-border rounded-lg px-4 py-2 font-medium
+           cursor-pointer transition-all duration-200
+           hover:border-primary/50;
+  }
+
+  .size-option.selected {
+    @apply border-primary bg-primary/5 text-primary;
+  }
+
+  .color-option {
+    @apply w-12 h-12 rounded-full cursor-pointer border-2 border-transparent
+           transition-all duration-200 hover:scale-110;
+  }
+
+  .color-option.selected {
+    @apply ring-2 ring-primary ring-offset-2;
+  }
+
+  .trust-badge {
+    @apply flex items-center gap-2 text-sm text-muted-foreground;
+  }
+
+  .review-stars {
+    @apply text-accent;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-rose bg-clip-text text-transparent;
+  }
+
+  .bg-gradient-hero {
+    background: linear-gradient(135deg, hsl(var(--rose-light)) 0%, hsl(var(--bege)) 100%);
+  }
+
+  .animate-bounce-slow {
+    animation: bounce 2s infinite;
+  }
+
+  .animate-shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+
+  @keyframes shrink {
+    from { width: 100%; }
+    to { width: 0%; }
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
