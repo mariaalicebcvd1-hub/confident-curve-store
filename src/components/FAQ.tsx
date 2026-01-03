@@ -32,7 +32,7 @@ const faqs = [
   },
   {
     question: "🎁 Como funciona o 'Pague 1 Leve 3'?",
-    answer: "É simples: você paga apenas R$ 87,00 (com 70% OFF) e recebe 3 calcinhas modeladoras! Pode escolher cores iguais ou o Kit Misto com Preto + Rose + Bege. É o melhor custo-benefício do mercado - cada calcinha sai por menos de R$ 29!",
+    answer: "É simples: você paga apenas R$ 87,90 (com 70% OFF) e recebe 3 calcinhas modeladoras! Pode escolher cores iguais ou o Kit Misto com Preto + Rose + Bege. É o melhor custo-benefício do mercado - cada calcinha sai por menos de R$ 29!",
   },
 ];
 

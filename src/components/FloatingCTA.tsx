@@ -29,7 +29,7 @@ const FloatingCTA = () => {
           <p className="font-bold text-foreground text-sm">🔥 Última chance - 70% OFF</p>
           <p className="text-xs text-muted-foreground">
             <span className="line-through">R$ 289,99</span>{" "}
-            <span className="text-primary font-bold">3 calcinhas por R$ 87,00</span>
+            <span className="text-primary font-bold">3 calcinhas por R$ 87,90</span>
           </p>
         </div>
 
