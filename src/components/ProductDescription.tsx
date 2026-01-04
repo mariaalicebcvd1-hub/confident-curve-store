@@ -20,15 +20,15 @@ const features = [
     icon: Heart,
     title: "Barriga Chapada Sem Sofrimento",
     description: "Aquela pochete que te incomoda? Suavemente comprimida e disfarçada. Você vai parecer 3kg mais magra em qualquer roupa. Resultado imediato, conforto o dia todo.",
-    image: featureConfiante,
-    isGif: false
+    image: featureGif2,
+    isGif: true
   },
   {
     icon: Shirt,
     title: "100% Invisível Sob Qualquer Roupa",
     description: "Vestido justo, legging, calça branca... pode usar sem medo! Costuras ultra-finas e tecido que desaparece. Ninguém vai saber seu segredo.",
-    image: featureGif2,
-    isGif: true
+    image: featureConfiante,
+    isGif: false
   },
   {
     icon: Shield,
