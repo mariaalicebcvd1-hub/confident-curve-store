@@ -10,6 +10,7 @@ import TrustSection from "@/components/TrustSection";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/FloatingCTA";
+import FloatingVideoButton from "@/components/FloatingVideoButton";
 import RecentPurchasePopup from "@/components/RecentPurchasePopup";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 
@@ -66,6 +67,9 @@ const Index = () => {
 
       {/* Floating CTA */}
       <FloatingCTA />
+
+      {/* Floating Video Button */}
+      <FloatingVideoButton />
 
       {/* Recent Purchase Popup */}
       <RecentPurchasePopup />
