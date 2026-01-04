@@ -10,9 +10,21 @@ const FloatingVideoButton = () => {
   const modalVideoRef = useRef<HTMLVideoElement>(null);
 
   // Wait for video to be ready before showing the button
+  // Fallback: show button after 2 seconds even if video doesn't load (mobile safari issue)
   useEffect(() => {
     const video = previewVideoRef.current;
-    if (!video) return;
+    
+    // Fallback timeout - show button after 2 seconds regardless
+    const fallbackTimeout = setTimeout(() => {
+      if (!isReady) {
+        setIsReady(true);
+        if (video) {
+          video.play().catch(() => {});
+        }
+      }
+    }, 2000);
+
+    if (!video) return () => clearTimeout(fallbackTimeout);
 
     const handleCanPlay = () => {
       video.play().catch(() => {});
@@ -23,12 +35,15 @@ const FloatingVideoButton = () => {
       handleCanPlay();
     } else {
       video.addEventListener('canplay', handleCanPlay);
+      video.addEventListener('loadeddata', handleCanPlay);
     }
 
     return () => {
+      clearTimeout(fallbackTimeout);
       video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('loadeddata', handleCanPlay);
     };
-  }, []);
+  }, [isReady]);
 
   // Handle modal video when opening - with retry for autoplay
   useEffect(() => {
