@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ShoppingBag, X } from "lucide-react";
 
 const names = [
@@ -6,92 +6,162 @@ const names = [
   "Larissa", "Beatriz", "Amanda", "Gabriela", "Isabela", "Rafaela"
 ];
 
-const cities = [
-  { city: "São Paulo", state: "SP" },
-  { city: "Rio de Janeiro", state: "RJ" },
-  { city: "Belo Horizonte", state: "MG" },
-  { city: "Curitiba", state: "PR" },
-  { city: "Salvador", state: "BA" },
-  { city: "Fortaleza", state: "CE" },
-  { city: "Recife", state: "PE" },
-  { city: "Porto Alegre", state: "RS" },
-  { city: "Brasília", state: "DF" },
-  { city: "Goiânia", state: "GO" },
-  { city: "Manaus", state: "AM" },
-  { city: "Florianópolis", state: "SC" },
-  { city: "Vitória", state: "ES" },
-  { city: "Natal", state: "RN" },
-  { city: "Campo Grande", state: "MS" },
-  { city: "João Pessoa", state: "PB" },
-  { city: "Maceió", state: "AL" },
-  { city: "Teresina", state: "PI" },
-  { city: "Cuiabá", state: "MT" },
-  { city: "Aracaju", state: "SE" },
-  { city: "Campinas", state: "SP" },
-  { city: "Santos", state: "SP" },
-  { city: "Ribeirão Preto", state: "SP" },
-  { city: "Uberlândia", state: "MG" },
-  { city: "Londrina", state: "PR" },
-  { city: "Joinville", state: "SC" },
-  { city: "Niterói", state: "RJ" },
-  { city: "Belém", state: "PA" },
-];
-
-const times = [
-  "agora mesmo",
-  "1 min atrás",
-  "2 min atrás",
-  "3 min atrás",
-  "5 min atrás",
-  "8 min atrás",
-  "10 min atrás",
-  "12 min atrás",
-  "15 min atrás",
-];
-
-const getRandomPurchase = () => {
-  const name = names[Math.floor(Math.random() * names.length)];
-  const location = cities[Math.floor(Math.random() * cities.length)];
-  const time = times[Math.floor(Math.random() * times.length)];
-  return { name, city: location.city, state: location.state, time };
+// Cidades por região para fallback
+const regionCities: Record<string, Array<{ city: string; state: string }>> = {
+  SP: [
+    { city: "São Paulo", state: "SP" },
+    { city: "Campinas", state: "SP" },
+    { city: "Santos", state: "SP" },
+    { city: "Ribeirão Preto", state: "SP" },
+    { city: "Guarulhos", state: "SP" },
+  ],
+  RJ: [
+    { city: "Rio de Janeiro", state: "RJ" },
+    { city: "Niterói", state: "RJ" },
+    { city: "Petrópolis", state: "RJ" },
+    { city: "Duque de Caxias", state: "RJ" },
+  ],
+  MG: [
+    { city: "Belo Horizonte", state: "MG" },
+    { city: "Uberlândia", state: "MG" },
+    { city: "Contagem", state: "MG" },
+    { city: "Juiz de Fora", state: "MG" },
+  ],
+  PR: [
+    { city: "Curitiba", state: "PR" },
+    { city: "Londrina", state: "PR" },
+    { city: "Maringá", state: "PR" },
+  ],
+  RS: [
+    { city: "Porto Alegre", state: "RS" },
+    { city: "Caxias do Sul", state: "RS" },
+    { city: "Canoas", state: "RS" },
+  ],
+  SC: [
+    { city: "Florianópolis", state: "SC" },
+    { city: "Joinville", state: "SC" },
+    { city: "Blumenau", state: "SC" },
+  ],
+  BA: [
+    { city: "Salvador", state: "BA" },
+    { city: "Feira de Santana", state: "BA" },
+    { city: "Vitória da Conquista", state: "BA" },
+  ],
+  DEFAULT: [
+    { city: "São Paulo", state: "SP" },
+    { city: "Rio de Janeiro", state: "RJ" },
+    { city: "Belo Horizonte", state: "MG" },
+    { city: "Curitiba", state: "PR" },
+    { city: "Porto Alegre", state: "RS" },
+  ],
 };
+
+interface UserLocation {
+  city: string;
+  state: string;
+}
 
 const RecentPurchasePopup = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [currentPurchase, setCurrentPurchase] = useState(getRandomPurchase);
+  const [showCount, setShowCount] = useState(0);
+  const [userLocation, setUserLocation] = useState<UserLocation | null>(null);
+  const [localCities, setLocalCities] = useState<Array<{ city: string; state: string }>>(regionCities.DEFAULT);
+  const [currentPurchase, setCurrentPurchase] = useState<{ name: string; city: string; state: string; time: string } | null>(null);
 
+  // Busca localização do usuário via IP
   useEffect(() => {
-    // Mostra o primeiro popup após 8 segundos (delay maior para não competir com LCP)
-    const initialTimeout = setTimeout(() => {
-      setIsVisible(true);
-    }, 8000);
-
-    return () => clearTimeout(initialTimeout);
+    const fetchLocation = async () => {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        if (data.city && data.region_code) {
+          const location = { city: data.city, state: data.region_code };
+          setUserLocation(location);
+          
+          // Pega cidades da região do usuário ou fallback
+          const regionKey = data.region_code as string;
+          const cities = regionCities[regionKey] || regionCities.DEFAULT;
+          
+          // Adiciona a cidade do usuário se não estiver na lista
+          const userCityExists = cities.some(c => c.city === data.city);
+          if (!userCityExists) {
+            setLocalCities([location, ...cities.slice(0, 4)]);
+          } else {
+            setLocalCities(cities);
+          }
+        }
+      } catch {
+        // Mantém cidades padrão em caso de erro
+      }
+    };
+    fetchLocation();
   }, []);
 
+  const getRandomPurchase = useCallback(() => {
+    const name = names[Math.floor(Math.random() * names.length)];
+    
+    // Nas 2 primeiras notificações, prioriza cidade do usuário
+    if (showCount < 2 && userLocation) {
+      const times = ["agora mesmo", "1 min atrás"];
+      return { 
+        name, 
+        city: userLocation.city, 
+        state: userLocation.state, 
+        time: times[showCount] 
+      };
+    }
+    
+    // Depois mostra cidades próximas
+    const location = localCities[Math.floor(Math.random() * localCities.length)];
+    const times = ["2 min atrás", "3 min atrás", "5 min atrás", "7 min atrás", "10 min atrás"];
+    const time = times[Math.floor(Math.random() * times.length)];
+    
+    return { name, city: location.city, state: location.state, time };
+  }, [showCount, userLocation, localCities]);
+
   useEffect(() => {
-    if (!isVisible) return;
+    // Não mostra mais após 12 notificações
+    if (showCount >= 12) return;
 
-    // Esconde o popup após 4 segundos
-    const hideTimeout = setTimeout(() => {
-      setIsVisible(false);
-    }, 4000);
-
-    // Prepara o próximo popup após 12 segundos (4s visível + 8s pausa)
-    const nextTimeout = setTimeout(() => {
+    // Mostra o primeiro popup após 5 segundos (mais rápido para criar urgência)
+    const initialTimeout = setTimeout(() => {
       setCurrentPurchase(getRandomPurchase());
       setIsVisible(true);
-    }, 12000);
+      setShowCount(prev => prev + 1);
+    }, 5000);
+
+    return () => clearTimeout(initialTimeout);
+  }, [getRandomPurchase, showCount]);
+
+  useEffect(() => {
+    if (!isVisible || showCount >= 12) return;
+
+    // Esconde o popup após 3.5 segundos
+    const hideTimeout = setTimeout(() => {
+      setIsVisible(false);
+    }, 3500);
+
+    // Prepara o próximo popup após 6 segundos (3.5s visível + 2.5s pausa) - mais frequente para criar urgência
+    const nextTimeout = setTimeout(() => {
+      if (showCount < 12) {
+        setCurrentPurchase(getRandomPurchase());
+        setIsVisible(true);
+        setShowCount(prev => prev + 1);
+      }
+    }, 6000);
 
     return () => {
       clearTimeout(hideTimeout);
       clearTimeout(nextTimeout);
     };
-  }, [isVisible]);
+  }, [isVisible, showCount, getRandomPurchase]);
 
   const handleClose = () => {
     setIsVisible(false);
   };
+
+  // Não renderiza se ainda não tem dados ou já mostrou todas
+  if (!currentPurchase) return null;
 
   return (
     <div
@@ -133,7 +203,7 @@ const RecentPurchasePopup = () => {
         {/* Progress bar */}
         <div className="mt-3 h-1 bg-secondary rounded-full overflow-hidden">
           <div 
-            className="h-full bg-success rounded-full animate-[shrink_4s_linear]"
+            className="h-full bg-success rounded-full animate-[shrink_3.5s_linear]"
             style={{ width: "100%" }}
           />
         </div>
