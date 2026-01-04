@@ -8,9 +8,11 @@ import {
 } from "@/components/ui/popover";
 
 const sizes = [
-  { value: "P/M", label: "P/M", description: "36-40" },
-  { value: "G/GG", label: "G/GG", description: "42-46" },
-  { value: "XG/XXG", label: "XG/XXG", description: "48-52" },
+  { value: "P", label: "P", description: "36-38" },
+  { value: "M", label: "M", description: "38-40" },
+  { value: "G", label: "G", description: "42-44" },
+  { value: "GG", label: "GG", description: "44-46" },
+  { value: "XG", label: "XG", description: "48-50" },
 ];
 
 const FloatingCTA = () => {
