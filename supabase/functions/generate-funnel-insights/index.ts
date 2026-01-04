@@ -34,43 +34,61 @@ serve(async (req) => {
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
 
     if (!LOVABLE_API_KEY) {
+      console.error('LOVABLE_API_KEY is not configured');
       throw new Error('LOVABLE_API_KEY is not configured');
     }
 
-    // Explicit authentication check
+    // Get authorization header
     const authHeader = req.headers.get('Authorization');
     if (!authHeader) {
+      console.log('No authorization header provided');
       return new Response(JSON.stringify({ error: 'Unauthorized' }), {
         status: 401,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
-    // Verify user with anon key client
-    const authClient = createClient(SUPABASE_URL!, SUPABASE_ANON_KEY!);
-    const token = authHeader.replace('Bearer ', '');
-    const { data: { user }, error: authError } = await authClient.auth.getUser(token);
+    // Create client with user's token for authentication
+    const supabaseAuth = createClient(SUPABASE_URL!, SUPABASE_ANON_KEY!, {
+      global: {
+        headers: { Authorization: authHeader },
+      },
+    });
+
+    // Verify the user using their token
+    const { data: { user }, error: authError } = await supabaseAuth.auth.getUser();
 
     if (authError || !user) {
-      console.log('Authentication failed:', authError?.message || 'No user');
+      console.log('Authentication failed:', authError?.message || 'No user found');
       return new Response(JSON.stringify({ error: 'Unauthorized' }), {
         status: 401,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
-    // Check if user is admin using service role client
+    console.log('User authenticated:', user.id);
+
+    // Create service role client for admin operations
     const supabase = createClient(SUPABASE_URL!, SUPABASE_SERVICE_ROLE_KEY!);
     
+    // Check if user is admin
     const { data: roleData, error: roleError } = await supabase
       .from('user_roles')
       .select('role')
       .eq('user_id', user.id)
       .eq('role', 'admin')
-      .single();
+      .maybeSingle();
 
-    if (roleError || !roleData) {
-      console.log('Admin role check failed for user:', user.id);
+    if (roleError) {
+      console.log('Role check error:', roleError.message);
+      return new Response(JSON.stringify({ error: 'Error checking permissions' }), {
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    if (!roleData) {
+      console.log('User is not admin:', user.id);
       return new Response(JSON.stringify({ error: 'Forbidden: Admin access required' }), {
         status: 403,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -180,7 +198,6 @@ Responda em formato JSON com a seguinte estrutura:
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
       }
-      const errorText = await response.text();
       console.error('AI Gateway error:', response.status);
       throw new Error(`AI Gateway error: ${response.status}`);
     }
@@ -233,7 +250,7 @@ Responda em formato JSON com a seguinte estrutura:
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    console.error('Error in generate-funnel-insights');
+    console.error('Error in generate-funnel-insights:', error);
     return new Response(JSON.stringify({ error: 'An unexpected error occurred' }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
