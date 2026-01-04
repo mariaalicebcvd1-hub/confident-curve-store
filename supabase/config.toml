@@ -1,1 +1,4 @@
 project_id = "grwovoemciemplljkboy"
+
+[functions.generate-funnel-insights]
+verify_jwt = true
