@@ -12,7 +12,7 @@ import reviewSulem2 from "@/assets/review-sulem-2.webp";
 import reviewSulem3 from "@/assets/review-sulem-3.webp";
 
 const reviews = [
-  { name: "Sulem Santos", verified: true, comment: "Amei é realmente de ótima qualidade, eu li os comentários e resolvi testar e amei. Ela realmente segura na barriga, o material é ótimo, muito resistente e vou comprar maiss!", productImage: null, productImages: [reviewSulem1, reviewSulem2, reviewSulem3], rating: 5, helpful: 12, date: "02/01/2026" },
+  { name: "Sulem Santos", verified: true, comment: "Amei é realmente de ótima qualidade, eu li os comentários e resolvi testar e amei. Ela realmente segura na barriga, o material é ótimo, muito resistente e vou comprar maiss!", productImage: null, productImages: [reviewSulem1, reviewSulem2], rating: 5, helpful: 12, date: "02/01/2026" },
   { name: "Karine", verified: true, comment: "Gostei bastante a entrega foi bem rápida, indico, podem comprar!", productImage: null, productImages: [reviewKarine1, reviewKarine2], rating: 5, helpful: 8, date: "28/12/2025" },
   { name: "Cecília", verified: true, comment: "Comprei a minha e simplesmente amei, a qualidade é impecável e realmente não enrola, levanta o bumbum e esconde a pochetinha que eu odeio rsrs comprem meninas, vcs não vão se arrepender!!", productImage: null, productImages: [reviewCecilia1, reviewCecilia2, reviewCecilia3], rating: 5, helpful: 15, date: "23/12/2025" },
   { name: "Virgínia", verified: true, comment: "Tamanho adequado, pedi meu número e coube perfeitamente, muito confortável, não marca nas roupas, principalmente nos vestidos.", productImage: "https://www.images.areviewsapp.com/admeliteshop.myshopify.com/6BJCH4sIUNgp2D5.jpg", rating: 5, helpful: 6, date: "19/12/2025" },
