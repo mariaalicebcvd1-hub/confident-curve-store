@@ -67,13 +67,13 @@ const FloatingVideoButton = () => {
       {/* Floating Video Button - hidden until video is ready */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-24 right-4 z-40 group cursor-pointer transition-all duration-500 ${
+        className={`fixed bottom-24 right-4 z-50 group cursor-pointer transition-all duration-500 ${
           isReady ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
         }`}
         aria-label="Assistir vídeo do produto"
       >
         {/* Video Preview Circle */}
-        <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-primary shadow-lg shadow-primary/30 animate-pulse-slow">
+        <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-primary shadow-lg shadow-primary/30 animate-pulse-slow">
           <video
             ref={previewVideoRef}
             src={videoSrc}
@@ -86,16 +86,16 @@ const FloatingVideoButton = () => {
           
           {/* Play Overlay */}
           <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors">
-            <Play className="w-6 h-6 sm:w-8 sm:h-8 text-white fill-white" />
+            <Play className="w-6 h-6 text-white fill-white" />
           </div>
         </div>
       </button>
 
       {/* Video Modal */}
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-[95vw] sm:max-w-md md:max-w-lg p-0 bg-black border-none overflow-hidden">
+        <DialogContent className="max-w-sm sm:max-w-md p-0 bg-black border-none overflow-hidden">
           <DialogTitle className="sr-only">Vídeo do Produto</DialogTitle>
-          <div className="relative aspect-[9/16] sm:aspect-[9/16] max-h-[85vh]">
+          <div className="relative aspect-[9/16] max-h-[80vh]">
             <video
               ref={modalVideoRef}
               src={videoSrc}
