@@ -3,9 +3,19 @@ import { Play, X, ShoppingBag } from "lucide-react";
 import { Dialog, DialogContent, DialogClose, DialogTitle } from "@/components/ui/dialog";
 import videoSrc from "@/assets/video-produto.mp4";
 
+// Format time as MM:SS
+const formatTime = (seconds: number) => {
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
+};
+
 const FloatingVideoButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isReady, setIsReady] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [fakeProgress, setFakeProgress] = useState(0);
+  const [fakeDuration, setFakeDuration] = useState(0);
   const previewVideoRef = useRef<HTMLVideoElement>(null);
   const modalVideoRef = useRef<HTMLVideoElement>(null);
 
@@ -45,24 +55,59 @@ const FloatingVideoButton = () => {
     };
   }, [isReady]);
 
-  // Handle modal video when opening - with retry for autoplay
+  // Handle modal video when opening - with retry for autoplay and time tracking
   useEffect(() => {
     if (isOpen && modalVideoRef.current) {
       const video = modalVideoRef.current;
       video.currentTime = 0;
+      setCurrentTime(0);
+      setFakeProgress(0);
       
-      // Try to play immediately
+      // Calculate fake duration (show ~40% of real duration to create urgency)
+      const handleLoadedMetadata = () => {
+        const realDuration = video.duration;
+        // Show a shorter fake duration (around 40-50% of real)
+        setFakeDuration(Math.floor(realDuration * 0.45));
+      };
+      
+      video.addEventListener('loadedmetadata', handleLoadedMetadata);
+      if (video.duration) {
+        handleLoadedMetadata();
+      }
+      
+      // Track current time and fake progress
+      const handleTimeUpdate = () => {
+        const current = video.currentTime;
+        setCurrentTime(current);
+        // Fake progress moves faster (appears to be ending soon)
+        const realDuration = video.duration || 1;
+        const fakePercent = Math.min((current / realDuration) * 2.2, 100);
+        setFakeProgress(fakePercent);
+      };
+      
+      video.addEventListener('timeupdate', handleTimeUpdate);
+      
+      // Try to play immediately with sound
       const playVideo = () => {
         video.play().catch(() => {
-          // If autoplay fails, try again after a short delay
-          setTimeout(() => {
-            video.play().catch(() => {});
-          }, 100);
+          // If autoplay with sound fails, try muted first then unmute
+          video.muted = true;
+          video.play().then(() => {
+            // Try to unmute after a short delay
+            setTimeout(() => {
+              video.muted = false;
+            }, 100);
+          }).catch(() => {});
         });
       };
 
       // Wait for dialog animation to complete
       setTimeout(playVideo, 50);
+      
+      return () => {
+        video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+        video.removeEventListener('timeupdate', handleTimeUpdate);
+      };
     }
   }, [isOpen]);
 
@@ -114,17 +159,32 @@ const FloatingVideoButton = () => {
             <video
               ref={modalVideoRef}
               src={videoSrc}
-              muted
               loop
               playsInline
               autoPlay
               preload="auto"
-              controls
               className="w-full h-full object-contain"
             />
 
-            {/* CTA Button */}
-            <div className="absolute bottom-20 left-4 right-4">
+            {/* Custom Vturb-style progress bar */}
+            <div className="absolute bottom-0 left-0 right-0 bg-black/80 px-3 py-2">
+              <div className="flex items-center gap-2">
+                {/* Fake progress bar */}
+                <div className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-white rounded-full transition-all duration-300"
+                    style={{ width: `${fakeProgress}%` }}
+                  />
+                </div>
+                {/* Fake time display - shows shorter remaining time */}
+                <span className="text-white text-xs font-medium whitespace-nowrap">
+                  {formatTime(currentTime)} / {formatTime(fakeDuration || 1)}
+                </span>
+              </div>
+            </div>
+
+            {/* CTA Button - positioned higher */}
+            <div className="absolute bottom-16 left-4 right-4">
               <button
                 onClick={handleCTAClick}
                 className="w-full bg-success hover:bg-success/90 text-success-foreground font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 shadow-lg transition-all duration-200 hover:scale-[1.02] uppercase tracking-wide"
