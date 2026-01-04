@@ -1,95 +1,6 @@
-import { Star, CheckCircle, Image, Filter, ThumbsUp, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, CheckCircle, Image, Filter, ThumbsUp } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-
-// Mini carousel component for multiple images in a review
-const ImageCarousel = ({ 
-  images, 
-  reviewerName, 
-  onImageClick 
-}: { 
-  images: string[]; 
-  reviewerName: string; 
-  onImageClick: (img: string) => void;
-}) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const goToPrevious = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  };
-
-  const goToNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  };
-
-  return (
-    <div className="relative w-32 h-32 group/carousel">
-      {/* Main Image */}
-      <div 
-        className="cursor-pointer w-full h-full"
-        onClick={() => onImageClick(images[currentIndex])}
-      >
-        <div className="relative overflow-hidden rounded-xl w-full h-full">
-          <img
-            src={images[currentIndex]}
-            alt={`Foto ${currentIndex + 1} do produto de ${reviewerName}`}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover/carousel:scale-110"
-            loading="lazy"
-            decoding="async"
-          />
-          <div className="absolute inset-0 bg-black/0 group-hover/carousel:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-            <span className="text-white opacity-0 group-hover/carousel:opacity-100 transition-opacity text-xs font-medium bg-black/50 px-2 py-1 rounded">
-              Ampliar
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Navigation Arrows */}
-      {images.length > 1 && (
-        <>
-          <button
-            onClick={goToPrevious}
-            className="absolute left-1 top-1/2 -translate-y-1/2 w-6 h-6 bg-black/60 hover:bg-black/80 rounded-full flex items-center justify-center text-white opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-200 z-10"
-            aria-label="Foto anterior"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            onClick={goToNext}
-            className="absolute right-1 top-1/2 -translate-y-1/2 w-6 h-6 bg-black/60 hover:bg-black/80 rounded-full flex items-center justify-center text-white opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-200 z-10"
-            aria-label="Próxima foto"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </>
-      )}
-
-      {/* Dots Indicator */}
-      {images.length > 1 && (
-        <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 flex gap-1 z-10">
-          {images.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={(e) => {
-                e.stopPropagation();
-                setCurrentIndex(idx);
-              }}
-              className={`w-1.5 h-1.5 rounded-full transition-all ${
-                idx === currentIndex 
-                  ? "bg-white w-3" 
-                  : "bg-white/50 hover:bg-white/75"
-              }`}
-              aria-label={`Ir para foto ${idx + 1}`}
-            />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
 import reviewCecilia1 from "@/assets/review-cecilia-1.jpeg";
 import reviewCecilia2 from "@/assets/review-cecilia-2.jpeg";
 import reviewCecilia3 from "@/assets/review-cecilia-3.jpeg";
@@ -347,13 +258,28 @@ const Reviews = () => {
                             </div>
                           </div>
                         )}
-                        {review.productImages && review.productImages.length > 0 && (
-                          <ImageCarousel 
-                            images={review.productImages} 
-                            reviewerName={review.name}
-                            onImageClick={setSelectedImage}
-                          />
-                        )}
+                        {review.productImages && review.productImages.map((img, imgIndex) => (
+                          <div 
+                            key={imgIndex}
+                            className="cursor-pointer group inline-block"
+                            onClick={() => setSelectedImage(img)}
+                          >
+                            <div className="relative overflow-hidden rounded-xl">
+                              <img
+                                src={img}
+                                alt={`Foto ${imgIndex + 1} do produto de ${review.name}`}
+                                className="w-28 h-28 object-cover transition-transform duration-300 group-hover:scale-110"
+                                loading="lazy"
+                                decoding="async"
+                              />
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                                <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium bg-black/50 px-2 py-1 rounded">
+                                  Ampliar
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     )}
 
