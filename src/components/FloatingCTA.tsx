@@ -8,11 +8,21 @@ const FloatingCTA = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setIsVisible(scrollY > 500 && !isDismissed);
+      // Find the ProductDescription section by its ID
+      const descriptionSection = document.getElementById('product-description');
+      
+      if (descriptionSection && !isDismissed) {
+        const rect = descriptionSection.getBoundingClientRect();
+        // Show when ProductDescription section enters the viewport
+        setIsVisible(rect.top <= window.innerHeight * 0.7);
+      } else {
+        setIsVisible(false);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
+    // Initial check
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isDismissed]);
 
