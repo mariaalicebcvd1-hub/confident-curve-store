@@ -71,15 +71,17 @@ const ProductGallery = ({ selectedImageIndex, onImageChange }: ProductGalleryPro
           -70% OFF
         </a>
         
-        {/* Offer Badge */}
-        <a 
-          href="https://pay.caminhodasaude.com/nWrxGWAr01X3654"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute top-3 right-3 bg-success text-white px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg text-xs sm:text-sm font-bold shadow-lg hover:bg-success/90 transition-colors cursor-pointer z-10"
-        >
-          LEVE 3 PAGUE 1
-        </a>
+        {/* Offer Badge - Only show on images that are not the first */}
+        {selectedImageIndex !== 0 && (
+          <a 
+            href="https://pay.caminhodasaude.com/nWrxGWAr01X3654"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute top-3 right-3 bg-success text-white px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg text-xs sm:text-sm font-bold shadow-lg hover:bg-success/90 transition-colors cursor-pointer z-10"
+          >
+            LEVE 3 PAGUE 1
+          </a>
+        )}
       </div>
 
       {/* Thumbnails - Abaixo no mobile, centralizado */}
