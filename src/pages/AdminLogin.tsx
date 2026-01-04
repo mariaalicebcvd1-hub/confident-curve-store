@@ -42,20 +42,14 @@ const AdminLogin = () => {
             throw error;
           }
         } else if (data.user) {
-          // Adiciona role de admin automaticamente para o primeiro usuário
-          const { error: roleError } = await supabase
-            .from('user_roles')
-            .insert({ user_id: data.user.id, role: 'admin' });
-
-          if (roleError) {
-            console.error('Error adding admin role:', roleError);
-          }
-
+          // Admin role is now automatically assigned by database trigger
+          // for the first user who signs up
           toast({
             title: 'Conta criada!',
-            description: 'Você foi registrado como administrador.',
+            description: 'Você foi registrado. Faça login para continuar.',
           });
-          navigate('/admin');
+          // Navigate to login after signup
+          setIsSignUp(false);
         }
       } else {
         const { error } = await supabase.auth.signInWithPassword({
