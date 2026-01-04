@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react";
-import { Clock, Users, AlertTriangle } from "lucide-react";
-
+import { Clock, Users } from "lucide-react";
 const UrgencyBanner = () => {
   const [timeLeft, setTimeLeft] = useState({
     hours: 2,
     minutes: 47,
-    seconds: 33,
+    seconds: 33
   });
-
   const [viewers] = useState(Math.floor(Math.random() * 30) + 25);
-
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        let { hours, minutes, seconds } = prev;
+      setTimeLeft(prev => {
+        let {
+          hours,
+          minutes,
+          seconds
+        } = prev;
         seconds--;
         if (seconds < 0) {
           seconds = 59;
@@ -28,20 +29,20 @@ const UrgencyBanner = () => {
             }
           }
         }
-        return { hours, minutes, seconds };
+        return {
+          hours,
+          minutes,
+          seconds
+        };
       });
     }, 1000);
-
     return () => clearInterval(timer);
   }, []);
-
   const formatNumber = (num: number) => num.toString().padStart(2, "0");
-
-  return (
-    <div className="bg-urgency-bg border-y border-urgency/20 py-2.5 sm:py-3 px-3 sm:px-4">
+  return <div className="bg-urgency-bg border-y border-urgency/20 py-2.5 sm:py-3 px-3 sm:px-4">
       <div className="container mx-auto flex flex-col items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm">
         <div className="flex items-center gap-2 text-urgency font-bold">
-          <AlertTriangle className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-pulse" />
+          
           <span>⚠️ ATENÇÃO: ESTOQUE QUASE ESGOTADO!</span>
         </div>
         
@@ -61,8 +62,6 @@ const UrgencyBanner = () => {
         
         <p className="text-xs text-muted-foreground">Restam apenas <strong className="text-destructive">23 kits</strong> com este preço promocional</p>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default UrgencyBanner;
