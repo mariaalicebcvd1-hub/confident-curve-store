@@ -13,35 +13,73 @@ const AdminLogin = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+      if (isSignUp) {
+        const { data, error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            emailRedirectTo: `${window.location.origin}/admin`
+          }
+        });
 
-      if (error) {
-        if (error.message.includes('Invalid login credentials')) {
+        if (error) {
+          if (error.message.includes('already registered')) {
+            toast({
+              title: 'Email já cadastrado',
+              description: 'Este email já possui uma conta. Faça login.',
+              variant: 'destructive',
+            });
+          } else {
+            throw error;
+          }
+        } else if (data.user) {
+          // Adiciona role de admin automaticamente para o primeiro usuário
+          const { error: roleError } = await supabase
+            .from('user_roles')
+            .insert({ user_id: data.user.id, role: 'admin' });
+
+          if (roleError) {
+            console.error('Error adding admin role:', roleError);
+          }
+
           toast({
-            title: 'Credenciais inválidas',
-            description: 'Email ou senha incorretos.',
-            variant: 'destructive',
+            title: 'Conta criada!',
+            description: 'Você foi registrado como administrador.',
           });
-        } else {
-          throw error;
+          navigate('/admin');
         }
       } else {
-        toast({
-          title: 'Login realizado!',
-          description: 'Bem-vindo ao painel de controle.',
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
         });
-        navigate('/admin');
+
+        if (error) {
+          if (error.message.includes('Invalid login credentials')) {
+            toast({
+              title: 'Credenciais inválidas',
+              description: 'Email ou senha incorretos.',
+              variant: 'destructive',
+            });
+          } else {
+            throw error;
+          }
+        } else {
+          toast({
+            title: 'Login realizado!',
+            description: 'Bem-vindo ao painel de controle.',
+          });
+          navigate('/admin');
+        }
       }
     } catch (error) {
       console.error('Auth error:', error);
@@ -62,13 +100,17 @@ const AdminLogin = () => {
           <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
             <Lock className="w-6 h-6 text-primary" />
           </div>
-          <CardTitle className="text-2xl font-bold">Painel Admin</CardTitle>
+          <CardTitle className="text-2xl font-bold">
+            {isSignUp ? 'Criar Conta Admin' : 'Painel Admin'}
+          </CardTitle>
           <CardDescription>
-            Faça login para gerenciar o funil de vendas
+            {isSignUp 
+              ? 'Crie sua conta de administrador' 
+              : 'Faça login para gerenciar o funil de vendas'}
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleAuth} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <div className="relative">
@@ -110,9 +152,21 @@ const AdminLogin = () => {
             </div>
 
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? 'Carregando...' : 'Entrar'}
+              {isLoading ? 'Carregando...' : isSignUp ? 'Criar Conta Admin' : 'Entrar'}
             </Button>
           </form>
+
+          <div className="mt-4 text-center">
+            <button
+              type="button"
+              onClick={() => setIsSignUp(!isSignUp)}
+              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              {isSignUp 
+                ? 'Já tem conta? Faça login' 
+                : 'Primeiro acesso? Cadastre-se'}
+            </button>
+          </div>
         </CardContent>
       </Card>
     </div>
