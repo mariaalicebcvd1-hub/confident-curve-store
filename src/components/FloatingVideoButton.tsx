@@ -6,21 +6,35 @@ import videoSrc from "@/assets/video-produto.mp4";
 const FloatingVideoButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [isReady, setIsReady] = useState(false);
   const previewVideoRef = useRef<HTMLVideoElement>(null);
   const modalVideoRef = useRef<HTMLVideoElement>(null);
 
-  // Play preview video on loop
+  // Wait for video to be ready before showing the button
   useEffect(() => {
-    if (previewVideoRef.current) {
-      previewVideoRef.current.play().catch(() => {
-        // Autoplay blocked, that's fine
-      });
+    const video = previewVideoRef.current;
+    if (!video) return;
+
+    const handleCanPlay = () => {
+      video.play().catch(() => {});
+      setIsReady(true);
+    };
+
+    if (video.readyState >= 3) {
+      handleCanPlay();
+    } else {
+      video.addEventListener('canplay', handleCanPlay);
     }
+
+    return () => {
+      video.removeEventListener('canplay', handleCanPlay);
+    };
   }, []);
 
   // Handle modal video when opening
   useEffect(() => {
     if (isOpen && modalVideoRef.current) {
+      modalVideoRef.current.currentTime = 0;
       modalVideoRef.current.play().catch(() => {});
     }
   }, [isOpen]);
@@ -38,10 +52,12 @@ const FloatingVideoButton = () => {
 
   return (
     <>
-      {/* Floating Video Button */}
+      {/* Floating Video Button - hidden until video is ready */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-24 right-4 z-40 group cursor-pointer"
+        className={`fixed bottom-24 right-4 z-40 group cursor-pointer transition-all duration-500 ${
+          isReady ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+        }`}
         aria-label="Assistir vídeo do produto"
       >
         {/* Video Preview Circle */}
@@ -52,6 +68,7 @@ const FloatingVideoButton = () => {
             muted
             loop
             playsInline
+            preload="auto"
             className="w-full h-full object-cover"
           />
           
@@ -73,7 +90,8 @@ const FloatingVideoButton = () => {
               muted={isMuted}
               loop
               playsInline
-              controls={false}
+              autoPlay
+              preload="auto"
               className="w-full h-full object-contain"
             />
 
