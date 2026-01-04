@@ -123,12 +123,12 @@ const RecentPurchasePopup = () => {
     // Não mostra mais após 12 notificações
     if (showCount >= 12) return;
 
-    // Mostra o primeiro popup após 5 segundos (mais rápido para criar urgência)
+    // Mostra o primeiro popup após 12 segundos
     const initialTimeout = setTimeout(() => {
       setCurrentPurchase(getRandomPurchase());
       setIsVisible(true);
       setShowCount(prev => prev + 1);
-    }, 5000);
+    }, 12000);
 
     return () => clearTimeout(initialTimeout);
   }, [getRandomPurchase, showCount]);
@@ -136,19 +136,19 @@ const RecentPurchasePopup = () => {
   useEffect(() => {
     if (!isVisible || showCount >= 12) return;
 
-    // Esconde o popup após 3.5 segundos
+    // Esconde o popup após 5 segundos
     const hideTimeout = setTimeout(() => {
       setIsVisible(false);
-    }, 3500);
+    }, 5000);
 
-    // Prepara o próximo popup após 6 segundos (3.5s visível + 2.5s pausa) - mais frequente para criar urgência
+    // Prepara o próximo popup após 18 segundos (5s visível + 13s pausa)
     const nextTimeout = setTimeout(() => {
       if (showCount < 12) {
         setCurrentPurchase(getRandomPurchase());
         setIsVisible(true);
         setShowCount(prev => prev + 1);
       }
-    }, 6000);
+    }, 18000);
 
     return () => {
       clearTimeout(hideTimeout);
@@ -203,7 +203,7 @@ const RecentPurchasePopup = () => {
         {/* Progress bar */}
         <div className="mt-3 h-1 bg-secondary rounded-full overflow-hidden">
           <div 
-            className="h-full bg-success rounded-full animate-[shrink_3.5s_linear]"
+            className="h-full bg-success rounded-full animate-[shrink_5s_linear]"
             style={{ width: "100%" }}
           />
         </div>
