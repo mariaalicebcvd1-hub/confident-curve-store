@@ -1,11 +1,10 @@
 import { useState, useRef, useEffect } from "react";
-import { Play, X, Volume2, VolumeX, ShoppingBag } from "lucide-react";
+import { Play, X, ShoppingBag } from "lucide-react";
 import { Dialog, DialogContent, DialogClose, DialogTitle } from "@/components/ui/dialog";
 import videoSrc from "@/assets/video-produto.mp4";
 
 const FloatingVideoButton = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
   const [isReady, setIsReady] = useState(false);
   const previewVideoRef = useRef<HTMLVideoElement>(null);
   const modalVideoRef = useRef<HTMLVideoElement>(null);
@@ -31,11 +30,24 @@ const FloatingVideoButton = () => {
     };
   }, []);
 
-  // Handle modal video when opening
+  // Handle modal video when opening - with retry for autoplay
   useEffect(() => {
     if (isOpen && modalVideoRef.current) {
-      modalVideoRef.current.currentTime = 0;
-      modalVideoRef.current.play().catch(() => {});
+      const video = modalVideoRef.current;
+      video.currentTime = 0;
+      
+      // Try to play immediately
+      const playVideo = () => {
+        video.play().catch(() => {
+          // If autoplay fails, try again after a short delay
+          setTimeout(() => {
+            video.play().catch(() => {});
+          }, 100);
+        });
+      };
+
+      // Wait for dialog animation to complete
+      setTimeout(playVideo, 50);
     }
   }, [isOpen]);
 
@@ -87,16 +99,17 @@ const FloatingVideoButton = () => {
             <video
               ref={modalVideoRef}
               src={videoSrc}
-              muted={isMuted}
+              muted
               loop
               playsInline
               autoPlay
               preload="auto"
+              controls
               className="w-full h-full object-contain"
             />
 
             {/* CTA Button */}
-            <div className="absolute bottom-16 left-4 right-4">
+            <div className="absolute bottom-20 left-4 right-4">
               <button
                 onClick={handleCTAClick}
                 className="w-full bg-success hover:bg-success/90 text-success-foreground font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 shadow-lg transition-all duration-200 hover:scale-[1.02] uppercase tracking-wide"
@@ -105,21 +118,6 @@ const FloatingVideoButton = () => {
                 Garantir Minha Oferta
               </button>
             </div>
-
-            {/* Mute Button */}
-            <div className="absolute bottom-4 left-4">
-              <button
-                onClick={() => setIsMuted(!isMuted)}
-                className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-              >
-                {isMuted ? (
-                  <VolumeX className="w-5 h-5" />
-                ) : (
-                  <Volume2 className="w-5 h-5" />
-                )}
-              </button>
-            </div>
-
             {/* Close Button */}
             <DialogClose className="absolute top-3 right-3 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors">
               <X className="w-5 h-5" />
