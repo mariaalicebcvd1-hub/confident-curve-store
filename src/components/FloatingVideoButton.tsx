@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Play, X, Volume2, VolumeX } from "lucide-react";
+import { Play, X, Volume2, VolumeX, ShoppingBag } from "lucide-react";
 import { Dialog, DialogContent, DialogClose, DialogTitle } from "@/components/ui/dialog";
 import videoSrc from "@/assets/video-produto.mp4";
 
@@ -25,6 +25,17 @@ const FloatingVideoButton = () => {
     }
   }, [isOpen]);
 
+  const handleCTAClick = () => {
+    setIsOpen(false);
+    // Scroll to size selection section
+    const sizeSection = document.querySelector('.size-option');
+    if (sizeSection) {
+      sizeSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
       {/* Floating Video Button */}
@@ -49,11 +60,6 @@ const FloatingVideoButton = () => {
             <Play className="w-6 h-6 sm:w-8 sm:h-8 text-white fill-white" />
           </div>
         </div>
-
-        {/* Label */}
-        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 text-[10px] sm:text-xs font-semibold text-foreground bg-background px-2 py-0.5 rounded shadow whitespace-nowrap">
-          PLAY VIDEO
-        </span>
       </button>
 
       {/* Video Modal */}
@@ -71,9 +77,19 @@ const FloatingVideoButton = () => {
               className="w-full h-full object-contain"
             />
 
-            {/* Custom Controls Overlay */}
-            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-              {/* Mute Button */}
+            {/* CTA Button */}
+            <div className="absolute bottom-16 left-4 right-4">
+              <button
+                onClick={handleCTAClick}
+                className="w-full bg-success hover:bg-success/90 text-success-foreground font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 shadow-lg transition-all duration-200 hover:scale-[1.02] uppercase tracking-wide"
+              >
+                <ShoppingBag className="w-5 h-5" />
+                Garantir Minha Oferta
+              </button>
+            </div>
+
+            {/* Mute Button */}
+            <div className="absolute bottom-4 left-4">
               <button
                 onClick={() => setIsMuted(!isMuted)}
                 className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
