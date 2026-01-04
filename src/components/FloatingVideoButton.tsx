@@ -153,9 +153,9 @@ const FloatingVideoButton = () => {
 
       {/* Video Modal */}
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-sm sm:max-w-md p-0 bg-black border-none overflow-hidden">
+        <DialogContent className="max-w-lg sm:max-w-xl md:max-w-2xl p-0 bg-black border-none overflow-hidden">
           <DialogTitle className="sr-only">Vídeo do Produto</DialogTitle>
-          <div className="relative aspect-[9/16] max-h-[80vh]">
+          <div className="relative aspect-[9/16] max-h-[90vh]">
             <video
               ref={modalVideoRef}
               src={videoSrc}
