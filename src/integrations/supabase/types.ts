@@ -14,7 +14,174 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      ai_suggestions: {
+        Row: {
+          action_notes: string | null
+          action_taken: boolean | null
+          created_at: string
+          description: string
+          id: string
+          is_dismissed: boolean | null
+          is_read: boolean | null
+          priority: string | null
+          stage: Database["public"]["Enums"]["funnel_stage"] | null
+          suggestion_type: string
+          title: string
+        }
+        Insert: {
+          action_notes?: string | null
+          action_taken?: boolean | null
+          created_at?: string
+          description: string
+          id?: string
+          is_dismissed?: boolean | null
+          is_read?: boolean | null
+          priority?: string | null
+          stage?: Database["public"]["Enums"]["funnel_stage"] | null
+          suggestion_type: string
+          title: string
+        }
+        Update: {
+          action_notes?: string | null
+          action_taken?: boolean | null
+          created_at?: string
+          description?: string
+          id?: string
+          is_dismissed?: boolean | null
+          is_read?: boolean | null
+          priority?: string | null
+          stage?: Database["public"]["Enums"]["funnel_stage"] | null
+          suggestion_type?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      dashboard_settings: {
+        Row: {
+          id: string
+          setting_key: string
+          setting_value: Json
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          setting_key: string
+          setting_value: Json
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          setting_key?: string
+          setting_value?: Json
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      funnel_goals: {
+        Row: {
+          created_at: string
+          current_value: number | null
+          deadline: string | null
+          goal_name: string
+          id: string
+          is_active: boolean | null
+          stage: Database["public"]["Enums"]["funnel_stage"]
+          target_value: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          current_value?: number | null
+          deadline?: string | null
+          goal_name: string
+          id?: string
+          is_active?: boolean | null
+          stage: Database["public"]["Enums"]["funnel_stage"]
+          target_value: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          current_value?: number | null
+          deadline?: string | null
+          goal_name?: string
+          id?: string
+          is_active?: boolean | null
+          stage?: Database["public"]["Enums"]["funnel_stage"]
+          target_value?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      funnel_metrics: {
+        Row: {
+          created_at: string
+          date: string
+          id: string
+          metric_name: string
+          metric_value: number
+          notes: string | null
+          stage: Database["public"]["Enums"]["funnel_stage"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          id?: string
+          metric_name: string
+          metric_value?: number
+          notes?: string | null
+          stage: Database["public"]["Enums"]["funnel_stage"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          id?: string
+          metric_name?: string
+          metric_value?: number
+          notes?: string | null
+          stage?: Database["public"]["Enums"]["funnel_stage"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      tracking_events: {
+        Row: {
+          created_at: string
+          element_id: string | null
+          event_name: string | null
+          event_type: Database["public"]["Enums"]["event_type"]
+          id: string
+          metadata: Json | null
+          page_url: string | null
+          session_id: string | null
+          visitor_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          element_id?: string | null
+          event_name?: string | null
+          event_type: Database["public"]["Enums"]["event_type"]
+          id?: string
+          metadata?: Json | null
+          page_url?: string | null
+          session_id?: string | null
+          visitor_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          element_id?: string | null
+          event_name?: string | null
+          event_type?: Database["public"]["Enums"]["event_type"]
+          id?: string
+          metadata?: Json | null
+          page_url?: string | null
+          session_id?: string | null
+          visitor_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +190,20 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      event_type:
+        | "page_view"
+        | "click"
+        | "scroll"
+        | "video_view"
+        | "form_submit"
+        | "add_to_cart"
+        | "checkout_start"
+      funnel_stage:
+        | "attraction"
+        | "engagement"
+        | "consideration"
+        | "conversion"
+        | "retention"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +330,23 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      event_type: [
+        "page_view",
+        "click",
+        "scroll",
+        "video_view",
+        "form_submit",
+        "add_to_cart",
+        "checkout_start",
+      ],
+      funnel_stage: [
+        "attraction",
+        "engagement",
+        "consideration",
+        "conversion",
+        "retention",
+      ],
+    },
   },
 } as const
