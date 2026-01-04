@@ -1,8 +1,9 @@
 import React from "react";
 import { Star, Truck, ShieldCheck, CreditCard, Zap, Check, Minus, Plus, ShoppingCart, Ruler } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ColorKey, colorFirstImageIndex } from "./ProductGallery";
+import { ColorKey } from "./ProductGallery";
 import tabelaMedidas from "@/assets/tabela-medidas.avif";
+import { trackEventDirect } from "@/hooks/useTracking";
 
 const colors: { name: string; value: string; key: ColorKey }[] = [
   { name: "Preto", value: "#1a1a1a", key: "preto" },
@@ -27,11 +28,17 @@ interface ProductInfoProps {
 }
 
 const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
-  const selectedColorData = colors.find(c => c.key === selectedColor);
+  const selectedColorData = colors.find((c) => c.key === selectedColor);
   const [selectedSize, setSelectedSize] = React.useState(0);
   const [quantity, setQuantity] = React.useState(1);
 
   const handleAddToCart = () => {
+    trackEventDirect(
+      'checkout_start',
+      'Primary CTA → Checkout',
+      'primary_cta',
+      { size: sizes[selectedSize], qty: quantity, color: selectedColor }
+    );
     window.open("https://pay.caminhodasaude.com/nWrxGWAr01X3654", "_blank");
   };
 

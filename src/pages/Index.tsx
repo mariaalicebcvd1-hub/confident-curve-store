@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TopBar from "@/components/TopBar";
 import UrgencyBanner from "@/components/UrgencyBanner";
 import ProductGallery, { ColorKey, colorFirstImageIndex } from "@/components/ProductGallery";
@@ -12,8 +12,12 @@ import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/FloatingCTA";
 import FloatingVideoButton from "@/components/FloatingVideoButton";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
+import { trackEventDirect, useTracking } from "@/hooks/useTracking";
 
 const Index = () => {
+  useTracking();
+  const scrolledTrackedRef = useRef(false);
+
   const [selectedColor, setSelectedColor] = useState<ColorKey>("misto");
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
@@ -22,6 +26,26 @@ const Index = () => {
     // Direciona para a primeira imagem da cor selecionada
     setSelectedImageIndex(colorFirstImageIndex[color]);
   };
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (scrolledTrackedRef.current) return;
+
+      const doc = document.documentElement;
+      const scrollTop = window.scrollY || doc.scrollTop;
+      const scrollHeight = doc.scrollHeight - window.innerHeight;
+      const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+
+      if (progress >= 0.5) {
+        scrolledTrackedRef.current = true;
+        trackEventDirect('scroll', 'Scrolled 50%');
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
