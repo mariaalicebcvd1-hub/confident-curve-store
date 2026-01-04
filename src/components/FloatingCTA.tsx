@@ -18,7 +18,7 @@ const sizes = [
 const FloatingCTA = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
-  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string>("P");
   const [sizeOpen, setSizeOpen] = useState(false);
 
   useEffect(() => {
