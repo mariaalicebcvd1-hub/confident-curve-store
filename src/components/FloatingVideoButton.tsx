@@ -183,11 +183,11 @@ const FloatingVideoButton = () => {
               </div>
             </div>
 
-            {/* CTA Button - positioned higher */}
+            {/* CTA Button - positioned higher with pulse animation */}
             <div className="absolute bottom-16 left-4 right-4">
               <button
                 onClick={handleCTAClick}
-                className="w-full bg-success hover:bg-success/90 text-success-foreground font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 shadow-lg transition-all duration-200 hover:scale-[1.02] uppercase tracking-wide"
+                className="w-full bg-success hover:bg-success/90 text-success-foreground font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 shadow-lg shadow-success/40 transition-all duration-200 hover:scale-[1.02] uppercase tracking-wide animate-pulse-slow"
               >
                 <ShoppingBag className="w-5 h-5" />
                 Garantir Minha Oferta
