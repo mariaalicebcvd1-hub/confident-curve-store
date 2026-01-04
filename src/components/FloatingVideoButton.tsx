@@ -153,9 +153,9 @@ const FloatingVideoButton = () => {
 
       {/* Video Modal */}
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="w-auto max-w-[90vw] sm:max-w-[400px] p-0 bg-transparent border-none overflow-hidden">
+        <DialogContent className="max-w-[min(90vw,400px)] w-full p-0 bg-black border-none overflow-hidden rounded-xl">
           <DialogTitle className="sr-only">Vídeo do Produto</DialogTitle>
-          <div className="relative">
+          <div className="relative aspect-[9/16] w-full">
             <video
               ref={modalVideoRef}
               src={videoSrc}
@@ -163,7 +163,7 @@ const FloatingVideoButton = () => {
               playsInline
               autoPlay
               preload="auto"
-              className="w-full h-full object-contain"
+              className="absolute inset-0 w-full h-full object-cover rounded-xl"
             />
 
             {/* CTA Button - positioned at bottom */}
