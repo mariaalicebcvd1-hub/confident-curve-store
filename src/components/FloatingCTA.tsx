@@ -6,6 +6,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { trackEventDirect } from "@/hooks/useTracking";
 
 const sizes = [
   { value: "P", label: "P", description: "36-38" },
@@ -25,7 +26,7 @@ const FloatingCTA = () => {
     const handleScroll = () => {
       // Find the ProductDescription section by its ID
       const descriptionSection = document.getElementById('product-description');
-      
+
       if (descriptionSection && !isDismissed) {
         const rect = descriptionSection.getBoundingClientRect();
         // Show when ProductDescription section enters the viewport
@@ -46,6 +47,11 @@ const FloatingCTA = () => {
       setSizeOpen(true);
       return;
     }
+
+    trackEventDirect('checkout_start', 'Floating CTA → Checkout', 'floating_cta', {
+      size: selectedSize,
+    });
+
     window.open("https://pay.caminhodasaude.com/nWrxGWAr01X3654", "_blank");
   };
 

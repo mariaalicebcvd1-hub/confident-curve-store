@@ -55,20 +55,31 @@ export const useTracking = () => {
   return { trackEvent, visitorId, sessionId };
 };
 
-export const trackClick = async (elementId: string, eventName?: string) => {
+export const trackEventDirect = async (
+  eventType: EventType,
+  eventName?: string,
+  elementId?: string,
+  metadata?: Json
+) => {
   const visitorId = getOrCreateVisitorId();
   const sessionId = getOrCreateSessionId();
-  
+
   try {
     await supabase.from('tracking_events').insert({
-      event_type: 'click' as EventType,
-      event_name: eventName || `Click on ${elementId}`,
+      event_type: eventType,
+      event_name: eventName,
       page_url: window.location.pathname,
       element_id: elementId,
       session_id: sessionId,
       visitor_id: visitorId,
+      metadata: metadata || {},
     });
   } catch (error) {
     console.error('Tracking error:', error);
   }
 };
+
+export const trackClick = async (elementId: string, eventName?: string) => {
+  return trackEventDirect('click', eventName || `Click on ${elementId}`, elementId);
+};
+

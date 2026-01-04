@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Play, X, ShoppingBag } from "lucide-react";
 import { Dialog, DialogContent, DialogClose, DialogTitle } from "@/components/ui/dialog";
 import videoSrc from "@/assets/video-produto.mp4";
+import { trackEventDirect } from "@/hooks/useTracking";
 
 // Format time as MM:SS
 const formatTime = (seconds: number) => {
@@ -126,7 +127,10 @@ const FloatingVideoButton = () => {
     <>
       {/* Floating Video Button - hidden until video is ready */}
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          trackEventDirect('video_view', 'Opened product video', 'floating_video_button');
+          setIsOpen(true);
+        }}
         className={`fixed bottom-24 right-4 z-50 group cursor-pointer transition-all duration-500 ${
           isReady ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
         }`}
