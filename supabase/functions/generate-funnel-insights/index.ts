@@ -6,6 +6,22 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// Simple in-memory rate limiting (per function instance)
+const rateLimitMap = new Map<string, number>();
+const RATE_LIMIT_WINDOW_MS = 60000; // 1 minute
+
+function checkRateLimit(userId: string): boolean {
+  const lastCall = rateLimitMap.get(userId);
+  const now = Date.now();
+  
+  if (lastCall && now - lastCall < RATE_LIMIT_WINDOW_MS) {
+    return false; // Rate limited
+  }
+  
+  rateLimitMap.set(userId, now);
+  return true;
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -14,13 +30,63 @@ serve(async (req) => {
   try {
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
     const SUPABASE_URL = Deno.env.get('SUPABASE_URL');
+    const SUPABASE_ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY');
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
 
     if (!LOVABLE_API_KEY) {
       throw new Error('LOVABLE_API_KEY is not configured');
     }
 
+    // Explicit authentication check
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader) {
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 401,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Verify user with anon key client
+    const authClient = createClient(SUPABASE_URL!, SUPABASE_ANON_KEY!);
+    const token = authHeader.replace('Bearer ', '');
+    const { data: { user }, error: authError } = await authClient.auth.getUser(token);
+
+    if (authError || !user) {
+      console.log('Authentication failed:', authError?.message || 'No user');
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 401,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Check if user is admin using service role client
     const supabase = createClient(SUPABASE_URL!, SUPABASE_SERVICE_ROLE_KEY!);
+    
+    const { data: roleData, error: roleError } = await supabase
+      .from('user_roles')
+      .select('role')
+      .eq('user_id', user.id)
+      .eq('role', 'admin')
+      .single();
+
+    if (roleError || !roleData) {
+      console.log('Admin role check failed for user:', user.id);
+      return new Response(JSON.stringify({ error: 'Forbidden: Admin access required' }), {
+        status: 403,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Rate limiting check (1 call per minute per user)
+    if (!checkRateLimit(user.id)) {
+      console.log('Rate limit exceeded for user:', user.id);
+      return new Response(JSON.stringify({ error: 'Rate limit exceeded. Please wait 1 minute between requests.' }), {
+        status: 429,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    console.log('Generating AI insights for admin user:', user.id);
 
     // Buscar dados do funil dos últimos 30 dias
     const thirtyDaysAgo = new Date();
@@ -85,8 +151,6 @@ Responda em formato JSON com a seguinte estrutura:
 }
 `;
 
-    console.log('Generating AI insights...');
-
     const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -117,14 +181,14 @@ Responda em formato JSON com a seguinte estrutura:
         });
       }
       const errorText = await response.text();
-      console.error('AI Gateway error:', response.status, errorText);
+      console.error('AI Gateway error:', response.status);
       throw new Error(`AI Gateway error: ${response.status}`);
     }
 
     const data = await response.json();
     const content = data.choices?.[0]?.message?.content || '';
     
-    console.log('AI response received:', content.substring(0, 200));
+    console.log('AI response received successfully');
 
     // Parse JSON da resposta
     let suggestions = [];
@@ -135,7 +199,7 @@ Responda em formato JSON com a seguinte estrutura:
         suggestions = parsed.suggestions || [];
       }
     } catch (parseError) {
-      console.error('Error parsing AI response:', parseError);
+      console.error('Error parsing AI response');
       // Criar sugestão padrão se não conseguir parsear
       suggestions = [{
         stage: 'conversion',
@@ -161,7 +225,7 @@ Responda em formato JSON com a seguinte estrutura:
         .insert(suggestionsToInsert);
 
       if (insertError) {
-        console.error('Error saving suggestions:', insertError);
+        console.error('Error saving suggestions to database');
       }
     }
 
@@ -169,8 +233,8 @@ Responda em formato JSON com a seguinte estrutura:
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    console.error('Error in generate-funnel-insights:', error);
-    return new Response(JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }), {
+    console.error('Error in generate-funnel-insights');
+    return new Response(JSON.stringify({ error: 'An unexpected error occurred' }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
