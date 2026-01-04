@@ -1,11 +1,14 @@
 import { Star, CheckCircle, Image, Filter, ThumbsUp } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import reviewCecilia1 from "@/assets/review-cecilia-1.jpeg";
+import reviewCecilia2 from "@/assets/review-cecilia-2.jpeg";
+import reviewCecilia3 from "@/assets/review-cecilia-3.jpeg";
 
 const reviews = [
-  { name: "Sulem Santos", verified: true, comment: "Amei é realmente de ótima qualidade, eu li os comentários e resolvi testar e amei. Ela realmente segura na barriga, o material é ótimo, muito resistente e vou comprar maiss!", productImage: "https://www.images.areviewsapp.com/admeliteshop.myshopify.com/p0K2XFu4fsPhIv8.jpg", rating: 5, helpful: 12, date: "02/01/2026" },
-  { name: "Karine", verified: true, comment: "Gostei bastante a entrega foi bem rápida, indico, podem comprar!", productImage: "https://www.images.areviewsapp.com/admeliteshop.myshopify.com/Hq0TLJwGuAig4mX.jpg", rating: 5, helpful: 8, date: "28/12/2025" },
-  { name: "Cecília", verified: true, comment: "Comprei a minha e simplesmente amei, a qualidade é impecável e realmente não enrola, levanta o bumbum e esconde a pochetinha que eu odeio rsrs comprem meninas, vcs não vão se arrepender!!", productImage: null, rating: 5, helpful: 15, date: "23/12/2025" },
+  { name: "Sulem Santos", verified: true, comment: "Amei é realmente de ótima qualidade, eu li os comentários e resolvi testar e amei. Ela realmente segura na barriga, o material é ótimo, muito resistente e vou comprar maiss!", productImage: "https://www.images.areviewsapp.com/admeliteshop.myshopify.com/p0K2XFu4fsPhIv8.jpg", productImages: null, rating: 5, helpful: 12, date: "02/01/2026" },
+  { name: "Karine", verified: true, comment: "Gostei bastante a entrega foi bem rápida, indico, podem comprar!", productImage: "https://www.images.areviewsapp.com/admeliteshop.myshopify.com/Hq0TLJwGuAig4mX.jpg", productImages: null, rating: 5, helpful: 8, date: "28/12/2025" },
+  { name: "Cecília", verified: true, comment: "Comprei a minha e simplesmente amei, a qualidade é impecável e realmente não enrola, levanta o bumbum e esconde a pochetinha que eu odeio rsrs comprem meninas, vcs não vão se arrepender!!", productImage: null, productImages: [reviewCecilia1, reviewCecilia2, reviewCecilia3], rating: 5, helpful: 15, date: "23/12/2025" },
   { name: "Virgínia", verified: true, comment: "Tamanho adequado, pedi meu número e coube perfeitamente, muito confortável, não marca nas roupas, principalmente nos vestidos.", productImage: "https://www.images.areviewsapp.com/admeliteshop.myshopify.com/6BJCH4sIUNgp2D5.jpg", rating: 5, helpful: 6, date: "19/12/2025" },
   { name: "Hilda Pontes", verified: true, comment: "Me surpreendeu, exatamente como anunciado. O produto é excelente, chegou antes do prazo e é muito confortável, perfeito de usar, muito linda e ótima de usar", productImage: "https://www.images.areviewsapp.com/admeliteshop.myshopify.com/omQeSyXFq5BwHLz.jpg", rating: 5, helpful: 9, date: "15/12/2025" },
   { name: "Ana Paula", verified: true, comment: "Adorei! Veste super bem, é confortável e realmente modela o corpo. Já quero comprar mais!", productImage: null, rating: 4, helpful: 4, date: "12/12/2025" },
@@ -80,12 +83,12 @@ const Reviews = () => {
   const averageRating = 4.9;
 
   const filteredReviews = reviews.filter((review) => {
-    if (filter === "with-photo") return review.productImage !== null;
+    if (filter === "with-photo") return review.productImage !== null || (review.productImages && review.productImages.length > 0);
     return true;
   });
 
   const displayedReviews = showAll ? filteredReviews : filteredReviews.slice(0, 4);
-  const photosCount = reviews.filter(r => r.productImage).length;
+  const photosCount = reviews.filter(r => r.productImage || (r.productImages && r.productImages.length > 0)).length;
 
   const handleHelpful = (index: number) => {
     if (!helpfulClicked.includes(index)) {
@@ -225,26 +228,52 @@ const Reviews = () => {
                     {/* Comment */}
                     <p className="text-foreground/80 leading-relaxed mb-4">{review.comment}</p>
 
-                    {/* Product Image */}
-                    {review.productImage && (
-                      <div 
-                        className="mb-4 cursor-pointer group inline-block"
-                        onClick={() => setSelectedImage(review.productImage)}
-                      >
-                        <div className="relative overflow-hidden rounded-xl">
-                          <img
-                            src={review.productImage}
-                            alt={`Foto do produto de ${review.name}`}
-                            className="w-28 h-28 object-cover transition-transform duration-300 group-hover:scale-110"
-                            loading="lazy"
-                            decoding="async"
-                          />
-                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-                            <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium bg-black/50 px-2 py-1 rounded">
-                              Ampliar
-                            </span>
+                    {/* Product Image(s) */}
+                    {(review.productImage || review.productImages) && (
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {review.productImage && (
+                          <div 
+                            className="cursor-pointer group inline-block"
+                            onClick={() => setSelectedImage(review.productImage)}
+                          >
+                            <div className="relative overflow-hidden rounded-xl">
+                              <img
+                                src={review.productImage}
+                                alt={`Foto do produto de ${review.name}`}
+                                className="w-28 h-28 object-cover transition-transform duration-300 group-hover:scale-110"
+                                loading="lazy"
+                                decoding="async"
+                              />
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                                <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium bg-black/50 px-2 py-1 rounded">
+                                  Ampliar
+                                </span>
+                              </div>
+                            </div>
                           </div>
-                        </div>
+                        )}
+                        {review.productImages && review.productImages.map((img, imgIndex) => (
+                          <div 
+                            key={imgIndex}
+                            className="cursor-pointer group inline-block"
+                            onClick={() => setSelectedImage(img)}
+                          >
+                            <div className="relative overflow-hidden rounded-xl">
+                              <img
+                                src={img}
+                                alt={`Foto ${imgIndex + 1} do produto de ${review.name}`}
+                                className="w-28 h-28 object-cover transition-transform duration-300 group-hover:scale-110"
+                                loading="lazy"
+                                decoding="async"
+                              />
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                                <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium bg-black/50 px-2 py-1 rounded">
+                                  Ampliar
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     )}
 
