@@ -145,11 +145,11 @@ const ProductDescription = () => {
                 </h3>
               </div>
               
-              <div className="relative mb-4 rounded-lg overflow-hidden bg-secondary/30 flex items-center justify-center" style={{ maxHeight: '280px' }}>
+              <div className="relative mb-4 rounded-lg overflow-hidden bg-secondary/30">
                 <img
                   src={feature.image}
                   alt={feature.title}
-                  className="w-full h-auto max-h-[280px] object-contain"
+                  className="w-full h-auto object-contain"
                   loading="lazy"
                   decoding="async"
                 />
