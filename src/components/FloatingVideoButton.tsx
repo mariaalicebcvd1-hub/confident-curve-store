@@ -166,25 +166,8 @@ const FloatingVideoButton = () => {
               className="w-full h-full object-contain"
             />
 
-            {/* Custom Vturb-style progress bar */}
-            <div className="absolute bottom-0 left-0 right-0 bg-black/80 px-3 py-2">
-              <div className="flex items-center gap-2">
-                {/* Fake progress bar */}
-                <div className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-white rounded-full transition-all duration-300"
-                    style={{ width: `${fakeProgress}%` }}
-                  />
-                </div>
-                {/* Fake time display - shows shorter remaining time */}
-                <span className="text-white text-xs font-medium whitespace-nowrap">
-                  {formatTime(currentTime)} / {formatTime(fakeDuration || 1)}
-                </span>
-              </div>
-            </div>
-
-            {/* CTA Button - positioned higher with pulse animation */}
-            <div className="absolute bottom-16 left-4 right-4">
+            {/* CTA Button - positioned at bottom */}
+            <div className="absolute bottom-4 left-4 right-4">
               <button
                 onClick={handleCTAClick}
                 className="w-full bg-success hover:bg-success/90 text-success-foreground font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 shadow-lg shadow-success/40 transition-all duration-200 hover:scale-[1.02] uppercase tracking-wide animate-pulse-slow"
