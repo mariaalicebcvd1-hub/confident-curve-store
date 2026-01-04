@@ -311,7 +311,7 @@ const Reviews = () => {
                 onClick={() => setShowAll(!showAll)}
                 className="rounded-full px-8"
               >
-                {showAll ? "Mostrar menos" : `Ver todas as ${filteredReviews.length} avaliações`}
+                {showAll ? "Mostrar menos" : `Ver todas as ${totalReviews.toLocaleString('pt-BR')} avaliações`}
               </Button>
             </div>
           )}
