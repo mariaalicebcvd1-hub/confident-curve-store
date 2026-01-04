@@ -1,28 +1,64 @@
 import { useState, useEffect } from "react";
 import { ShoppingBag, X } from "lucide-react";
 
-const recentPurchases = [
-  { name: "Maria", city: "São Paulo", state: "SP", time: "agora mesmo" },
-  { name: "Ana", city: "Rio de Janeiro", state: "RJ", time: "2 min atrás" },
-  { name: "Juliana", city: "Belo Horizonte", state: "MG", time: "5 min atrás" },
-  { name: "Fernanda", city: "Curitiba", state: "PR", time: "8 min atrás" },
-  { name: "Camila", city: "Salvador", state: "BA", time: "12 min atrás" },
-  { name: "Patrícia", city: "Fortaleza", state: "CE", time: "15 min atrás" },
-  { name: "Larissa", city: "Recife", state: "PE", time: "18 min atrás" },
-  { name: "Beatriz", city: "Porto Alegre", state: "RS", time: "22 min atrás" },
-  { name: "Amanda", city: "Brasília", state: "DF", time: "25 min atrás" },
-  { name: "Gabriela", city: "Goiânia", state: "GO", time: "28 min atrás" },
-  { name: "Isabela", city: "Manaus", state: "AM", time: "32 min atrás" },
-  { name: "Rafaela", city: "Florianópolis", state: "SC", time: "35 min atrás" },
-  { name: "Thais", city: "Vitória", state: "ES", time: "38 min atrás" },
-  { name: "Priscila", city: "Natal", state: "RN", time: "42 min atrás" },
-  { name: "Vanessa", city: "Campo Grande", state: "MS", time: "45 min atrás" },
+const names = [
+  "Maria", "Ana", "Juliana", "Fernanda", "Camila", "Patrícia",
+  "Larissa", "Beatriz", "Amanda", "Gabriela", "Isabela", "Rafaela"
 ];
+
+const cities = [
+  { city: "São Paulo", state: "SP" },
+  { city: "Rio de Janeiro", state: "RJ" },
+  { city: "Belo Horizonte", state: "MG" },
+  { city: "Curitiba", state: "PR" },
+  { city: "Salvador", state: "BA" },
+  { city: "Fortaleza", state: "CE" },
+  { city: "Recife", state: "PE" },
+  { city: "Porto Alegre", state: "RS" },
+  { city: "Brasília", state: "DF" },
+  { city: "Goiânia", state: "GO" },
+  { city: "Manaus", state: "AM" },
+  { city: "Florianópolis", state: "SC" },
+  { city: "Vitória", state: "ES" },
+  { city: "Natal", state: "RN" },
+  { city: "Campo Grande", state: "MS" },
+  { city: "João Pessoa", state: "PB" },
+  { city: "Maceió", state: "AL" },
+  { city: "Teresina", state: "PI" },
+  { city: "Cuiabá", state: "MT" },
+  { city: "Aracaju", state: "SE" },
+  { city: "Campinas", state: "SP" },
+  { city: "Santos", state: "SP" },
+  { city: "Ribeirão Preto", state: "SP" },
+  { city: "Uberlândia", state: "MG" },
+  { city: "Londrina", state: "PR" },
+  { city: "Joinville", state: "SC" },
+  { city: "Niterói", state: "RJ" },
+  { city: "Belém", state: "PA" },
+];
+
+const times = [
+  "agora mesmo",
+  "1 min atrás",
+  "2 min atrás",
+  "3 min atrás",
+  "5 min atrás",
+  "8 min atrás",
+  "10 min atrás",
+  "12 min atrás",
+  "15 min atrás",
+];
+
+const getRandomPurchase = () => {
+  const name = names[Math.floor(Math.random() * names.length)];
+  const location = cities[Math.floor(Math.random() * cities.length)];
+  const time = times[Math.floor(Math.random() * times.length)];
+  return { name, city: location.city, state: location.state, time };
+};
 
 const RecentPurchasePopup = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [currentPurchase, setCurrentPurchase] = useState(recentPurchases[0]);
-  const [purchaseIndex, setPurchaseIndex] = useState(0);
+  const [currentPurchase, setCurrentPurchase] = useState(getRandomPurchase);
 
   useEffect(() => {
     // Mostra o primeiro popup após 8 segundos (delay maior para não competir com LCP)
@@ -41,11 +77,9 @@ const RecentPurchasePopup = () => {
       setIsVisible(false);
     }, 4000);
 
-    // Prepara o próximo popup após 6 segundos (4s visível + 2s pausa)
+    // Prepara o próximo popup após 12 segundos (4s visível + 8s pausa)
     const nextTimeout = setTimeout(() => {
-      const nextIndex = (purchaseIndex + 1) % recentPurchases.length;
-      setPurchaseIndex(nextIndex);
-      setCurrentPurchase(recentPurchases[nextIndex]);
+      setCurrentPurchase(getRandomPurchase());
       setIsVisible(true);
     }, 12000);
 
@@ -53,7 +87,7 @@ const RecentPurchasePopup = () => {
       clearTimeout(hideTimeout);
       clearTimeout(nextTimeout);
     };
-  }, [isVisible, purchaseIndex]);
+  }, [isVisible]);
 
   const handleClose = () => {
     setIsVisible(false);
