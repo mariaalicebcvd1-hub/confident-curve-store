@@ -55,7 +55,7 @@ const features = [
 
 const ProductDescription = () => {
   return (
-    <section className="py-12 lg:py-16 bg-gradient-to-b from-secondary/50 to-background">
+    <section id="product-description" className="py-12 lg:py-16 bg-gradient-to-b from-secondary/50 to-background">
       <div className="container mx-auto px-4">
         {/* Hero Header */}
         <div className="text-center max-w-4xl mx-auto mb-12">
