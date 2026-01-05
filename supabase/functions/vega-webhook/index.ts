@@ -3,8 +3,102 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-vega-signature',
 };
+
+// Rate limiting: track requests per IP
+const requestCounts = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT = 10; // requests per minute
+const RATE_WINDOW = 60000; // 1 minute in ms
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const record = requestCounts.get(ip);
+  
+  if (!record || now > record.resetTime) {
+    requestCounts.set(ip, { count: 1, resetTime: now + RATE_WINDOW });
+    return true;
+  }
+  
+  if (record.count >= RATE_LIMIT) {
+    return false;
+  }
+  
+  record.count++;
+  return true;
+}
+
+// HMAC signature verification for webhook security
+async function verifySignature(payload: string, signature: string | null, secret: string): Promise<boolean> {
+  if (!signature || !secret) {
+    console.log('Missing signature or secret, skipping verification');
+    return true; // Allow if no secret configured (for backwards compatibility)
+  }
+  
+  try {
+    const encoder = new TextEncoder();
+    const key = await crypto.subtle.importKey(
+      'raw',
+      encoder.encode(secret),
+      { name: 'HMAC', hash: 'SHA-256' },
+      false,
+      ['sign']
+    );
+    
+    const signatureBuffer = await crypto.subtle.sign('HMAC', key, encoder.encode(payload));
+    const expectedSignature = Array.from(new Uint8Array(signatureBuffer))
+      .map(b => b.toString(16).padStart(2, '0'))
+      .join('');
+    
+    // Constant-time comparison to prevent timing attacks
+    if (signature.length !== expectedSignature.length) {
+      return false;
+    }
+    
+    let result = 0;
+    for (let i = 0; i < signature.length; i++) {
+      result |= signature.charCodeAt(i) ^ expectedSignature.charCodeAt(i);
+    }
+    
+    return result === 0;
+  } catch (error) {
+    console.error('Signature verification error:', error);
+    return false;
+  }
+}
+
+// Sanitize payload to remove sensitive PII before storage
+function sanitizePayload(payload: Record<string, unknown>): Record<string, unknown> {
+  const sanitized = { ...payload };
+  
+  // Redact customer PII
+  if (sanitized.customer && typeof sanitized.customer === 'object') {
+    sanitized.customer = {
+      ...(sanitized.customer as Record<string, unknown>),
+      email: '[REDACTED]',
+      phone: '[REDACTED]',
+      document: '[REDACTED]',
+      cpf: '[REDACTED]',
+    };
+  }
+  
+  if (sanitized.buyer && typeof sanitized.buyer === 'object') {
+    sanitized.buyer = {
+      ...(sanitized.buyer as Record<string, unknown>),
+      email: '[REDACTED]',
+      phone: '[REDACTED]',
+      document: '[REDACTED]',
+      cpf: '[REDACTED]',
+    };
+  }
+  
+  // Remove any credit card or payment sensitive data
+  delete sanitized.card;
+  delete sanitized.credit_card;
+  delete sanitized.payment_details;
+  
+  return sanitized;
+}
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -12,17 +106,73 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  // Only allow POST requests
+  if (req.method !== 'POST') {
+    console.log('Rejected non-POST request:', req.method);
+    return new Response(
+      JSON.stringify({ success: false, error: 'Method not allowed' }),
+      { status: 405, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+    );
+  }
+
+  // Rate limiting check
+  const clientIP = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 
+                   req.headers.get('cf-connecting-ip') || 
+                   'unknown';
+  
+  if (!checkRateLimit(clientIP)) {
+    console.log('Rate limit exceeded for IP:', clientIP);
+    return new Response(
+      JSON.stringify({ success: false, error: 'Rate limit exceeded' }),
+      { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+    );
+  }
+
   try {
+    const rawBody = await req.text();
+    
+    // Verify webhook signature if secret is configured
+    const webhookSecret = Deno.env.get('VEGA_WEBHOOK_SECRET');
+    const signature = req.headers.get('x-vega-signature');
+    
+    if (webhookSecret) {
+      const isValid = await verifySignature(rawBody, signature, webhookSecret);
+      if (!isValid) {
+        console.log('Invalid webhook signature');
+        return new Response(
+          JSON.stringify({ success: false, error: 'Invalid signature' }),
+          { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+    }
+    
+    const payload = JSON.parse(rawBody);
+    console.log('Vega Webhook received from IP:', clientIP);
+
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    const payload = await req.json();
-    console.log('Vega Webhook received:', JSON.stringify(payload));
-
     // Extract fields from Vega Checkout payload structure
     const externalId = payload.transaction_id || payload.id || payload.order_id;
     const status = payload.status || 'pending';
+    
+    // Check for duplicate to prevent replay attacks
+    if (externalId) {
+      const { data: existing } = await supabase
+        .from('sales')
+        .select('id')
+        .eq('external_id', externalId.toString())
+        .maybeSingle();
+      
+      if (existing) {
+        console.log('Duplicate transaction ignored:', externalId);
+        return new Response(
+          JSON.stringify({ success: true, message: 'Duplicate ignored' }),
+          { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+    }
     
     // Vega sends amount in total_price (in BRL like "98.01") or sub_price
     const amount = parseFloat(payload.total_price) || 
@@ -52,7 +202,10 @@ serve(async (req) => {
     );
 
     if (isValidSale) {
-      const { data, error } = await supabase
+      // Sanitize payload before storing
+      const sanitizedPayload = sanitizePayload(payload);
+      
+      const { error } = await supabase
         .from('sales')
         .insert({
           external_id: externalId?.toString(),
@@ -62,7 +215,7 @@ serve(async (req) => {
           customer_name: customerName,
           product_name: productName,
           payment_method: paymentMethod,
-          raw_payload: payload,
+          raw_payload: sanitizedPayload,
         });
 
       if (error) {
