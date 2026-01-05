@@ -20,15 +20,30 @@ serve(async (req) => {
     const payload = await req.json();
     console.log('Vega Webhook received:', JSON.stringify(payload));
 
-    // Extract common fields from Vega Checkout payload
-    // Adjust field names based on actual Vega Checkout webhook structure
-    const externalId = payload.id || payload.transaction_id || payload.order_id;
-    const status = payload.status || payload.payment_status || 'completed';
-    const amount = payload.amount || payload.value || payload.total || 0;
+    // Extract fields from Vega Checkout payload structure
+    const externalId = payload.transaction_id || payload.id || payload.order_id;
+    const status = payload.status || 'pending';
+    
+    // Vega sends amount in total_price (in BRL like "98.01") or sub_price
+    const amount = parseFloat(payload.total_price) || 
+                   parseFloat(payload.sub_price) || 
+                   parseFloat(payload.amount) || 
+                   parseFloat(payload.value) || 
+                   0;
+    
+    // Customer info is in customer object
     const customerEmail = payload.customer?.email || payload.buyer?.email || payload.email;
     const customerName = payload.customer?.name || payload.buyer?.name || payload.name;
-    const productName = payload.product?.name || payload.product_name || payload.items?.[0]?.name;
-    const paymentMethod = payload.payment_method || payload.payment_type;
+    
+    // Product name is in plans[0].products[0].name or plans[0].name
+    const productName = payload.plans?.[0]?.products?.[0]?.name || 
+                        payload.plans?.[0]?.name ||
+                        payload.product?.name || 
+                        payload.product_name || 
+                        payload.items?.[0]?.name;
+    
+    // Payment method
+    const paymentMethod = payload.method || payload.payment_method || payload.payment_type;
 
     // Only save approved/completed sales
     const validStatuses = ['approved', 'completed', 'paid', 'confirmed', 'aprovado', 'pago'];
@@ -42,7 +57,7 @@ serve(async (req) => {
         .insert({
           external_id: externalId?.toString(),
           status: status,
-          amount: parseFloat(amount) || 0,
+          amount: amount,
           customer_email: customerEmail,
           customer_name: customerName,
           product_name: productName,
@@ -55,7 +70,7 @@ serve(async (req) => {
         throw error;
       }
 
-      console.log('Sale recorded successfully:', externalId);
+      console.log('Sale recorded successfully:', externalId, 'Amount:', amount);
     } else {
       console.log('Ignoring non-sale event with status:', status);
     }
