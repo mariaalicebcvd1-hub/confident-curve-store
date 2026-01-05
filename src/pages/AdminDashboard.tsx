@@ -93,8 +93,8 @@ const AdminDashboard = () => {
               <BarChart3 className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <h1 className="font-bold text-lg">BellaShape Dashboard</h1>
-              <p className="text-xs text-muted-foreground">Gestão do Funil de Vendas</p>
+              <h1 className="font-bold text-lg">Central de Resultados</h1>
+              <p className="text-xs text-muted-foreground">Acompanhe cada centavo do seu funil</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -104,12 +104,12 @@ const AdminDashboard = () => {
               variant="outline"
               className="gap-2"
             >
-              {isGeneratingInsights ? (
+            {isGeneratingInsights ? (
                 <RefreshCw className="w-4 h-4 animate-spin" />
               ) : (
                 <Sparkles className="w-4 h-4" />
               )}
-              Gerar Insights IA
+              Pedir Insights da IA
             </Button>
             <Button variant="ghost" size="icon" onClick={handleLogout}>
               <LogOut className="w-4 h-4" />
@@ -130,15 +130,15 @@ const AdminDashboard = () => {
           <TabsList className="grid w-full grid-cols-4 lg:w-auto lg:inline-flex">
             <TabsTrigger value="overview" className="gap-2">
               <BarChart3 className="w-4 h-4 hidden sm:block" />
-              Métricas
+              Resultados
             </TabsTrigger>
             <TabsTrigger value="suggestions" className="gap-2">
               <Lightbulb className="w-4 h-4 hidden sm:block" />
-              Sugestões IA
+              Insights IA
             </TabsTrigger>
             <TabsTrigger value="metrics" className="gap-2">
               <Plus className="w-4 h-4 hidden sm:block" />
-              Configurar
+              Ajustes
             </TabsTrigger>
             <TabsTrigger value="goals" className="gap-2">
               <Target className="w-4 h-4 hidden sm:block" />
