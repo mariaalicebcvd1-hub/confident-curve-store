@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Calendar } from 'lucide-react';
+import { toZonedTime } from 'date-fns-tz';
+import { startOfDay, addDays, subDays, subMonths, subYears } from 'date-fns';
 
 type FilterOption = 'today' | 'yesterday' | '7days' | 'month' | 'year' | 'all';
 
@@ -18,34 +19,32 @@ const filterOptions: { value: FilterOption; label: string }[] = [
   { value: 'all', label: 'Todo Período' },
 ];
 
+const BRASILIA_TZ = 'America/Sao_Paulo';
+
 export const getDateRange = (filter: FilterOption): { start: Date; end: Date } => {
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  // Get current time in Brasília timezone
+  const nowInBrasilia = toZonedTime(new Date(), BRASILIA_TZ);
+  const todayStart = startOfDay(nowInBrasilia);
+  const tomorrow = addDays(todayStart, 1);
   
   switch (filter) {
     case 'today':
-      return { start: today, end: tomorrow };
+      return { start: todayStart, end: tomorrow };
     case 'yesterday':
-      const yesterday = new Date(today);
-      yesterday.setDate(yesterday.getDate() - 1);
-      return { start: yesterday, end: today };
+      const yesterday = subDays(todayStart, 1);
+      return { start: yesterday, end: todayStart };
     case '7days':
-      const sevenDaysAgo = new Date(today);
-      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+      const sevenDaysAgo = subDays(todayStart, 7);
       return { start: sevenDaysAgo, end: tomorrow };
     case 'month':
-      const monthAgo = new Date(today);
-      monthAgo.setMonth(monthAgo.getMonth() - 1);
+      const monthAgo = subMonths(todayStart, 1);
       return { start: monthAgo, end: tomorrow };
     case 'year':
-      const yearAgo = new Date(today);
-      yearAgo.setFullYear(yearAgo.getFullYear() - 1);
+      const yearAgo = subYears(todayStart, 1);
       return { start: yearAgo, end: tomorrow };
     case 'all':
     default:
-      const allTime = new Date('2020-01-01');
+      const allTime = new Date('2020-01-01T00:00:00-03:00');
       return { start: allTime, end: tomorrow };
   }
 };
