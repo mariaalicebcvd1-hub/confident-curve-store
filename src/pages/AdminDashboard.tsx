@@ -6,19 +6,66 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
-import { LogOut, TrendingUp, Users, ShoppingCart, Target, Sparkles, RefreshCw, Plus, BarChart3 } from 'lucide-react';
+import { LogOut, TrendingUp, Users, ShoppingCart, Target, Sparkles, RefreshCw, Plus, BarChart3, DollarSign } from 'lucide-react';
 import FunnelOverview from '@/components/admin/FunnelOverview';
 import MetricsManager from '@/components/admin/MetricsManager';
 import AISuggestions from '@/components/admin/AISuggestions';
 import GoalsManager from '@/components/admin/GoalsManager';
+
+interface SalesStats {
+  totalSales: number;
+  totalRevenue: number;
+  totalVisitors: number;
+  conversionRate: number;
+}
 
 const AdminDashboard = () => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isGeneratingInsights, setIsGeneratingInsights] = useState(false);
+  const [stats, setStats] = useState<SalesStats>({
+    totalSales: 0,
+    totalRevenue: 0,
+    totalVisitors: 0,
+    conversionRate: 0,
+  });
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  const fetchStats = async () => {
+    try {
+      // Fetch sales data
+      const { data: sales, error: salesError } = await supabase
+        .from('sales')
+        .select('amount')
+        .eq('status', 'approved');
+
+      // Fetch visitors (page views from last 30 days)
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      
+      const { data: visitors, error: visitorsError } = await supabase
+        .from('tracking_events')
+        .select('id')
+        .eq('event_type', 'page_view')
+        .gte('created_at', thirtyDaysAgo.toISOString());
+
+      const totalSales = sales?.length || 0;
+      const totalRevenue = sales?.reduce((sum, sale) => sum + (Number(sale.amount) || 0), 0) || 0;
+      const totalVisitors = visitors?.length || 0;
+      const conversionRate = totalVisitors > 0 ? ((totalSales / totalVisitors) * 100) : 0;
+
+      setStats({
+        totalSales,
+        totalRevenue,
+        totalVisitors,
+        conversionRate,
+      });
+    } catch (error) {
+      console.error('Error fetching stats:', error);
+    }
+  };
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -41,6 +88,9 @@ const AdminDashboard = () => {
   useEffect(() => {
     if (!isLoading && !user) {
       navigate('/admin/login');
+    }
+    if (!isLoading && user) {
+      fetchStats();
     }
   }, [isLoading, user, navigate]);
 
@@ -81,6 +131,13 @@ const AdminDashboard = () => {
   }
 
   if (!user) return null;
+
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(value);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary/10 to-background">
@@ -128,8 +185,8 @@ const AdminDashboard = () => {
                   <Users className="w-5 h-5 text-blue-500" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold">-</p>
-                  <p className="text-xs text-muted-foreground">Visitantes</p>
+                  <p className="text-2xl font-bold">{stats.totalVisitors.toLocaleString()}</p>
+                  <p className="text-xs text-muted-foreground">Visitantes (30d)</p>
                 </div>
               </div>
             </CardContent>
@@ -141,7 +198,7 @@ const AdminDashboard = () => {
                   <TrendingUp className="w-5 h-5 text-green-500" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold">-</p>
+                  <p className="text-2xl font-bold">{stats.conversionRate.toFixed(1)}%</p>
                   <p className="text-xs text-muted-foreground">Taxa Conv.</p>
                 </div>
               </div>
@@ -154,7 +211,7 @@ const AdminDashboard = () => {
                   <ShoppingCart className="w-5 h-5 text-purple-500" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold">-</p>
+                  <p className="text-2xl font-bold">{stats.totalSales}</p>
                   <p className="text-xs text-muted-foreground">Vendas</p>
                 </div>
               </div>
@@ -164,11 +221,11 @@ const AdminDashboard = () => {
             <CardContent className="pt-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-orange-500/10 rounded-lg flex items-center justify-center">
-                  <Target className="w-5 h-5 text-orange-500" />
+                  <DollarSign className="w-5 h-5 text-orange-500" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold">-</p>
-                  <p className="text-xs text-muted-foreground">Meta</p>
+                  <p className="text-2xl font-bold">{formatCurrency(stats.totalRevenue)}</p>
+                  <p className="text-xs text-muted-foreground">Faturamento</p>
                 </div>
               </div>
             </CardContent>
