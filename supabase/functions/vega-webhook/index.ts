@@ -29,10 +29,16 @@ function checkRateLimit(ip: string): boolean {
 }
 
 // HMAC signature verification for webhook security
-async function verifySignature(payload: string, signature: string | null, secret: string): Promise<boolean> {
-  if (!signature || !secret) {
-    console.log('Missing signature or secret, skipping verification');
-    return true; // Allow if no secret configured (for backwards compatibility)
+async function verifySignature(payload: string, signature: string | null, secret: string | undefined): Promise<{ valid: boolean; error?: string }> {
+  // Reject if no signature provided
+  if (!signature) {
+    return { valid: false, error: 'Missing signature header' };
+  }
+  
+  // Reject if webhook secret is not configured
+  if (!secret) {
+    console.error('CRITICAL: VEGA_WEBHOOK_SECRET not configured - rejecting request');
+    return { valid: false, error: 'Webhook secret not configured' };
   }
   
   try {
@@ -52,7 +58,7 @@ async function verifySignature(payload: string, signature: string | null, secret
     
     // Constant-time comparison to prevent timing attacks
     if (signature.length !== expectedSignature.length) {
-      return false;
+      return { valid: false, error: 'Invalid signature' };
     }
     
     let result = 0;
@@ -60,10 +66,10 @@ async function verifySignature(payload: string, signature: string | null, secret
       result |= signature.charCodeAt(i) ^ expectedSignature.charCodeAt(i);
     }
     
-    return result === 0;
+    return result === 0 ? { valid: true } : { valid: false, error: 'Invalid signature' };
   } catch (error) {
     console.error('Signature verification error:', error);
-    return false;
+    return { valid: false, error: 'Signature verification failed' };
   }
 }
 
@@ -131,21 +137,18 @@ serve(async (req) => {
   try {
     const rawBody = await req.text();
     
-    // Verify webhook signature if secret is configured
+    // Verify webhook signature - ALWAYS required
     const webhookSecret = Deno.env.get('VEGA_WEBHOOK_SECRET');
     const signature = req.headers.get('x-vega-signature');
     
-    if (webhookSecret) {
-      const isValid = await verifySignature(rawBody, signature, webhookSecret);
-      if (!isValid) {
-        console.log('Invalid webhook signature');
-        return new Response(
-          JSON.stringify({ success: false, error: 'Invalid signature' }),
-          { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-        );
-      }
+    const verification = await verifySignature(rawBody, signature, webhookSecret);
+    if (!verification.valid) {
+      console.log('Webhook authentication failed:', verification.error);
+      return new Response(
+        JSON.stringify({ success: false, error: verification.error }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
     }
-    
     const payload = JSON.parse(rawBody);
     console.log('Vega Webhook received from IP:', clientIP);
 
