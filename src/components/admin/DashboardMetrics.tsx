@@ -160,15 +160,15 @@ const DashboardMetrics = ({ dateFilter }: DashboardMetricsProps) => {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <MetricCard
           icon={Eye}
-          label="Visitas à Página"
+          label="Olhos na Oferta"
           value={metrics.pageViews.toLocaleString()}
           iconColor="bg-blue-500/10 text-blue-500"
         />
         <MetricCard
           icon={ShoppingCart}
-          label="Visitas ao Checkout"
+          label="Chegaram no Checkout"
           value={metrics.checkoutViews.toLocaleString()}
-          subLabel="Página → Checkout"
+          subLabel="Taxa de Interesse"
           subValue={metrics.pageViews > 0 
             ? `${((metrics.checkoutViews / metrics.pageViews) * 100).toFixed(1)}%` 
             : '0%'
@@ -177,9 +177,9 @@ const DashboardMetrics = ({ dateFilter }: DashboardMetricsProps) => {
         />
         <MetricCard
           icon={CheckCircle}
-          label="Compras Aprovadas"
+          label="Vendas Aprovadas 💰"
           value={metrics.approvedSales}
-          subLabel="Checkout → Compra"
+          subLabel="Taxa de Fechamento"
           subValue={metrics.checkoutViews > 0 
             ? `${((metrics.approvedSales / metrics.checkoutViews) * 100).toFixed(1)}%` 
             : '0%'
@@ -188,7 +188,7 @@ const DashboardMetrics = ({ dateFilter }: DashboardMetricsProps) => {
         />
         <MetricCard
           icon={TrendingUp}
-          label="Taxa de Conversão Geral"
+          label="Conversão Geral"
           value={`${metrics.conversionRate.toFixed(2)}%`}
           iconColor="bg-orange-500/10 text-orange-500"
         />
@@ -198,31 +198,31 @@ const DashboardMetrics = ({ dateFilter }: DashboardMetricsProps) => {
       <div className="grid grid-cols-2 gap-4">
         <MetricCard
           icon={MousePointer}
-          label="Cliques na Página p/ 1 Venda"
-          value={metrics.clicksPerSalePage}
+          label="Cliques p/ Fechar 1 Venda (Página)"
+          value={metrics.clicksPerSalePage || '—'}
           iconColor="bg-indigo-500/10 text-indigo-500"
         />
         <MetricCard
           icon={MousePointer}
-          label="Cliques no Checkout p/ 1 Venda"
-          value={metrics.clicksPerSaleCheckout}
+          label="Checkouts p/ Fechar 1 Venda"
+          value={metrics.clicksPerSaleCheckout || '—'}
           iconColor="bg-pink-500/10 text-pink-500"
         />
       </div>
 
       {/* Sales Breakdown */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card className="border-primary/20">
-          <CardContent className="pt-4">
-            <div className="flex items-start gap-3">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                <Package className="w-6 h-6 text-primary" />
+        <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
+          <CardContent className="pt-5 pb-5">
+            <div className="flex items-start gap-4">
+              <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
+                <Package className="w-7 h-7 text-primary" />
               </div>
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Vendas do Produto Principal</p>
-                <p className="text-3xl font-bold">{isLoading ? '...' : metrics.mainProductSales}</p>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Valor Total: <span className="font-semibold text-foreground">
+                <p className="text-xs font-semibold text-primary uppercase tracking-wide">Produto Principal</p>
+                <p className="text-4xl font-bold mt-1">{isLoading ? '...' : metrics.mainProductSales}</p>
+                <p className="text-sm text-muted-foreground mt-2">
+                  Faturado: <span className="font-bold text-foreground text-base">
                     {formatCurrency(metrics.mainProductRevenue)}
                   </span>
                 </p>
@@ -231,17 +231,17 @@ const DashboardMetrics = ({ dateFilter }: DashboardMetricsProps) => {
           </CardContent>
         </Card>
 
-        <Card className="border-orange-500/20">
-          <CardContent className="pt-4">
-            <div className="flex items-start gap-3">
-              <div className="w-12 h-12 bg-orange-500/10 rounded-lg flex items-center justify-center shrink-0">
-                <Gift className="w-6 h-6 text-orange-500" />
+        <Card className="border-orange-500/20 bg-gradient-to-br from-orange-500/5 to-transparent">
+          <CardContent className="pt-5 pb-5">
+            <div className="flex items-start gap-4">
+              <div className="w-14 h-14 bg-orange-500/10 rounded-xl flex items-center justify-center shrink-0">
+                <Gift className="w-7 h-7 text-orange-500" />
               </div>
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Vendas de Order Bumps</p>
-                <p className="text-3xl font-bold">{isLoading ? '...' : metrics.orderBumpSales}</p>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Valor Total: <span className="font-semibold text-foreground">
+                <p className="text-xs font-semibold text-orange-500 uppercase tracking-wide">Order Bumps</p>
+                <p className="text-4xl font-bold mt-1">{isLoading ? '...' : metrics.orderBumpSales}</p>
+                <p className="text-sm text-muted-foreground mt-2">
+                  Lucro Extra: <span className="font-bold text-foreground text-base">
                     {formatCurrency(metrics.orderBumpRevenue)}
                   </span>
                 </p>
@@ -250,6 +250,34 @@ const DashboardMetrics = ({ dateFilter }: DashboardMetricsProps) => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Total Revenue Card */}
+      <Card className="border-green-500/30 bg-gradient-to-r from-green-500/10 via-emerald-500/5 to-transparent">
+        <CardContent className="py-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 bg-green-500/20 rounded-2xl flex items-center justify-center">
+                <DollarSign className="w-8 h-8 text-green-500" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-green-600 uppercase tracking-wide">Faturamento Total</p>
+                <p className="text-4xl font-bold mt-1">
+                  {isLoading ? '...' : formatCurrency(metrics.mainProductRevenue + metrics.orderBumpRevenue)}
+                </p>
+              </div>
+            </div>
+            <div className="text-right hidden sm:block">
+              <p className="text-xs text-muted-foreground">Ticket Médio</p>
+              <p className="text-2xl font-bold">
+                {metrics.mainProductSales + metrics.orderBumpSales > 0 
+                  ? formatCurrency((metrics.mainProductRevenue + metrics.orderBumpRevenue) / (metrics.mainProductSales + metrics.orderBumpSales))
+                  : 'R$ 0,00'
+                }
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
