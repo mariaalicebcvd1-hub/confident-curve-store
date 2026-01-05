@@ -3,69 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
-import { LogOut, TrendingUp, Users, ShoppingCart, Target, Sparkles, RefreshCw, Plus, BarChart3, DollarSign } from 'lucide-react';
-import FunnelOverview from '@/components/admin/FunnelOverview';
+import { LogOut, Target, Sparkles, RefreshCw, Plus, BarChart3, Lightbulb } from 'lucide-react';
+import DashboardMetrics from '@/components/admin/DashboardMetrics';
+import DateFilter, { FilterOption } from '@/components/admin/DateFilter';
 import MetricsManager from '@/components/admin/MetricsManager';
 import AISuggestions from '@/components/admin/AISuggestions';
 import GoalsManager from '@/components/admin/GoalsManager';
-
-interface SalesStats {
-  totalSales: number;
-  totalRevenue: number;
-  totalVisitors: number;
-  conversionRate: number;
-}
 
 const AdminDashboard = () => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isGeneratingInsights, setIsGeneratingInsights] = useState(false);
-  const [stats, setStats] = useState<SalesStats>({
-    totalSales: 0,
-    totalRevenue: 0,
-    totalVisitors: 0,
-    conversionRate: 0,
-  });
+  const [dateFilter, setDateFilter] = useState<FilterOption>('7days');
   const navigate = useNavigate();
   const { toast } = useToast();
-
-  const fetchStats = async () => {
-    try {
-      // Fetch sales data
-      const { data: sales, error: salesError } = await supabase
-        .from('sales')
-        .select('amount')
-        .eq('status', 'approved');
-
-      // Fetch visitors (page views from last 30 days)
-      const thirtyDaysAgo = new Date();
-      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-      
-      const { data: visitors, error: visitorsError } = await supabase
-        .from('tracking_events')
-        .select('id')
-        .eq('event_type', 'page_view')
-        .gte('created_at', thirtyDaysAgo.toISOString());
-
-      const totalSales = sales?.length || 0;
-      const totalRevenue = sales?.reduce((sum, sale) => sum + (Number(sale.amount) || 0), 0) || 0;
-      const totalVisitors = visitors?.length || 0;
-      const conversionRate = totalVisitors > 0 ? ((totalSales / totalVisitors) * 100) : 0;
-
-      setStats({
-        totalSales,
-        totalRevenue,
-        totalVisitors,
-        conversionRate,
-      });
-    } catch (error) {
-      console.error('Error fetching stats:', error);
-    }
-  };
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -88,9 +42,6 @@ const AdminDashboard = () => {
   useEffect(() => {
     if (!isLoading && !user) {
       navigate('/admin/login');
-    }
-    if (!isLoading && user) {
-      fetchStats();
     }
   }, [isLoading, user, navigate]);
 
@@ -132,13 +83,6 @@ const AdminDashboard = () => {
 
   if (!user) return null;
 
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(value);
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary/10 to-background">
       {/* Header */}
@@ -176,60 +120,9 @@ const AdminDashboard = () => {
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6">
-        {/* Quick Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <Card>
-            <CardContent className="pt-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center">
-                  <Users className="w-5 h-5 text-blue-500" />
-                </div>
-                <div>
-                  <p className="text-2xl font-bold">{stats.totalVisitors.toLocaleString()}</p>
-                  <p className="text-xs text-muted-foreground">Visitantes (30d)</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="pt-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5 text-green-500" />
-                </div>
-                <div>
-                  <p className="text-2xl font-bold">{stats.conversionRate.toFixed(1)}%</p>
-                  <p className="text-xs text-muted-foreground">Taxa Conv.</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="pt-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-purple-500/10 rounded-lg flex items-center justify-center">
-                  <ShoppingCart className="w-5 h-5 text-purple-500" />
-                </div>
-                <div>
-                  <p className="text-2xl font-bold">{stats.totalSales}</p>
-                  <p className="text-xs text-muted-foreground">Vendas</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="pt-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-orange-500/10 rounded-lg flex items-center justify-center">
-                  <DollarSign className="w-5 h-5 text-orange-500" />
-                </div>
-                <div>
-                  <p className="text-2xl font-bold">{formatCurrency(stats.totalRevenue)}</p>
-                  <p className="text-xs text-muted-foreground">Faturamento</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+        {/* Date Filter */}
+        <div className="mb-6">
+          <DateFilter value={dateFilter} onChange={setDateFilter} />
         </div>
 
         {/* Tabs */}
@@ -237,15 +130,15 @@ const AdminDashboard = () => {
           <TabsList className="grid w-full grid-cols-4 lg:w-auto lg:inline-flex">
             <TabsTrigger value="overview" className="gap-2">
               <BarChart3 className="w-4 h-4 hidden sm:block" />
-              Funil
+              Métricas
             </TabsTrigger>
             <TabsTrigger value="suggestions" className="gap-2">
-              <Sparkles className="w-4 h-4 hidden sm:block" />
+              <Lightbulb className="w-4 h-4 hidden sm:block" />
               Sugestões IA
             </TabsTrigger>
             <TabsTrigger value="metrics" className="gap-2">
               <Plus className="w-4 h-4 hidden sm:block" />
-              Métricas
+              Configurar
             </TabsTrigger>
             <TabsTrigger value="goals" className="gap-2">
               <Target className="w-4 h-4 hidden sm:block" />
@@ -254,7 +147,7 @@ const AdminDashboard = () => {
           </TabsList>
 
           <TabsContent value="overview">
-            <FunnelOverview />
+            <DashboardMetrics dateFilter={dateFilter} />
           </TabsContent>
 
           <TabsContent value="suggestions">
