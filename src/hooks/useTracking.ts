@@ -1,6 +1,7 @@
 import { useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Json } from '@/integrations/supabase/types';
+import { logger } from '@/lib/logger';
 
 type EventType = 'page_view' | 'click' | 'scroll' | 'video_view' | 'form_submit' | 'add_to_cart' | 'checkout_start';
 
@@ -43,7 +44,7 @@ export const useTracking = () => {
         metadata: metadata || {},
       }]);
     } catch (error) {
-      console.error('Tracking error:', error);
+      logger.error('Tracking error:', error);
     }
   }, [sessionId, visitorId]);
 
@@ -75,7 +76,7 @@ export const trackEventDirect = async (
       metadata: metadata || {},
     });
   } catch (error) {
-    console.error('Tracking error:', error);
+    logger.error('Tracking error:', error);
   }
 };
 
