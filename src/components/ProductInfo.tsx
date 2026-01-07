@@ -39,7 +39,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       'primary_cta',
       { size: sizes[selectedSize], qty: quantity, color: selectedColor }
     );
-    window.open("https://pay.caminhodasaude.com/nWrxGWAr01X3654", "_blank");
+    window.open("https://seguro.caminhodasaude.com/api/public/shopify?product=2586328866196&store=25863", "_blank");
   };
 
   return (
