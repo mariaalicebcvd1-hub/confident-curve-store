@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { ShoppingCart, X, ChevronDown, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
@@ -43,8 +42,9 @@ const FloatingCTA = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isDismissed]);
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
     if (!selectedSize) {
+      e.preventDefault();
       setSizeOpen(true);
       return;
     }
@@ -52,8 +52,6 @@ const FloatingCTA = () => {
     trackEventDirect('checkout_start', 'Floating CTA → Checkout', 'floating_cta', {
       size: selectedSize,
     });
-
-    window.open(CHECKOUT_URL, "_blank");
   };
 
   const handleSizeSelect = (size: string) => {
@@ -123,15 +121,16 @@ const FloatingCTA = () => {
             </PopoverContent>
           </Popover>
 
-          <Button
+          <a
+            href={CHECKOUT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={handleClick}
-            variant="success"
-            size="default"
-            className="btn-compra flex-1 sm:flex-initial text-sm sm:text-base h-10 sm:h-11 animate-pulse"
+            className="btn-compra flex-1 sm:flex-initial text-sm sm:text-base h-10 sm:h-11 animate-pulse inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-success text-white hover:bg-success/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide px-4"
           >
             <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
             <span className="truncate">GARANTIR MINHA OFERTA</span>
-          </Button>
+          </a>
 
           <button
             onClick={() => setIsDismissed(true)}
