@@ -66,15 +66,15 @@ const ExitIntentPopup = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4">
       {/* Overlay */}
       <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in"
         onClick={handleClose}
       />
       
       {/* Modal - Compacto e com scroll interno */}
-      <div className="relative bg-card rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-hidden animate-scale-in border-2 border-destructive/50 flex flex-col">
+      <div className="relative bg-card rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-hidden animate-popup-enter border-2 border-destructive/50 flex flex-col">
         {/* Header - Barra de Urgência */}
         <div className="bg-destructive text-white py-2 px-4 text-center flex-shrink-0">
           <p className="text-xs sm:text-sm font-black uppercase tracking-wide animate-pulse">
