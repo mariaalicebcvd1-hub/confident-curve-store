@@ -47,6 +47,9 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       'primary_cta',
       { size: sizes[selectedSize], qty: quantity, color: selectedColor }
     );
+
+    // Abre o checkout em nova aba
+    window.open(CHECKOUT_URL, "_blank");
   };
 
   return (
@@ -194,16 +197,14 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
 
       {/* Add to Cart Button */}
       <div className="space-y-2">
-        <a
-          href={CHECKOUT_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
           onClick={handleAddToCart}
           className="btn-compra w-full text-sm sm:text-base animate-pulse inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-success text-white hover:bg-success/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide h-12 sm:h-14 px-4 sm:px-8"
         >
           <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
           QUERO MEU KIT COM 70% OFF
-        </a>
+        </button>
         <p className="text-xs text-center text-muted-foreground">🔒 Compra 100% segura • Entrega garantida</p>
       </div>
 
