@@ -7,6 +7,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { trackEventDirect } from "@/hooks/useTracking";
+import { CHECKOUT_URL } from "@/lib/constants";
 
 const sizes = [
   { value: "P", label: "P", description: "36-38" },
@@ -52,7 +53,7 @@ const FloatingCTA = () => {
       size: selectedSize,
     });
 
-    window.open("https://seguro.caminhodasaude.com/api/public/shopify?product=2586328866196&store=25863", "_blank");
+    window.open(CHECKOUT_URL, "_blank");
   };
 
   const handleSizeSelect = (size: string) => {

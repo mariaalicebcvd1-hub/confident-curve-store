@@ -1,4 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { CHECKOUT_URL } from "@/lib/constants";
 
 // Todas as imagens do produto
 const allImages = [
@@ -63,7 +64,7 @@ const ProductGallery = ({ selectedImageIndex, onImageChange }: ProductGalleryPro
 
         {/* Discount Badge */}
         <a 
-          href="https://seguro.caminhodasaude.com/api/public/shopify?product=2586328866196&store=25863"
+          href={CHECKOUT_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="absolute top-3 left-3 badge-discount text-xs sm:text-sm hover:opacity-80 transition-opacity cursor-pointer z-10"
@@ -74,7 +75,7 @@ const ProductGallery = ({ selectedImageIndex, onImageChange }: ProductGalleryPro
         {/* Offer Badge - Only show on images that are not the first */}
         {selectedImageIndex !== 0 && (
           <a 
-            href="https://seguro.caminhodasaude.com/api/public/shopify?product=2586328866196&store=25863"
+            href={CHECKOUT_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="absolute top-3 right-3 bg-success text-white px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg text-xs sm:text-sm font-bold shadow-lg hover:bg-success/90 transition-colors cursor-pointer z-10"
