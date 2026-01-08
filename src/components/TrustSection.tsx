@@ -47,7 +47,7 @@ const TrustSection = () => {
             href={CHECKOUT_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-success/10 text-success px-4 py-2 rounded-full text-sm font-bold mb-4 hover:bg-success/20 transition-colors cursor-pointer"
+            className="btn-compra inline-flex items-center gap-2 bg-success/10 text-success px-4 py-2 rounded-full text-sm font-bold mb-4 hover:bg-success/20 transition-colors cursor-pointer"
           >
             <Award className="w-4 h-4" />
             COMPRA 100% GARANTIDA

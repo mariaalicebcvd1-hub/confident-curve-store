@@ -127,7 +127,7 @@ const FloatingCTA = () => {
             onClick={handleClick}
             variant="success"
             size="default"
-            className="flex-1 sm:flex-initial text-sm sm:text-base h-10 sm:h-11 animate-pulse"
+            className="btn-compra flex-1 sm:flex-initial text-sm sm:text-base h-10 sm:h-11 animate-pulse"
           >
             <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
             <span className="truncate">GARANTIR MINHA OFERTA</span>

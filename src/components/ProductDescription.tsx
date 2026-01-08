@@ -64,7 +64,7 @@ const ProductDescription = () => {
             href={CHECKOUT_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-destructive/10 text-destructive px-4 py-2 rounded-full text-sm font-bold mb-6 animate-pulse hover:bg-destructive/20 transition-colors cursor-pointer"
+            className="btn-compra inline-flex items-center gap-2 bg-destructive/10 text-destructive px-4 py-2 rounded-full text-sm font-bold mb-6 animate-pulse hover:bg-destructive/20 transition-colors cursor-pointer"
           >
             <Zap className="w-4 h-4" />
             MAIS DE 47.000 MULHERES JÁ TRANSFORMARAM SEUS CORPOS
@@ -83,7 +83,7 @@ const ProductDescription = () => {
         <div className="bg-card rounded-2xl p-6 lg:p-8 shadow-lg border-2 border-primary/30 mb-12 overflow-hidden">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div className="space-y-4">
-              <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="inline-block bg-destructive/10 text-destructive px-3 py-1 rounded-full text-xs font-bold hover:bg-destructive/20 transition-colors">MAIS VENDIDO 🏆</a>
+              <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="btn-compra inline-block bg-destructive/10 text-destructive px-3 py-1 rounded-full text-xs font-bold hover:bg-destructive/20 transition-colors">MAIS VENDIDO 🏆</a>
               <h3 className="text-xl lg:text-2xl font-bold text-foreground">
                 Cós Alto Que Esconde TUDO
               </h3>
@@ -110,7 +110,7 @@ const ProductDescription = () => {
                 loading="lazy"
                 decoding="async"
               />
-              <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="absolute -top-3 -right-3 bg-destructive text-destructive-foreground px-3 py-1 rounded-full text-xs font-bold animate-pulse hover:bg-destructive/90 transition-colors">
+              <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className="btn-compra absolute -top-3 -right-3 bg-destructive text-destructive-foreground px-3 py-1 rounded-full text-xs font-bold animate-pulse hover:bg-destructive/90 transition-colors">
                 #1 BRASIL
               </a>
             </div>
@@ -179,7 +179,7 @@ const ProductDescription = () => {
               href={CHECKOUT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-destructive text-destructive-foreground px-5 py-2.5 rounded-full text-sm font-bold animate-pulse hover:bg-destructive/90 transition-colors cursor-pointer"
+              className="btn-compra inline-flex items-center gap-2 bg-destructive text-destructive-foreground px-5 py-2.5 rounded-full text-sm font-bold animate-pulse hover:bg-destructive/90 transition-colors cursor-pointer"
             >
               <Zap className="w-4 h-4" />
               🔥 ÚLTIMAS 23 UNIDADES COM 70% OFF
