@@ -120,8 +120,8 @@ export default {
         },
         "shake-subtle": {
           "0%, 100%": { transform: "translateX(0)" },
-          "10%, 30%, 50%, 70%, 90%": { transform: "translateX(-2px)" },
-          "20%, 40%, 60%, 80%": { transform: "translateX(2px)" },
+          "25%": { transform: "translateX(-1px)" },
+          "75%": { transform: "translateX(1px)" },
         },
       },
       animation: {
@@ -131,7 +131,7 @@ export default {
         "slide-up": "slide-up 0.3s ease-out",
         "fade-in": "fade-in 0.4s ease-out",
         "popup-enter": "popup-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-        "shake-subtle": "shake-subtle 0.5s ease-in-out infinite",
+        "shake-subtle": "shake-subtle 2s ease-in-out infinite",
       },
     },
   },
