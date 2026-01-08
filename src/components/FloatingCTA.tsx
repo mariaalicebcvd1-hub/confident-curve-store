@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/popover";
 import { trackEventDirect } from "@/hooks/useTracking";
 import { CHECKOUT_URL } from "@/lib/constants";
+import { trackInitiateCheckout } from "@/lib/facebook-pixel";
 
 const sizes = [
   { value: "P", label: "P", description: "36-38" },
@@ -48,6 +49,13 @@ const FloatingCTA = () => {
       setSizeOpen(true);
       return;
     }
+
+    // Dispara evento do Facebook Pixel
+    trackInitiateCheckout({
+      content_name: 'Calcinha Empina Bumbum - Kit 3 unidades',
+      value: 87.90,
+      num_items: 3,
+    });
 
     trackEventDirect('checkout_start', 'Floating CTA → Checkout', 'floating_cta', {
       size: selectedSize,

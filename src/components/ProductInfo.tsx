@@ -1,10 +1,10 @@
 import React from "react";
 import { Star, Truck, ShieldCheck, CreditCard, Zap, Check, Minus, Plus, ShoppingCart, Ruler } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { ColorKey } from "./ProductGallery";
 import tabelaMedidas from "@/assets/tabela-medidas.avif";
 import { trackEventDirect } from "@/hooks/useTracking";
 import { CHECKOUT_URL } from "@/lib/constants";
+import { trackInitiateCheckout } from "@/lib/facebook-pixel";
 
 const colors: { name: string; value: string; key: ColorKey }[] = [
   { name: "Preto", value: "#1a1a1a", key: "preto" },
@@ -34,13 +34,19 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
   const [quantity, setQuantity] = React.useState(1);
 
   const handleAddToCart = () => {
+    // Dispara evento do Facebook Pixel
+    trackInitiateCheckout({
+      content_name: 'Calcinha Empina Bumbum - Kit 3 unidades',
+      value: 87.90 * quantity,
+      num_items: 3 * quantity,
+    });
+
     trackEventDirect(
       'checkout_start',
       'Primary CTA → Checkout',
       'primary_cta',
       { size: sizes[selectedSize], qty: quantity, color: selectedColor }
     );
-    window.open(CHECKOUT_URL, "_blank");
   };
 
   return (
