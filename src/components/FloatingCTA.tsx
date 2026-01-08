@@ -60,6 +60,9 @@ const FloatingCTA = () => {
     trackEventDirect('checkout_start', 'Floating CTA → Checkout', 'floating_cta', {
       size: selectedSize,
     });
+
+    // Abre o checkout em nova aba
+    window.open(CHECKOUT_URL, "_blank");
   };
 
   const handleSizeSelect = (size: string) => {
@@ -129,16 +132,14 @@ const FloatingCTA = () => {
             </PopoverContent>
           </Popover>
 
-          <a
-            href={CHECKOUT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
             onClick={handleClick}
             className="btn-compra flex-1 sm:flex-initial text-sm sm:text-base h-10 sm:h-11 animate-pulse inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-success text-white hover:bg-success/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide px-4"
           >
             <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
             <span className="truncate">GARANTIR MINHA OFERTA</span>
-          </a>
+          </button>
 
           <button
             onClick={() => setIsDismissed(true)}
