@@ -192,7 +192,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
           onClick={handleAddToCart}
           variant="success"
           size="xl"
-          className="w-full text-sm sm:text-base animate-pulse"
+          className="btn-compra w-full text-sm sm:text-base animate-pulse"
         >
           <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
           QUERO MEU KIT COM 70% OFF

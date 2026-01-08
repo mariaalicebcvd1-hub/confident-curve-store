@@ -192,7 +192,7 @@ const ExitIntentPopup = () => {
               onClick={handleAcceptOffer}
               variant="success"
               size="lg"
-              className="w-full text-sm sm:text-base font-black uppercase tracking-wide shadow-lg shadow-success/30 animate-shake-subtle hover:animate-none"
+              className="btn-compra w-full text-sm sm:text-base font-black uppercase tracking-wide shadow-lg shadow-success/30 animate-shake-subtle hover:animate-none"
             >
               SIM, QUERO ESCOLHER MINHA COR
             </Button>

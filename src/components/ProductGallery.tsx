@@ -67,7 +67,7 @@ const ProductGallery = ({ selectedImageIndex, onImageChange }: ProductGalleryPro
           href={CHECKOUT_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute top-3 left-3 badge-discount text-xs sm:text-sm hover:opacity-80 transition-opacity cursor-pointer z-10"
+          className="btn-compra absolute top-3 left-3 badge-discount text-xs sm:text-sm hover:opacity-80 transition-opacity cursor-pointer z-10"
         >
           -70% OFF
         </a>
@@ -78,7 +78,7 @@ const ProductGallery = ({ selectedImageIndex, onImageChange }: ProductGalleryPro
             href={CHECKOUT_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="absolute top-3 right-3 bg-success text-white px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg text-xs sm:text-sm font-bold shadow-lg hover:bg-success/90 transition-colors cursor-pointer z-10"
+            className="btn-compra absolute top-3 right-3 bg-success text-white px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg text-xs sm:text-sm font-bold shadow-lg hover:bg-success/90 transition-colors cursor-pointer z-10"
           >
             LEVE 3 PAGUE 1
           </a>
