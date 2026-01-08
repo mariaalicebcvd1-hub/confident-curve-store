@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const ExitIntentPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const [hasShown, setHasShown] = useState(false);
 
   useEffect(() => {
@@ -14,24 +15,38 @@ const ExitIntentPopup = () => {
       return;
     }
 
-    const showPopup = () => {
-      if (!hasShown) {
-        setIsVisible(true);
+    // Detecta se é mobile
+    const isMobile = window.innerWidth < 768;
+    const MOBILE_DELAY = 1500; // 1.5 segundos de delay no mobile
+
+    const showPopup = (withDelay = false) => {
+      if (hasShown) return;
+      
+      const triggerShow = () => {
         setHasShown(true);
         sessionStorage.setItem("exitIntentShown", "true");
+        setIsAnimating(true);
+        // Pequeno delay para a animação do overlay aparecer primeiro
+        setTimeout(() => setIsVisible(true), 50);
+      };
+
+      if (withDelay) {
+        setTimeout(triggerShow, MOBILE_DELAY);
+      } else {
+        triggerShow();
       }
     };
 
     // Desktop: detecta quando o mouse sai pelo topo da página
     const handleMouseLeave = (e: MouseEvent) => {
       if (e.clientY <= 0) {
-        showPopup();
+        showPopup(false);
       }
     };
 
     // Detecta o botão voltar do navegador
     const handlePopState = () => {
-      showPopup();
+      showPopup(isMobile);
       window.history.pushState(null, "", window.location.href);
     };
 
@@ -45,7 +60,7 @@ const ExitIntentPopup = () => {
       
       // Se scrollou rápido para cima e está perto do topo
       if (scrollVelocity > 50 && currentScrollY < 100 && !hasShown) {
-        showPopup();
+        showPopup(true); // Com delay no mobile
       }
       
       lastScrollY = currentScrollY;
@@ -67,33 +82,44 @@ const ExitIntentPopup = () => {
 
   const handleClose = () => {
     setIsVisible(false);
+    // Aguarda animação de saída antes de esconder completamente
+    setTimeout(() => setIsAnimating(false), 500);
   };
 
   const handleAcceptOffer = () => {
-    // Fecha o popup e rola até a seção de seleção de cor/tamanho
+    // Fecha o popup com animação
     setIsVisible(false);
     
-    // Aguarda um momento para o popup fechar e então rola
+    // Aguarda animação de saída e então rola
     setTimeout(() => {
+      setIsAnimating(false);
       const productInfo = document.getElementById("product-options");
       if (productInfo) {
         productInfo.scrollIntoView({ behavior: "smooth", block: "center" });
       }
-    }, 100);
+    }, 500);
   };
 
-  if (!isVisible) return null;
+  if (!isAnimating) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4">
-      {/* Overlay */}
+      {/* Overlay - aparece primeiro */}
       <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in"
+        className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${
+          isVisible ? 'opacity-100' : 'opacity-0'
+        }`}
         onClick={handleClose}
       />
       
-      {/* Modal - Compacto e com scroll interno */}
-      <div className="relative bg-card rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-hidden animate-popup-enter border-2 border-destructive/50 flex flex-col">
+      {/* Modal - aparece com delay suave */}
+      <div 
+        className={`relative bg-card rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-hidden border-2 border-destructive/50 flex flex-col transition-all duration-500 ease-out ${
+          isVisible 
+            ? 'opacity-100 scale-100 translate-y-0' 
+            : 'opacity-0 scale-95 translate-y-4'
+        }`}
+      >
         {/* Header - Barra de Urgência */}
         <div className="bg-destructive text-white py-2 px-4 text-center flex-shrink-0">
           <p className="text-xs sm:text-sm font-black uppercase tracking-wide animate-pulse">
