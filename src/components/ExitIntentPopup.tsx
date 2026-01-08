@@ -14,24 +14,41 @@ const ExitIntentPopup = () => {
       return;
     }
 
-    const handleMouseLeave = (e: MouseEvent) => {
-      // Detecta quando o mouse sai pelo topo da página (intenção de sair)
-      if (e.clientY <= 0 && !hasShown) {
+    const showPopup = () => {
+      if (!hasShown) {
         setIsVisible(true);
         setHasShown(true);
         sessionStorage.setItem("exitIntentShown", "true");
       }
     };
 
+    // Desktop: detecta quando o mouse sai pelo topo da página
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0) {
+        showPopup();
+      }
+    };
+
     // Detecta o botão voltar do navegador
     const handlePopState = () => {
-      if (!hasShown) {
-        setIsVisible(true);
-        setHasShown(true);
-        sessionStorage.setItem("exitIntentShown", "true");
-        // Previne a navegação imediata
-        window.history.pushState(null, "", window.location.href);
+      showPopup();
+      window.history.pushState(null, "", window.location.href);
+    };
+
+    // Mobile: detecta scroll rápido para cima (intenção de sair)
+    let lastScrollY = window.scrollY;
+    let scrollVelocity = 0;
+    
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      scrollVelocity = lastScrollY - currentScrollY;
+      
+      // Se scrollou rápido para cima e está perto do topo
+      if (scrollVelocity > 50 && currentScrollY < 100 && !hasShown) {
+        showPopup();
       }
+      
+      lastScrollY = currentScrollY;
     };
 
     // Adiciona entrada no histórico para capturar o botão voltar
@@ -39,10 +56,12 @@ const ExitIntentPopup = () => {
 
     document.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("popstate", handlePopState);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       document.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("popstate", handlePopState);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [hasShown]);
 
