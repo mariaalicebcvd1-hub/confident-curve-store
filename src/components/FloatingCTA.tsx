@@ -61,8 +61,12 @@ const FloatingCTA = () => {
       size: selectedSize,
     });
 
+    // Monta URL com parâmetro de tamanho (cor não disponível neste CTA)
+    const checkoutUrl = new URL(CHECKOUT_URL);
+    checkoutUrl.searchParams.set('tamanho', selectedSize);
+
     // Abre o checkout em nova aba
-    window.open(CHECKOUT_URL, "_blank");
+    window.open(checkoutUrl.toString(), "_blank");
   };
 
   const handleSizeSelect = (size: string) => {
