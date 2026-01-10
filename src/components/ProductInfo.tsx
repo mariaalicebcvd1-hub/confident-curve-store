@@ -3,8 +3,8 @@ import { Star, Truck, ShieldCheck, CreditCard, Zap, Check, Minus, Plus, Shopping
 import { ColorKey } from "./ProductGallery";
 import tabelaMedidas from "@/assets/tabela-medidas.avif";
 import { trackEventDirect } from "@/hooks/useTracking";
-import { CHECKOUT_URL } from "@/lib/constants";
 import { trackInitiateCheckout } from "@/lib/facebook-pixel";
+import { buildCheckoutUrl } from "@/lib/checkout";
 
 const colors: { name: string; value: string; key: ColorKey }[] = [
   { name: "Preto", value: "#1a1a1a", key: "preto" },
@@ -48,13 +48,14 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       { size: sizes[selectedSize], qty: quantity, color: selectedColor }
     );
 
-    // Monta URL com parâmetros de cor e tamanho
-    const checkoutUrl = new URL(CHECKOUT_URL);
-    checkoutUrl.searchParams.set('cor', selectedColor);
-    checkoutUrl.searchParams.set('tamanho', sizes[selectedSize]);
+    // Monta URL com parâmetros de cor, tamanho e UTMs
+    const checkoutUrl = buildCheckoutUrl({
+      cor: selectedColor,
+      tamanho: sizes[selectedSize],
+    });
 
     // Abre o checkout em nova aba
-    window.open(checkoutUrl.toString(), "_blank");
+    window.open(checkoutUrl, "_blank");
   };
 
   return (

@@ -6,8 +6,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { trackEventDirect } from "@/hooks/useTracking";
-import { CHECKOUT_URL } from "@/lib/constants";
 import { trackInitiateCheckout } from "@/lib/facebook-pixel";
+import { buildCheckoutUrl } from "@/lib/checkout";
 
 const sizes = [
   { value: "P", label: "P", description: "36-38" },
@@ -61,12 +61,13 @@ const FloatingCTA = () => {
       size: selectedSize,
     });
 
-    // Monta URL com parâmetro de tamanho (cor não disponível neste CTA)
-    const checkoutUrl = new URL(CHECKOUT_URL);
-    checkoutUrl.searchParams.set('tamanho', selectedSize);
+    // Monta URL com parâmetro de tamanho e UTMs
+    const checkoutUrl = buildCheckoutUrl({
+      tamanho: selectedSize,
+    });
 
     // Abre o checkout em nova aba
-    window.open(checkoutUrl.toString(), "_blank");
+    window.open(checkoutUrl, "_blank");
   };
 
   const handleSizeSelect = (size: string) => {
