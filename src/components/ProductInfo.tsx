@@ -48,8 +48,13 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       { size: sizes[selectedSize], qty: quantity, color: selectedColor }
     );
 
+    // Monta URL com parâmetros de cor e tamanho
+    const checkoutUrl = new URL(CHECKOUT_URL);
+    checkoutUrl.searchParams.set('cor', selectedColor);
+    checkoutUrl.searchParams.set('tamanho', sizes[selectedSize]);
+
     // Abre o checkout em nova aba
-    window.open(CHECKOUT_URL, "_blank");
+    window.open(checkoutUrl.toString(), "_blank");
   };
 
   return (
