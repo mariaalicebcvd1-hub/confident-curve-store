@@ -21,6 +21,16 @@ import avatar7 from "@/assets/avatar-7.jpeg";
 import avatar8 from "@/assets/avatar-8.webp";
 import avatar9 from "@/assets/avatar-9.jpeg";
 import avatar10 from "@/assets/avatar-10.webp";
+import avatar11 from "@/assets/avatar-11.jpeg";
+import avatar12 from "@/assets/avatar-12.jpeg";
+import avatar13 from "@/assets/avatar-13.webp";
+import avatar14 from "@/assets/avatar-14.jpeg";
+import avatar15 from "@/assets/avatar-15.jpg";
+import avatar16 from "@/assets/avatar-16.jpeg";
+import avatar17 from "@/assets/avatar-17.png";
+import avatar18 from "@/assets/avatar-18.webp";
+import avatar19 from "@/assets/avatar-19.jpeg";
+import avatar20 from "@/assets/avatar-20.jpeg";
 
 const reviews = [
   { name: "Sulem Santos", verified: true, avatar: avatar1, comment: "Amei é realmente de ótima qualidade, eu li os comentários e resolvi testar e amei. Ela realmente segura na barriga, o material é ótimo, muito resistente e vou comprar maiss!", productImage: null, productImages: [reviewSulem1, reviewSulem2], rating: 5, helpful: 12, date: "02/01/2026" },
@@ -33,16 +43,16 @@ const reviews = [
   { name: "Juliana Costa", verified: true, avatar: avatar8, comment: "Melhor calcinha que já comprei na vida! Uso todos os dias e não largo mais. Super recomendo!", productImage: "https://www.images.areviewsapp.com/admeliteshop.myshopify.com/p0K2XFu4fsPhIv8.jpg", rating: 5, helpful: 11, date: "03/12/2025" },
   { name: "Fernanda Oliveira", verified: true, avatar: avatar9, comment: "Entrega super rápida, produto de qualidade. Já estou pensando em comprar mais para presentear minhas amigas.", productImage: null, rating: 5, helpful: 5, date: "28/11/2025" },
   { name: "Camila Rodrigues", verified: true, avatar: avatar10, comment: "Amei demais! O efeito empina bumbum é real, não é propaganda enganosa. Vale cada centavo!", productImage: null, rating: 5, helpful: 14, date: "24/11/2025" },
-  { name: "Beatriz Santos", verified: true, comment: "Comprei com receio mas me surpreendi positivamente. Qualidade excelente e muito confortável.", productImage: null, rating: 5, helpful: 3, date: "19/11/2025" },
-  { name: "Larissa Mendes", verified: true, comment: "Perfeita! Não marca na roupa, é confortável e bonita. Já virou minha favorita!", productImage: null, rating: 5, helpful: 8, date: "14/11/2025" },
-  { name: "Patrícia Lima", verified: true, comment: "Adorei o produto, chegou antes do prazo. A qualidade é muito boa, recomendo!", productImage: null, rating: 5, helpful: 6, date: "09/11/2025" },
-  { name: "Amanda Ferreira", verified: true, comment: "Sensacional! Modelou certinho meu corpo. Vou comprar de todas as cores!", productImage: null, rating: 5, helpful: 10, date: "04/11/2025" },
-  { name: "Gabriela Souza", verified: true, comment: "Produto de excelente qualidade. Entrega rápida e bem embalado. Super satisfeita!", productImage: null, rating: 5, helpful: 4, date: "30/10/2025" },
-  { name: "Isabela Martins", verified: true, comment: "Muito boa! Confortável, bonita e faz o que promete. Já indiquei para todas as amigas.", productImage: null, rating: 5, helpful: 9, date: "25/10/2025" },
-  { name: "Rafaela Alves", verified: true, comment: "Comprei 2 kits e amei! A qualidade é incrível, vale muito a pena.", productImage: null, rating: 5, helpful: 7, date: "20/10/2025" },
-  { name: "Thais Barbosa", verified: true, comment: "Perfeita para usar com vestidos! Não marca e é super confortável.", productImage: null, rating: 5, helpful: 5, date: "15/10/2025" },
-  { name: "Priscila Carvalho", verified: true, comment: "Amei! Produto de qualidade, entrega rápida. Nota 10!", productImage: null, rating: 5, helpful: 8, date: "10/10/2025" },
-  { name: "Vanessa Ribeiro", verified: true, comment: "Excelente! O tecido é macio e não esquenta. Perfeita para o dia a dia.", productImage: null, rating: 5, helpful: 6, date: "05/10/2025" },
+  { name: "Beatriz Santos", verified: true, avatar: avatar11, comment: "Comprei com receio mas me surpreendi positivamente. Qualidade excelente e muito confortável.", productImage: null, rating: 5, helpful: 3, date: "19/11/2025" },
+  { name: "Larissa Mendes", verified: true, avatar: avatar12, comment: "Perfeita! Não marca na roupa, é confortável e bonita. Já virou minha favorita!", productImage: null, rating: 5, helpful: 8, date: "14/11/2025" },
+  { name: "Patrícia Lima", verified: true, avatar: avatar13, comment: "Adorei o produto, chegou antes do prazo. A qualidade é muito boa, recomendo!", productImage: null, rating: 5, helpful: 6, date: "09/11/2025" },
+  { name: "Amanda Ferreira", verified: true, avatar: avatar14, comment: "Sensacional! Modelou certinho meu corpo. Vou comprar de todas as cores!", productImage: null, rating: 5, helpful: 10, date: "04/11/2025" },
+  { name: "Gabriela Souza", verified: true, avatar: avatar15, comment: "Produto de excelente qualidade. Entrega rápida e bem embalado. Super satisfeita!", productImage: null, rating: 5, helpful: 4, date: "30/10/2025" },
+  { name: "Isabela Martins", verified: true, avatar: avatar16, comment: "Muito boa! Confortável, bonita e faz o que promete. Já indiquei para todas as amigas.", productImage: null, rating: 5, helpful: 9, date: "25/10/2025" },
+  { name: "Rafaela Alves", verified: true, avatar: avatar17, comment: "Comprei 2 kits e amei! A qualidade é incrível, vale muito a pena.", productImage: null, rating: 5, helpful: 7, date: "20/10/2025" },
+  { name: "Thais Barbosa", verified: true, avatar: avatar18, comment: "Perfeita para usar com vestidos! Não marca e é super confortável.", productImage: null, rating: 5, helpful: 5, date: "15/10/2025" },
+  { name: "Priscila Carvalho", verified: true, avatar: avatar19, comment: "Amei! Produto de qualidade, entrega rápida. Nota 10!", productImage: null, rating: 5, helpful: 8, date: "10/10/2025" },
+  { name: "Vanessa Ribeiro", verified: true, avatar: avatar20, comment: "Excelente! O tecido é macio e não esquenta. Perfeita para o dia a dia.", productImage: null, rating: 5, helpful: 6, date: "05/10/2025" },
   { name: "Renata Gomes", verified: true, comment: "Maravilhosa! Veste muito bem e é super confortável. Já virou essencial!", productImage: null, rating: 5, helpful: 11, date: "30/09/2025" },
   { name: "Carolina Dias", verified: true, comment: "Produto incrível! Realmente empina o bumbum e é muito confortável.", productImage: null, rating: 5, helpful: 9, date: "25/09/2025" },
   { name: "Letícia Moura", verified: true, comment: "Super satisfeita com a compra! Qualidade excepcional.", productImage: null, rating: 5, helpful: 4, date: "20/09/2025" },
