@@ -1,22 +1,31 @@
 import { useState, useRef, useEffect } from "react";
-import { Play, X, ShoppingBag, Volume2, VolumeX, Pause } from "lucide-react";
+import { Play, X, ShoppingBag } from "lucide-react";
 import { Dialog, DialogContent, DialogClose, DialogTitle } from "@/components/ui/dialog";
-import videoSrc from "@/assets/video-stories.mp4";
+import videoSrc from "@/assets/video-produto.mp4";
 import { trackEventDirect } from "@/hooks/useTracking";
+
+// Format time as MM:SS
+const formatTime = (seconds: number) => {
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
+};
 
 const FloatingVideoButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isReady, setIsReady] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [fakeProgress, setFakeProgress] = useState(0);
+  const [fakeDuration, setFakeDuration] = useState(0);
   const previewVideoRef = useRef<HTMLVideoElement>(null);
   const modalVideoRef = useRef<HTMLVideoElement>(null);
 
   // Wait for video to be ready before showing the button
+  // Fallback: show button after 2 seconds even if video doesn't load (mobile safari issue)
   useEffect(() => {
     const video = previewVideoRef.current;
     
+    // Fallback timeout - show button after 2 seconds regardless
     const fallbackTimeout = setTimeout(() => {
       if (!isReady) {
         setIsReady(true);
@@ -47,36 +56,57 @@ const FloatingVideoButton = () => {
     };
   }, [isReady]);
 
-  // Handle modal video when opening
+  // Handle modal video when opening - with retry for autoplay and time tracking
   useEffect(() => {
     if (isOpen && modalVideoRef.current) {
       const video = modalVideoRef.current;
       video.currentTime = 0;
-      setProgress(0);
-      setIsPaused(false);
+      setCurrentTime(0);
+      setFakeProgress(0);
       
-      // Track progress for stories bar
+      // Calculate fake duration (show ~40% of real duration to create urgency)
+      const handleLoadedMetadata = () => {
+        const realDuration = video.duration;
+        // Show a shorter fake duration (around 40-50% of real)
+        setFakeDuration(Math.floor(realDuration * 0.45));
+      };
+      
+      video.addEventListener('loadedmetadata', handleLoadedMetadata);
+      if (video.duration) {
+        handleLoadedMetadata();
+      }
+      
+      // Track current time and fake progress
       const handleTimeUpdate = () => {
-        const progressPercent = (video.currentTime / video.duration) * 100;
-        setProgress(progressPercent);
+        const current = video.currentTime;
+        setCurrentTime(current);
+        // Fake progress moves faster (appears to be ending soon)
+        const realDuration = video.duration || 1;
+        const fakePercent = Math.min((current / realDuration) * 2.2, 100);
+        setFakeProgress(fakePercent);
       };
       
       video.addEventListener('timeupdate', handleTimeUpdate);
       
-      // Try to play with sound
+      // Try to play immediately with sound
       const playVideo = () => {
-        video.muted = false;
-        setIsMuted(false);
         video.play().catch(() => {
+          // If autoplay with sound fails, try muted first then unmute
           video.muted = true;
-          setIsMuted(true);
-          video.play().catch(() => {});
+          video.play().then(() => {
+            // Try to unmute after a short delay
+            setTimeout(() => {
+              video.muted = false;
+            }, 100);
+          }).catch(() => {});
         });
       };
 
+      // Wait for dialog animation to complete
       setTimeout(playVideo, 50);
       
       return () => {
+        video.removeEventListener('loadedmetadata', handleLoadedMetadata);
         video.removeEventListener('timeupdate', handleTimeUpdate);
       };
     }
@@ -84,6 +114,7 @@ const FloatingVideoButton = () => {
 
   const handleCTAClick = () => {
     setIsOpen(false);
+    // Scroll to size selection section
     const sizeSection = document.querySelector('.size-option');
     if (sizeSection) {
       sizeSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -92,27 +123,9 @@ const FloatingVideoButton = () => {
     }
   };
 
-  const toggleMute = () => {
-    if (modalVideoRef.current) {
-      modalVideoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
-
-  const togglePlayPause = () => {
-    if (modalVideoRef.current) {
-      if (isPaused) {
-        modalVideoRef.current.play();
-      } else {
-        modalVideoRef.current.pause();
-      }
-      setIsPaused(!isPaused);
-    }
-  };
-
   return (
     <>
-      {/* Floating Video Button - Instagram Stories Style */}
+      {/* Floating Video Button - hidden until video is ready */}
       <button
         onClick={() => {
           trackEventDirect('video_view', 'Opened product video', 'floating_video_button');
@@ -123,81 +136,30 @@ const FloatingVideoButton = () => {
         }`}
         aria-label="Assistir vídeo do produto"
       >
-        {/* Stories Ring Animation */}
-        <div className="relative">
-          {/* Gradient ring like Instagram stories */}
-          <div className="absolute -inset-1 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 rounded-full animate-spin-slow" style={{ animationDuration: '3s' }} />
+        {/* Video Preview Circle */}
+        <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-primary shadow-lg shadow-primary/30 animate-pulse-slow">
+          <video
+            ref={previewVideoRef}
+            src={videoSrc}
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className="w-full h-full object-cover"
+          />
           
-          {/* Video Preview Circle */}
-          <div className="relative w-16 h-16 rounded-full overflow-hidden border-[3px] border-white">
-            <video
-              ref={previewVideoRef}
-              src={videoSrc}
-              muted
-              loop
-              playsInline
-              preload="auto"
-              className="w-full h-full object-cover scale-125"
-            />
-            
-            {/* Play Overlay */}
-            <div className="absolute inset-0 bg-black/20 flex items-center justify-center group-hover:bg-black/30 transition-colors">
-              <Play className="w-5 h-5 text-white fill-white drop-shadow-lg" />
-            </div>
+          {/* Play Overlay */}
+          <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors">
+            <Play className="w-6 h-6 text-white fill-white" />
           </div>
         </div>
       </button>
 
-      {/* Instagram Stories Style Modal */}
+      {/* Video Modal */}
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-[min(90vw,420px)] w-full p-0 bg-black border-none overflow-hidden rounded-2xl">
+        <DialogContent className="max-w-[min(90vw,400px)] w-full p-0 bg-black border-none overflow-hidden rounded-xl">
           <DialogTitle className="sr-only">Vídeo do Produto</DialogTitle>
-          <div className="relative aspect-[9/16] w-full bg-black">
-            {/* Stories Progress Bar */}
-            <div className="absolute top-3 left-3 right-3 z-20">
-              <div className="h-1 bg-white/30 rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-white rounded-full transition-all duration-100 ease-linear"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-            </div>
-
-            {/* Header with profile info - Stories style */}
-            <div className="absolute top-6 left-3 right-3 z-20 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-pink-500 to-purple-600 p-0.5">
-                  <div className="w-full h-full rounded-full bg-black overflow-hidden">
-                    <video
-                      src={videoSrc}
-                      muted
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-white text-sm font-semibold">Legging Modeladora</span>
-                  <span className="text-white/60 text-xs">Agora</span>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-2">
-                {/* Mute/Unmute Button */}
-                <button
-                  onClick={toggleMute}
-                  className="p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors"
-                >
-                  {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                </button>
-                
-                {/* Close Button */}
-                <DialogClose className="p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors">
-                  <X className="w-4 h-4" />
-                </DialogClose>
-              </div>
-            </div>
-
-            {/* Video */}
+          <div className="relative aspect-[9/16] w-full">
             <video
               ref={modalVideoRef}
               src={videoSrc}
@@ -205,50 +167,26 @@ const FloatingVideoButton = () => {
               playsInline
               autoPlay
               preload="auto"
-              onClick={togglePlayPause}
-              className="absolute inset-0 w-full h-full object-cover cursor-pointer"
+              className="absolute inset-0 w-full h-full object-cover rounded-xl"
             />
 
-            {/* Pause Indicator */}
-            {isPaused && (
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-16 h-16 rounded-full bg-black/50 flex items-center justify-center">
-                  <Pause className="w-8 h-8 text-white fill-white" />
-                </div>
-              </div>
-            )}
-
-            {/* Gradient overlay for bottom content */}
-            <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none" />
-
-            {/* CTA Button - Stories swipe up style */}
-            <div className="absolute bottom-4 left-4 right-4 z-20">
+            {/* CTA Button - positioned at bottom */}
+            <div className="absolute bottom-4 left-4 right-4">
               <button
                 onClick={handleCTAClick}
-                className="w-full bg-white hover:bg-white/90 text-black font-bold py-3.5 px-6 rounded-full flex items-center justify-center gap-2 shadow-lg transition-all duration-200 hover:scale-[1.02] text-sm uppercase tracking-wider"
+                className="w-full bg-success hover:bg-success/90 text-success-foreground font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 shadow-lg shadow-success/40 transition-all duration-200 hover:scale-[1.02] uppercase tracking-wide animate-pulse-slow"
               >
-                <ShoppingBag className="w-4 h-4" />
-                Ver Produto
+                <ShoppingBag className="w-5 h-5" />
+                Garantir Minha Oferta
               </button>
-              
-              {/* Swipe up indicator */}
-              <div className="flex flex-col items-center mt-2 animate-bounce">
-                <div className="w-8 h-1 bg-white/50 rounded-full" />
-              </div>
             </div>
+            {/* Close Button */}
+            <DialogClose className="absolute top-3 right-3 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors">
+              <X className="w-5 h-5" />
+            </DialogClose>
           </div>
         </DialogContent>
       </Dialog>
-
-      <style>{`
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 3s linear infinite;
-        }
-      `}</style>
     </>
   );
 };
