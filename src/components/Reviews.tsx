@@ -31,6 +31,16 @@ import avatar17 from "@/assets/avatar-17.png";
 import avatar18 from "@/assets/avatar-18.webp";
 import avatar19 from "@/assets/avatar-19.jpeg";
 import avatar20 from "@/assets/avatar-20.jpeg";
+import avatar21 from "@/assets/avatar-21.jpg";
+import avatar22 from "@/assets/avatar-22.jpg";
+import avatar23 from "@/assets/avatar-23.jpg";
+import avatar24 from "@/assets/avatar-24.jpg";
+import avatar25 from "@/assets/avatar-25.jpg";
+import avatar26 from "@/assets/avatar-26.jpg";
+import avatar27 from "@/assets/avatar-27.jpg";
+import avatar28 from "@/assets/avatar-28.jpg";
+import avatar29 from "@/assets/avatar-29.jpg";
+import avatar30 from "@/assets/avatar-30.jpg";
 
 const reviews = [
   { name: "Sulem Santos", verified: true, avatar: avatar1, comment: "Amei é realmente de ótima qualidade, eu li os comentários e resolvi testar e amei. Ela realmente segura na barriga, o material é ótimo, muito resistente e vou comprar maiss!", productImage: null, productImages: [reviewSulem1, reviewSulem2], rating: 5, helpful: 12, date: "02/01/2026" },
@@ -53,16 +63,16 @@ const reviews = [
   { name: "Thais Barbosa", verified: true, avatar: avatar18, comment: "Perfeita para usar com vestidos! Não marca e é super confortável.", productImage: null, rating: 5, helpful: 5, date: "15/10/2025" },
   { name: "Priscila Carvalho", verified: true, avatar: avatar19, comment: "Amei! Produto de qualidade, entrega rápida. Nota 10!", productImage: null, rating: 5, helpful: 8, date: "10/10/2025" },
   { name: "Vanessa Ribeiro", verified: true, avatar: avatar20, comment: "Excelente! O tecido é macio e não esquenta. Perfeita para o dia a dia.", productImage: null, rating: 5, helpful: 6, date: "05/10/2025" },
-  { name: "Renata Gomes", verified: true, comment: "Maravilhosa! Veste muito bem e é super confortável. Já virou essencial!", productImage: null, rating: 5, helpful: 11, date: "30/09/2025" },
-  { name: "Carolina Dias", verified: true, comment: "Produto incrível! Realmente empina o bumbum e é muito confortável.", productImage: null, rating: 5, helpful: 9, date: "25/09/2025" },
-  { name: "Letícia Moura", verified: true, comment: "Super satisfeita com a compra! Qualidade excepcional.", productImage: null, rating: 5, helpful: 4, date: "20/09/2025" },
-  { name: "Débora Castro", verified: true, comment: "Adorei! Chegou rápido e o produto é exatamente como nas fotos.", productImage: null, rating: 5, helpful: 7, date: "15/09/2025" },
-  { name: "Jéssica Pereira", verified: true, comment: "Melhor compra que fiz! Confortável e bonita. Recomendo demais!", productImage: null, rating: 5, helpful: 13, date: "10/09/2025" },
-  { name: "Michele Araujo", verified: true, comment: "Produto de qualidade! Veste perfeitamente e não deforma com as lavagens.", productImage: null, rating: 5, helpful: 5, date: "05/09/2025" },
-  { name: "Aline Nascimento", verified: true, comment: "Simplesmente perfeita! O efeito modelador é real e muito natural.", productImage: null, rating: 5, helpful: 10, date: "31/08/2025" },
-  { name: "Tatiane Freitas", verified: true, comment: "Amei a qualidade! Tecido macio, não aperta e valoriza o corpo.", productImage: null, rating: 5, helpful: 6, date: "26/08/2025" },
-  { name: "Viviane Lopes", verified: true, comment: "Excelente produto! Já comprei 3 vezes e sempre me surpreendo.", productImage: null, rating: 5, helpful: 8, date: "21/08/2025" },
-  { name: "Daniele Correia", verified: true, comment: "Maravilhosa! Super confortável e bonita. Não fico sem!", productImage: null, rating: 5, helpful: 4, date: "16/08/2025" },
+  { name: "Renata Gomes", verified: true, avatar: avatar21, comment: "Maravilhosa! Veste muito bem e é super confortável. Já virou essencial!", productImage: null, rating: 5, helpful: 11, date: "30/09/2025" },
+  { name: "Carolina Dias", verified: true, avatar: avatar22, comment: "Produto incrível! Realmente empina o bumbum e é muito confortável.", productImage: null, rating: 5, helpful: 9, date: "25/09/2025" },
+  { name: "Letícia Moura", verified: true, avatar: avatar23, comment: "Super satisfeita com a compra! Qualidade excepcional.", productImage: null, rating: 5, helpful: 4, date: "20/09/2025" },
+  { name: "Débora Castro", verified: true, avatar: avatar24, comment: "Adorei! Chegou rápido e o produto é exatamente como nas fotos.", productImage: null, rating: 5, helpful: 7, date: "15/09/2025" },
+  { name: "Jéssica Pereira", verified: true, avatar: avatar25, comment: "Melhor compra que fiz! Confortável e bonita. Recomendo demais!", productImage: null, rating: 5, helpful: 13, date: "10/09/2025" },
+  { name: "Michele Araujo", verified: true, avatar: avatar26, comment: "Produto de qualidade! Veste perfeitamente e não deforma com as lavagens.", productImage: null, rating: 5, helpful: 5, date: "05/09/2025" },
+  { name: "Aline Nascimento", verified: true, avatar: avatar27, comment: "Simplesmente perfeita! O efeito modelador é real e muito natural.", productImage: null, rating: 5, helpful: 10, date: "31/08/2025" },
+  { name: "Tatiane Freitas", verified: true, avatar: avatar28, comment: "Amei a qualidade! Tecido macio, não aperta e valoriza o corpo.", productImage: null, rating: 5, helpful: 6, date: "26/08/2025" },
+  { name: "Viviane Lopes", verified: true, avatar: avatar29, comment: "Excelente produto! Já comprei 3 vezes e sempre me surpreendo.", productImage: null, rating: 5, helpful: 8, date: "21/08/2025" },
+  { name: "Daniele Correia", verified: true, avatar: avatar30, comment: "Maravilhosa! Super confortável e bonita. Não fico sem!", productImage: null, rating: 5, helpful: 4, date: "16/08/2025" },
   { name: "Eliane Teixeira", verified: true, comment: "Produto top! Entrega rápida e qualidade excelente. Recomendo!", productImage: null, rating: 5, helpful: 7, date: "11/08/2025" },
   { name: "Fabiana Rocha", verified: true, comment: "Adorei! Veste muito bem, não aperta e é super confortável.", productImage: null, rating: 5, helpful: 9, date: "06/08/2025" },
   { name: "Helena Cardoso", verified: true, comment: "Comprei para testar e amei! Já virou minha calcinha preferida.", productImage: null, rating: 5, helpful: 11, date: "01/08/2025" },
