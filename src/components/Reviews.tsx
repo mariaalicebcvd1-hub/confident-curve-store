@@ -10,29 +10,18 @@ import reviewMariana from "@/assets/review-mariana.webp";
 import reviewSulem1 from "@/assets/review-sulem-1.webp";
 import reviewSulem2 from "@/assets/review-sulem-2.webp";
 import reviewSulem3 from "@/assets/review-sulem-3.webp";
-// Avatars
-import avatar1 from "@/assets/avatar-1.jpeg";
-import avatar2 from "@/assets/avatar-2.jpeg";
-import avatar3 from "@/assets/avatar-3.webp";
-import avatar4 from "@/assets/avatar-4.jpeg";
-import avatar5 from "@/assets/avatar-5.jpg";
-import avatar6 from "@/assets/avatar-6.png";
-import avatar7 from "@/assets/avatar-7.jpeg";
-import avatar8 from "@/assets/avatar-8.webp";
-import avatar9 from "@/assets/avatar-9.jpeg";
-import avatar10 from "@/assets/avatar-10.webp";
 
 const reviews = [
-  { name: "Sulem Santos", verified: true, avatar: avatar1, comment: "Amei é realmente de ótima qualidade, eu li os comentários e resolvi testar e amei. Ela realmente segura na barriga, o material é ótimo, muito resistente e vou comprar maiss!", productImage: null, productImages: [reviewSulem1, reviewSulem2], rating: 5, helpful: 12, date: "02/01/2026" },
-  { name: "Karine", verified: true, avatar: avatar2, comment: "Gostei bastante a entrega foi bem rápida, indico, podem comprar!", productImage: null, productImages: [reviewKarine1, reviewKarine2], rating: 5, helpful: 8, date: "28/12/2025" },
-  { name: "Cecília", verified: true, avatar: avatar3, comment: "Comprei a minha e simplesmente amei, a qualidade é impecável e realmente não enrola, levanta o bumbum e esconde a pochetinha que eu odeio rsrs comprem meninas, vcs não vão se arrepender!!", productImage: null, productImages: [reviewCecilia1, reviewCecilia2, reviewCecilia3], rating: 5, helpful: 15, date: "23/12/2025" },
-  { name: "Virgínia", verified: true, avatar: avatar4, comment: "Tamanho adequado, pedi meu número e coube perfeitamente, muito confortável, não marca nas roupas, principalmente nos vestidos.", productImage: "https://www.images.areviewsapp.com/admeliteshop.myshopify.com/6BJCH4sIUNgp2D5.jpg", rating: 5, helpful: 6, date: "19/12/2025" },
-  { name: "Hilda Pontes", verified: true, avatar: avatar5, comment: "Me surpreendeu, exatamente como anunciado. O produto é excelente, chegou antes do prazo e é muito confortável, perfeito de usar, muito linda e ótima de usar", productImage: "https://www.images.areviewsapp.com/admeliteshop.myshopify.com/omQeSyXFq5BwHLz.jpg", rating: 5, helpful: 9, date: "15/12/2025" },
-  { name: "Ana Paula", verified: true, avatar: avatar6, comment: "Adorei! Veste super bem, é confortável e realmente modela o corpo. Já quero comprar mais!", productImage: "https://www.images.areviewsapp.com/admeliteshop.myshopify.com/Hq0TLJwGuAig4mX.jpg", rating: 4, helpful: 4, date: "12/12/2025" },
-  { name: "Mariana Silva", verified: true, avatar: avatar7, comment: "Produto maravilhoso! Superou todas as expectativas. O tecido é de altíssima qualidade e muito confortável.", productImage: reviewMariana, rating: 5, helpful: 7, date: "08/12/2025" },
-  { name: "Juliana Costa", verified: true, avatar: avatar8, comment: "Melhor calcinha que já comprei na vida! Uso todos os dias e não largo mais. Super recomendo!", productImage: "https://www.images.areviewsapp.com/admeliteshop.myshopify.com/p0K2XFu4fsPhIv8.jpg", rating: 5, helpful: 11, date: "03/12/2025" },
-  { name: "Fernanda Oliveira", verified: true, avatar: avatar9, comment: "Entrega super rápida, produto de qualidade. Já estou pensando em comprar mais para presentear minhas amigas.", productImage: null, rating: 5, helpful: 5, date: "28/11/2025" },
-  { name: "Camila Rodrigues", verified: true, avatar: avatar10, comment: "Amei demais! O efeito empina bumbum é real, não é propaganda enganosa. Vale cada centavo!", productImage: null, rating: 5, helpful: 14, date: "24/11/2025" },
+  { name: "Sulem Santos", verified: true, comment: "Amei é realmente de ótima qualidade, eu li os comentários e resolvi testar e amei. Ela realmente segura na barriga, o material é ótimo, muito resistente e vou comprar maiss!", productImage: null, productImages: [reviewSulem1, reviewSulem2], rating: 5, helpful: 12, date: "02/01/2026" },
+  { name: "Karine", verified: true, comment: "Gostei bastante a entrega foi bem rápida, indico, podem comprar!", productImage: null, productImages: [reviewKarine1, reviewKarine2], rating: 5, helpful: 8, date: "28/12/2025" },
+  { name: "Cecília", verified: true, comment: "Comprei a minha e simplesmente amei, a qualidade é impecável e realmente não enrola, levanta o bumbum e esconde a pochetinha que eu odeio rsrs comprem meninas, vcs não vão se arrepender!!", productImage: null, productImages: [reviewCecilia1, reviewCecilia2, reviewCecilia3], rating: 5, helpful: 15, date: "23/12/2025" },
+  { name: "Virgínia", verified: true, comment: "Tamanho adequado, pedi meu número e coube perfeitamente, muito confortável, não marca nas roupas, principalmente nos vestidos.", productImage: "https://www.images.areviewsapp.com/admeliteshop.myshopify.com/6BJCH4sIUNgp2D5.jpg", rating: 5, helpful: 6, date: "19/12/2025" },
+  { name: "Hilda Pontes", verified: true, comment: "Me surpreendeu, exatamente como anunciado. O produto é excelente, chegou antes do prazo e é muito confortável, perfeito de usar, muito linda e ótima de usar", productImage: "https://www.images.areviewsapp.com/admeliteshop.myshopify.com/omQeSyXFq5BwHLz.jpg", rating: 5, helpful: 9, date: "15/12/2025" },
+  { name: "Ana Paula", verified: true, comment: "Adorei! Veste super bem, é confortável e realmente modela o corpo. Já quero comprar mais!", productImage: "https://www.images.areviewsapp.com/admeliteshop.myshopify.com/Hq0TLJwGuAig4mX.jpg", rating: 4, helpful: 4, date: "12/12/2025" },
+  { name: "Mariana Silva", verified: true, comment: "Produto maravilhoso! Superou todas as expectativas. O tecido é de altíssima qualidade e muito confortável.", productImage: reviewMariana, rating: 5, helpful: 7, date: "08/12/2025" },
+  { name: "Juliana Costa", verified: true, comment: "Melhor calcinha que já comprei na vida! Uso todos os dias e não largo mais. Super recomendo!", productImage: "https://www.images.areviewsapp.com/admeliteshop.myshopify.com/p0K2XFu4fsPhIv8.jpg", rating: 5, helpful: 11, date: "03/12/2025" },
+  { name: "Fernanda Oliveira", verified: true, comment: "Entrega super rápida, produto de qualidade. Já estou pensando em comprar mais para presentear minhas amigas.", productImage: null, rating: 5, helpful: 5, date: "28/11/2025" },
+  { name: "Camila Rodrigues", verified: true, comment: "Amei demais! O efeito empina bumbum é real, não é propaganda enganosa. Vale cada centavo!", productImage: null, rating: 5, helpful: 14, date: "24/11/2025" },
   { name: "Beatriz Santos", verified: true, comment: "Comprei com receio mas me surpreendi positivamente. Qualidade excelente e muito confortável.", productImage: null, rating: 5, helpful: 3, date: "19/11/2025" },
   { name: "Larissa Mendes", verified: true, comment: "Perfeita! Não marca na roupa, é confortável e bonita. Já virou minha favorita!", productImage: null, rating: 5, helpful: 8, date: "14/11/2025" },
   { name: "Patrícia Lima", verified: true, comment: "Adorei o produto, chegou antes do prazo. A qualidade é muito boa, recomendo!", productImage: null, rating: 5, helpful: 6, date: "09/11/2025" },
@@ -207,19 +196,11 @@ const Reviews = () => {
                 <div className="flex gap-4">
                   {/* Avatar */}
                   <div className="flex-shrink-0">
-                    {review.avatar ? (
-                      <img
-                        src={review.avatar}
-                        alt={review.name}
-                        className="w-12 h-12 rounded-full object-cover ring-2 ring-primary/10"
-                      />
-                    ) : (
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center ring-2 ring-primary/10">
-                        <span className="text-primary font-bold text-lg">
-                          {review.name.charAt(0)}
-                        </span>
-                      </div>
-                    )}
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center ring-2 ring-primary/10">
+                      <span className="text-primary font-bold text-lg">
+                        {review.name.charAt(0)}
+                      </span>
+                    </div>
                   </div>
 
                   {/* Content */}
