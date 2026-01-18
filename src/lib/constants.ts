@@ -1,2 +1,2 @@
 // URLs centralizadas
-export const CHECKOUT_URL = "https://seguro.caminhodasaude.com/api/public/shopify?product=2586328866196&store=25863";
+export const CHECKOUT_URL = "https://pay.caminhodasaude.com/nWrxGWAr01X3654";
