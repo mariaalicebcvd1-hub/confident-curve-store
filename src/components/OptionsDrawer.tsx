@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import type { ColorKey } from "@/components/ProductGallery";
+import { SizeHelperQuiz } from "@/components/SizeHelperQuiz";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
   Drawer,
@@ -10,7 +11,8 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import { ShoppingBag } from "lucide-react";
+import tabelaMedidas from "@/assets/tabela-medidas.avif";
+import { Ruler, ShoppingBag } from "lucide-react";
 
 const sizeOptions = [
   { value: "P", label: "P" },
@@ -54,13 +56,26 @@ export function OptionsDrawer({
 }) {
   const selectedSize = selectedSizeIndex >= 0 ? sizeOptions[selectedSizeIndex]?.value : "";
   const isSelectionMissing = selectedSizeIndex < 0;
+  const [showSizeTable, setShowSizeTable] = React.useState(false);
+
+  const handleSelectSizeValue = React.useCallback(
+    (size: (typeof sizeOptions)[number]["value"]) => {
+      const idx = sizeOptions.findIndex((s) => s.value === size);
+      if (idx >= 0) onSelectSizeIndex(idx);
+      setShowSizeHint(false);
+    },
+    [onSelectSizeIndex, setShowSizeHint]
+  );
 
   return (
     <Drawer
       open={open}
       onOpenChange={(v) => {
         onOpenChange(v);
-        if (!v) setShowSizeHint(false);
+        if (!v) {
+          setShowSizeHint(false);
+          setShowSizeTable(false);
+        }
       }}
     >
       <DrawerContent>
@@ -101,7 +116,20 @@ export function OptionsDrawer({
           </div>
 
           <div>
-            <p className="text-sm font-semibold text-foreground mb-2">Tamanho</p>
+            <div className="flex items-center justify-between gap-3 mb-2">
+              <p className="text-sm font-semibold text-foreground">Tamanho</p>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowSizeTable((v) => !v)}
+                  className="text-xs font-semibold text-primary underline underline-offset-4"
+                >
+                  Tabela de medidas
+                </button>
+
+                <SizeHelperQuiz onSelectSize={(size) => handleSelectSizeValue(size)} />
+              </div>
+            </div>
 
             {showSizeHint && isSelectionMissing && (
               <div className="mb-2 rounded-xl border border-border bg-secondary/50 p-3 text-sm text-foreground animate-fade-in">
@@ -114,9 +142,7 @@ export function OptionsDrawer({
               value={selectedSize || ""}
               onValueChange={(v) => {
                 if (!v) return;
-                const idx = sizeOptions.findIndex((s) => s.value === v);
-                if (idx >= 0) onSelectSizeIndex(idx);
-                setShowSizeHint(false);
+                handleSelectSizeValue(v as (typeof sizeOptions)[number]["value"]);
               }}
               className="flex flex-wrap justify-start gap-2"
             >
@@ -131,6 +157,25 @@ export function OptionsDrawer({
                 </ToggleGroupItem>
               ))}
             </ToggleGroup>
+
+            {showSizeTable && (
+              <div className="mt-3 rounded-xl border border-border bg-secondary/50 p-3">
+                <div className="flex items-center gap-2 mb-2">
+                  <Ruler className="w-4 h-4 text-primary" />
+                  <p className="text-sm font-semibold text-foreground">Tabela de Medidas</p>
+                  <span className="text-xs text-muted-foreground ml-auto">
+                    Na dúvida, peça 1 tamanho maior
+                  </span>
+                </div>
+                <img
+                  src={tabelaMedidas}
+                  alt="Tabela de medidas - Guia de tamanhos"
+                  className="w-full rounded-lg"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            )}
           </div>
         </div>
 
