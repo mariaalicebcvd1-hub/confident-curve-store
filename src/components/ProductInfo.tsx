@@ -59,7 +59,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
     <div className="space-y-5 px-1 sm:px-0">
       {/* Title & Rating */}
       <div className="text-center sm:text-left">
-        <p className="text-xs sm:text-sm text-primary font-semibold mb-1 uppercase tracking-wide">PIX à vista (pagamento no PIX)</p>
+        <p className="text-xs sm:text-sm text-primary font-semibold mb-1 uppercase tracking-wide">⚡ Oferta Especial de Lançamento</p>
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground leading-tight">
           Bumbum Empinado, Barriga Suave, <span className="text-primary">Sem Desconforto</span>
         </h1>
@@ -81,7 +81,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
         <div className="flex flex-wrap items-baseline justify-center sm:justify-start gap-2 sm:gap-3">
           <span className="price-old text-base sm:text-lg">R$ 179,90</span>
           <span className="price-new text-2xl sm:text-3xl">R$ 69,90</span>
-          <span className="badge-discount text-xs">De R$ 179,90 por R$ 69,90 • PIX à vista</span>
+          <span className="badge-discount text-xs">De R$ 179,90 → Agora: R$ 69,90 no Pix (só R$ 23 cada)</span>
         </div>
 
         <p className="text-xs text-muted-foreground text-center sm:text-left">
@@ -92,10 +92,8 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
         <div className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm">
           <CreditCard className="w-4 h-4 text-muted-foreground" />
           <span className="text-muted-foreground">
-            No cartão: <strong className="text-foreground">R$ 77,70</strong> ou em até{" "}
-            <strong className="text-foreground">12x</strong> de{" "}
-            <strong className="text-foreground">R$ 6,47</strong> sem juros
-            <span className="text-muted-foreground"> • no PIX é à vista</span>
+            💳 Ou <strong className="text-foreground">R$ 77,70</strong> no cartão (12x de{" "}
+            <strong className="text-foreground">R$ 6,47</strong> sem juros)
           </span>
         </div>
       </div>

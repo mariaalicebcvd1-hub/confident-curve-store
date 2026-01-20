@@ -11,8 +11,8 @@ interface SectionCTAProps {
 }
 
 const SectionCTA = ({ 
-  title = "De R$ 179,90 por R$ 69,90 no PIX (kit com 3)",
-  subtitle = "No cartão: R$ 77,70 ou em até 12x de R$ 6,47 sem juros.",
+  title = "Kit com 3 Calcinhas Modeladoras por R$ 69,90 no Pix",
+  subtitle = "Modela sem apertar, empina com conforto e não marca na roupa",
   priceHighlight,
   buttonText = "ESCOLHER MINHA COR E TAMANHO",
   variant = "default",
@@ -43,31 +43,34 @@ const SectionCTA = ({
       </div>
     );
   }
-
   return (
     <div className="py-10 bg-gradient-to-b from-transparent via-secondary/30 to-transparent">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-xl mx-auto bg-card rounded-2xl p-8 border border-border shadow-sm">
           <div className="inline-flex items-center justify-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-3">
-            PIX à vista
-            <span className="text-foreground/80 font-semibold normal-case">(pagamento no PIX)</span>
+            ⚡ Oferta Especial de Lançamento
           </div>
 
           <h3 className="text-xl lg:text-2xl font-black text-foreground mb-2">
             {title}
           </h3>
 
-          <p className="text-muted-foreground mb-1">
-            {subtitle}
-          </p>
-          <p className="text-sm text-foreground font-semibold mb-3">
-            Cada peça sai por <span className="font-black">menos de R$ 24</span> • conforto real • troca grátis • rastreio
+          <p className="text-muted-foreground mb-2">{subtitle}</p>
+
+          <p className="text-sm text-foreground font-semibold mb-4">
+            De <span className="line-through">R$ 179,90</span> → Agora:{" "}
+            <span className="font-black text-success">R$ 69,90</span> no Pix{" "}
+            <span className="text-muted-foreground">(só R$ 23 cada)</span>
           </p>
 
           {priceHighlight && (
             <p className="text-sm text-success font-semibold mb-4">{priceHighlight}</p>
           )}
-          {!priceHighlight && <div className="mb-4" />}
+
+          <p className="text-sm text-muted-foreground mb-5">
+            💳 Ou <strong className="text-foreground">R$ 77,70</strong> no cartão (12x de{" "}
+            <strong className="text-foreground">R$ 6,47</strong> sem juros)
+          </p>
 
           <button
             onClick={handleClick}
@@ -76,9 +79,8 @@ const SectionCTA = ({
             <ShoppingBag className="w-5 h-5" />
             {buttonText}
           </button>
-          {!priceHighlight && (
-            <p className="text-xs text-muted-foreground mt-3">Frete grátis • Troca garantida • Loja com CNPJ</p>
-          )}
+
+          <p className="text-xs text-muted-foreground mt-3">Frete grátis • Troca garantida • Loja com CNPJ</p>
         </div>
       </div>
     </div>
