@@ -63,7 +63,7 @@ export function OptionsDrawer({
 }) {
   const selectedSize = selectedSizeIndex >= 0 ? sizeOptions[selectedSizeIndex]?.value : "";
   const isSelectionMissing = selectedSizeIndex < 0;
-  const [showSizeTable, setShowSizeTable] = React.useState(false);
+  const [showSizeTable, setShowSizeTable] = React.useState(true);
 
   const selectedColorLabel = colorLabelMap[selectedColor] ?? selectedColor;
 
@@ -83,7 +83,7 @@ export function OptionsDrawer({
         onOpenChange(v);
         if (!v) {
           setShowSizeHint(false);
-          setShowSizeTable(false);
+          setShowSizeTable(true);
         }
       }}
     >
@@ -136,14 +136,6 @@ export function OptionsDrawer({
             <div className="flex items-center justify-between gap-3 mb-2">
               <p className="text-sm font-semibold text-foreground">Tamanho</p>
               <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => setShowSizeTable((v) => !v)}
-                  className="text-xs font-semibold text-primary underline underline-offset-4"
-                >
-                  Tabela de medidas
-                </button>
-
                 <SizeHelperQuiz onSelectSize={(size) => handleSelectSizeValue(size)} />
               </div>
             </div>
