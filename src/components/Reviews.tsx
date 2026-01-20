@@ -162,7 +162,7 @@ const Reviews = () => {
   const [helpfulClicked, setHelpfulClicked] = useState<number[]>([]);
   
   const totalReviews = 2341;
-  const averageRating = 4.8;
+  const averageRating = 4.9;
 
   const filteredReviews = reviews.filter((review) => {
     if (filter === "with-photo") return review.productImages !== null && review.productImages.length > 0;
