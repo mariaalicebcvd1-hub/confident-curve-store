@@ -160,7 +160,7 @@ const ProductDescription = () => {
           </p>
 
           <p className="text-sm text-foreground font-semibold mb-4 max-w-2xl mx-auto">
-            De <span className="line-through">R$ 179,90</span> → Agora: <span className="font-black text-success">R$ 69,90</span> no Pix <span className="text-muted-foreground">(só R$ 23 cada)</span>
+            De <span className="line-through">R$ 179,90</span> → Agora: <span className="font-black text-success">R$ 69,90</span> no Pix <span className="text-muted-foreground">• R$ 23 cada</span>
           </p>
 
           <p className="text-sm text-muted-foreground mb-6 max-w-2xl mx-auto">
