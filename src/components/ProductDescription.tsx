@@ -185,9 +185,14 @@ const ProductDescription = ({
             }}
             className="btn-compra inline-flex items-center gap-2 bg-success text-white px-6 py-3 rounded-lg font-bold hover:bg-success/90 transition-colors"
           >
-            QUERO A MINHA AGORA
+            <span className="flex flex-col items-start leading-tight text-left">
+              <span className="uppercase">QUERO A MINHA AGORA</span>
+              <span className="text-[11px] font-semibold opacity-90 normal-case tracking-normal">
+                Escolha sua cor e tamanho na próxima etapa
+              </span>
+            </span>
           </button>
-          <p className="text-xs text-muted-foreground mt-3">Escolha sua cor e tamanho na próxima etapa</p>
+          <p className="text-xs text-muted-foreground mt-3">Frete grátis • Loja com CNPJ • Rastreio por WhatsApp</p>
         </div>
       </div>
     </section>
