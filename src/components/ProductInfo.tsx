@@ -46,11 +46,6 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
 
   const handleAddToCart = () => {
     if (selectedSizeIndex < 0) {
-      if (onOpenOptionsDrawer) {
-        onOpenOptionsDrawer(true);
-        return;
-      }
-
       document.getElementById("product-options")?.scrollIntoView({ behavior: "smooth", block: "start" });
       return;
     }
