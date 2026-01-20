@@ -212,7 +212,6 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
           <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
           QUERO MEU KIT POR R$ 69,90
         </button>
-        <p className="text-xs text-center text-muted-foreground">Frete grátis • Troca garantida • Loja com CNPJ</p>
       </div>
 
       {/* Trust Badges */}
