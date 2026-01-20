@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ShoppingCart, X, ChevronDown, Check } from "lucide-react";
 import {
   Popover,
@@ -8,6 +8,8 @@ import {
 import { trackEventDirect } from "@/hooks/useTracking";
 import { trackInitiateCheckout } from "@/lib/facebook-pixel";
 import { buildCheckoutUrl } from "@/lib/checkout";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import type { ColorKey } from "@/components/ProductGallery";
 
 const sizes = [
   { value: "P", label: "P", description: "36-38" },
@@ -17,11 +19,26 @@ const sizes = [
   { value: "XG", label: "XG", description: "48-50" },
 ];
 
-const FloatingCTA = () => {
+const FloatingCTA = ({
+  selectedColor,
+  selectedSizeIndex,
+  onSelectSizeIndex,
+}: {
+  selectedColor: ColorKey;
+  selectedSizeIndex: number;
+  onSelectSizeIndex: (idx: number) => void;
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
-  const [selectedSize, setSelectedSize] = useState<string>("P");
+
   const [sizeOpen, setSizeOpen] = useState(false);
+
+  const selectedSize = useMemo(() => {
+    if (selectedSizeIndex < 0) return "";
+    return sizes[selectedSizeIndex]?.value ?? "";
+  }, [selectedSizeIndex]);
+
+  const isSelectionMissing = selectedSizeIndex < 0;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,9 +61,10 @@ const FloatingCTA = () => {
   }, [isDismissed]);
 
   const handleClick = (e: React.MouseEvent) => {
-    if (!selectedSize) {
+    if (isSelectionMissing) {
       e.preventDefault();
-      setSizeOpen(true);
+      // Em vez de forçar checkout, guia a pessoa pra selecionar com segurança.
+      document.getElementById("product-options")?.scrollIntoView({ behavior: "smooth", block: "start" });
       return;
     }
 
@@ -58,9 +76,11 @@ const FloatingCTA = () => {
 
     trackEventDirect('checkout_start', 'Floating CTA → Checkout', 'floating_cta', {
       size: selectedSize,
+      color: selectedColor,
     });
 
     const checkoutUrl = buildCheckoutUrl({
+      cor: selectedColor,
       tamanho: selectedSize,
     });
 
@@ -68,7 +88,8 @@ const FloatingCTA = () => {
   };
 
   const handleSizeSelect = (size: string) => {
-    setSelectedSize(size);
+    const idx = sizes.findIndex((s) => s.value === size);
+    if (idx >= 0) onSelectSizeIndex(idx);
     setSizeOpen(false);
   };
 
@@ -83,6 +104,14 @@ const FloatingCTA = () => {
             <span className="line-through">R$ 179,90</span>{" "}
             <span className="text-primary font-bold">por R$ 69,90 no PIX</span>
           </p>
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center rounded-full border border-border bg-secondary/50 px-2.5 py-1 text-[11px] font-semibold text-foreground">
+              Cor: <span className="ml-1 text-primary font-bold">{selectedColor}</span>
+            </span>
+            <span className="inline-flex items-center rounded-full border border-border bg-secondary/50 px-2.5 py-1 text-[11px] font-semibold text-foreground">
+              Tam: <span className="ml-1 text-primary font-bold">{selectedSize || "Escolha"}</span>
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center gap-2 flex-1 sm:flex-initial min-w-0">
@@ -133,13 +162,42 @@ const FloatingCTA = () => {
             </PopoverContent>
           </Popover>
 
+          {/* Mobile: chips rápidos (Shopify-like) */}
+          <div className="sm:hidden flex-1 min-w-0">
+            <ToggleGroup
+              type="single"
+              value={selectedSize || ""}
+              onValueChange={(v) => {
+                if (!v) return;
+                handleSizeSelect(v);
+              }}
+              className="flex items-center justify-start gap-1 overflow-x-auto"
+            >
+              {sizes.map((s) => (
+                <ToggleGroupItem
+                  key={s.value}
+                  value={s.value}
+                  aria-label={`Tamanho ${s.label}`}
+                  className="h-9 w-11 rounded-xl text-xs font-extrabold data-[state=on]:border-primary data-[state=on]:bg-primary/10"
+                >
+                  {s.label}
+                </ToggleGroupItem>
+              ))}
+            </ToggleGroup>
+            {isSelectionMissing && (
+              <p className="mt-1 text-[11px] text-muted-foreground">
+                Falta escolher o tamanho pra finalizar com segurança.
+              </p>
+            )}
+          </div>
+
           <button
             type="button"
             onClick={handleClick}
             className="btn-compra flex-1 sm:flex-initial text-sm sm:text-base h-10 sm:h-11 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-success text-white hover:bg-success/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide px-4"
           >
             <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-            <span className="truncate">COMPRAR AGORA</span>
+            <span className="truncate">{isSelectionMissing ? "ESCOLHER TAMANHO" : "COMPRAR AGORA"}</span>
           </button>
 
           <button

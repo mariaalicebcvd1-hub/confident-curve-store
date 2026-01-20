@@ -28,21 +28,27 @@ const benefits = [
 interface ProductInfoProps {
   selectedColor: ColorKey;
   onColorChange: (color: ColorKey) => void;
+  selectedSizeIndex: number;
+  onSizeChange: (sizeIndex: number) => void;
 }
 
-const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
+const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeChange }: ProductInfoProps) => {
   const selectedColorData = colors.find((c) => c.key === selectedColor);
-  const [selectedSize, setSelectedSize] = React.useState(0);
   const [quantity, setQuantity] = React.useState(1);
 
-  const selectedSizeLabel = sizes[selectedSize] as (typeof sizes)[number];
+  const selectedSizeLabel = selectedSizeIndex >= 0 ? (sizes[selectedSizeIndex] as (typeof sizes)[number]) : undefined;
 
   const handleSelectSizeLabel = (size: (typeof sizes)[number]) => {
     const idx = sizes.indexOf(size);
-    if (idx >= 0) setSelectedSize(idx);
+    if (idx >= 0) onSizeChange(idx);
   };
 
   const handleAddToCart = () => {
+    if (selectedSizeIndex < 0) {
+      document.getElementById("product-options")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
     trackInitiateCheckout({
       content_name: 'Calcinha Modeladora - Kit 3 unidades',
       value: 69.90 * quantity,
@@ -53,12 +59,12 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       'checkout_start',
       'Primary CTA → Checkout',
       'primary_cta',
-      { size: sizes[selectedSize], qty: quantity, color: selectedColor }
+      { size: sizes[selectedSizeIndex], qty: quantity, color: selectedColor }
     );
 
     const checkoutUrl = buildCheckoutUrl({
       cor: selectedColor,
-      tamanho: sizes[selectedSize],
+      tamanho: sizes[selectedSizeIndex],
     });
 
     window.open(checkoutUrl, "_blank");
@@ -197,7 +203,8 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       <div>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
           <p className="font-semibold text-center sm:text-left">
-            Tamanho: <span className="text-primary">{selectedSizeLabel}</span>
+            Tamanho:{" "}
+            <span className="text-primary">{selectedSizeLabel ?? "Escolha"}</span>
           </p>
           <div className="flex justify-center sm:justify-end">
             <SizeHelperQuiz onSelectSize={handleSelectSizeLabel} />
@@ -224,6 +231,12 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
             </ToggleGroupItem>
           ))}
         </ToggleGroup>
+
+        {selectedSizeIndex < 0 && (
+          <p className="mt-2 text-xs text-muted-foreground text-center sm:text-left">
+            Escolha um tamanho pra gente liberar a compra com segurança.
+          </p>
+        )}
         
         {/* Size Guide */}
         <div className="mt-4 bg-secondary/50 rounded-xl p-4 border border-border">

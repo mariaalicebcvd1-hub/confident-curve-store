@@ -20,6 +20,7 @@ const Index = () => {
 
   const [selectedColor, setSelectedColor] = useState<ColorKey>("misto");
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [selectedSizeIndex, setSelectedSizeIndex] = useState<number>(-1);
 
   const handleColorChange = (color: ColorKey) => {
     setSelectedColor(color);
@@ -68,6 +69,8 @@ const Index = () => {
           <ProductInfo 
             selectedColor={selectedColor}
             onColorChange={handleColorChange}
+            selectedSizeIndex={selectedSizeIndex}
+            onSizeChange={setSelectedSizeIndex}
           />
         </div>
       </main>
@@ -114,7 +117,11 @@ const Index = () => {
       <Footer />
 
       {/* Floating CTA */}
-      <FloatingCTA />
+      <FloatingCTA
+        selectedColor={selectedColor}
+        selectedSizeIndex={selectedSizeIndex}
+        onSelectSizeIndex={setSelectedSizeIndex}
+      />
 
       {/* Floating Video Button */}
       <FloatingVideoButton />
