@@ -81,6 +81,12 @@ export function SizeHelperQuiz({
     requestAnimationFrame(() => applyBtnRef.current?.focus());
   };
 
+  const resetResult = () => {
+    setResult(null);
+    // Mantém os valores preenchidos pra facilitar ajustes rápidos.
+    requestAnimationFrame(() => form.setFocus("heightCm"));
+  };
+
   const apply = () => {
     if (!result) return;
     onSelectSize(result);
@@ -129,54 +135,58 @@ export function SizeHelperQuiz({
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <FormField
-                control={form.control}
-                name="heightCm"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Altura (cm)</FormLabel>
-                    <FormControl>
-                      <Input
-                        autoFocus
-                        type="number"
-                        inputMode="numeric"
-                        min={140}
-                        max={200}
-                        placeholder="165"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            {!result && (
+              <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <FormField
+                    control={form.control}
+                    name="heightCm"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Altura (cm)</FormLabel>
+                        <FormControl>
+                          <Input
+                            autoFocus
+                            type="number"
+                            inputMode="numeric"
+                            min={140}
+                            max={200}
+                            placeholder="165"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-              <FormField
-                control={form.control}
-                name="weightKg"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Peso (kg)</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        inputMode="numeric"
-                        min={40}
-                        max={150}
-                        placeholder="68"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+                  <FormField
+                    control={form.control}
+                    name="weightKg"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Peso (kg)</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="number"
+                            inputMode="numeric"
+                            min={40}
+                            max={150}
+                            placeholder="68"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
-            <FormDescription className="text-xs">
-              Usamos só esses dados pra sugerir o tamanho. Não salvamos nada.
-            </FormDescription>
+                <FormDescription className="text-xs">
+                  Usamos só esses dados pra sugerir o tamanho. Não salvamos nada.
+                </FormDescription>
+              </>
+            )}
 
             {result && (
               <div className="rounded-2xl border border-border bg-secondary/40 p-4">
@@ -185,6 +195,22 @@ export function SizeHelperQuiz({
                   <span className="rounded-full border border-border bg-background px-2.5 py-1 text-xs font-semibold text-muted-foreground">
                     sugestão
                   </span>
+                </div>
+
+                <div className="mt-2 flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center rounded-full border border-border bg-background/60 px-2.5 py-1 text-[11px] font-semibold text-muted-foreground">
+                    Altura: {form.getValues("heightCm")}cm
+                  </span>
+                  <span className="inline-flex items-center rounded-full border border-border bg-background/60 px-2.5 py-1 text-[11px] font-semibold text-muted-foreground">
+                    Peso: {form.getValues("weightKg")}kg
+                  </span>
+                  <button
+                    type="button"
+                    onClick={resetResult}
+                    className="ml-auto text-[11px] font-semibold text-primary underline underline-offset-2"
+                  >
+                    Ajustar dados
+                  </button>
                 </div>
 
                 <div className="mt-3 flex items-end justify-between">
