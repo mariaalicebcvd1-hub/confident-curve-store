@@ -119,6 +119,7 @@ const Index = () => {
       {/* Floating CTA */}
       <FloatingCTA
         selectedColor={selectedColor}
+        onSelectColor={setSelectedColor}
         selectedSizeIndex={selectedSizeIndex}
         onSelectSizeIndex={setSelectedSizeIndex}
       />
