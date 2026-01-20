@@ -93,6 +93,12 @@ export function SizeHelperQuiz({
     setOpen(false);
   };
 
+  const applyComfort = () => {
+    if (!comfortSize) return;
+    onSelectSize(comfortSize);
+    setOpen(false);
+  };
+
   return (
     <Dialog open={open} onOpenChange={(v) => {
       setOpen(v);
@@ -217,7 +223,7 @@ export function SizeHelperQuiz({
                   <p className="text-4xl font-black text-foreground leading-none tracking-tight">
                     {result}
                   </p>
-                  <p className="text-xs text-muted-foreground">(mais provável)</p>
+                  <p className="text-xs text-muted-foreground">Mais chance de vestir perfeito 💖</p>
                 </div>
 
                 <div className="mt-3 rounded-xl border border-border bg-background/60 p-3">
@@ -225,12 +231,12 @@ export function SizeHelperQuiz({
                     <span aria-hidden>✅</span>{" "}
                     {comfortSize ? (
                       <>
-                        Dica: se gosta de peça mais soltinha, prefira <span className="font-semibold">{comfortSize}</span>.
+                        Quer um caimento mais soltinho? Você pode optar por <span className="font-semibold">{comfortSize}</span>.
                       </>
                     ) : (
                       <>
-                        Dica: você está no maior tamanho disponível. Se você prefere mais soltinha, pode escolher o <span className="font-semibold">XG</span>
-                        com mais conforto — e se ficar mais firme do que você gosta, a troca é simples.
+                        Você já está no maior tamanho disponível — ótima escolha pra garantir conforto. E se ainda assim preferir ajustar,
+                        a troca é simples.
                       </>
                     )}
                   </p>
@@ -244,9 +250,17 @@ export function SizeHelperQuiz({
                   Ver sugestão
                 </Button>
               ) : (
-                <Button ref={applyBtnRef} type="button" onClick={apply} className="w-full sm:w-auto">
-                  Usar esse tamanho
-                </Button>
+                <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+                  <Button ref={applyBtnRef} type="button" onClick={apply} className="w-full sm:w-auto">
+                    Usar esse tamanho
+                  </Button>
+
+                  {comfortSize && (
+                    <Button type="button" variant="outline" onClick={applyComfort} className="w-full sm:w-auto">
+                      Prefiro mais confortável ({comfortSize})
+                    </Button>
+                  )}
+                </div>
               )}
             </DialogFooter>
           </form>
