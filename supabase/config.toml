@@ -1,7 +1,1 @@
-project_id = "grwovoemciemplljkboy"
-
-[functions.generate-funnel-insights]
-verify_jwt = true
-
-[functions.vega-webhook]
-verify_jwt = false
+project_id = "xojtiigfwvnvcsdqvuax"
