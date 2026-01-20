@@ -76,9 +76,14 @@ const SectionCTA = ({
           className="inline-flex items-center justify-center gap-2 bg-success hover:bg-success/90 text-white font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 uppercase tracking-wide"
         >
           <ShoppingBag className="w-5 h-5" />
-          {buttonText}
+          <span className="flex flex-col items-start leading-tight text-left">
+            <span>{buttonText}</span>
+            <span className="text-[11px] font-semibold opacity-90 normal-case tracking-normal">
+              Escolha sua cor e tamanho na próxima etapa
+            </span>
+          </span>
         </button>
-        <p className="text-xs text-muted-foreground mt-3">Escolha sua cor e tamanho na próxima etapa</p>
+        <p className="text-xs text-muted-foreground mt-3">Frete grátis • Troca garantida • Pagamento seguro</p>
       </div>
     );
   }
@@ -116,10 +121,15 @@ const SectionCTA = ({
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-success hover:bg-success/90 text-white font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 uppercase tracking-wide"
           >
             <ShoppingBag className="w-5 h-5" />
-            {buttonText}
+            <span className="flex flex-col items-start leading-tight text-left">
+              <span>{buttonText}</span>
+              <span className="text-[11px] font-semibold opacity-90 normal-case tracking-normal">
+                Escolha sua cor e tamanho na próxima etapa
+              </span>
+            </span>
           </button>
 
-          <p className="text-xs text-muted-foreground mt-3">Escolha sua cor e tamanho na próxima etapa</p>
+          <p className="text-xs text-muted-foreground mt-3">Frete grátis • Troca garantida • Loja com CNPJ</p>
         </div>
       </div>
     </div>
