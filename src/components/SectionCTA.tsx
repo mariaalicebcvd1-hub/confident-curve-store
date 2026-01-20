@@ -1,6 +1,38 @@
 import { ShoppingBag } from "lucide-react";
 import { trackEventDirect } from "@/hooks/useTracking";
 
+function emphasizeOfferText(text: string) {
+  // Destaques pensados para tráfego frio: preço/valor e pontos de confiança.
+  const tokens = [
+    "R$ 69,90",
+    "R$ 77,70",
+    "R$ 6,47",
+    "R$ 23",
+    "30 dias",
+    "Frete grátis",
+    "troca grátis",
+    "Compra segura",
+    "Loja com CNPJ",
+    "rastreio",
+  ];
+
+  const escaped = tokens
+    .map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .sort((a, b) => b.length - a.length);
+  const re = new RegExp(`(${escaped.join("|")})`, "gi");
+
+  const parts = text.split(re);
+  return parts.map((part, i) => {
+    const isMatch = tokens.some((t) => t.toLowerCase() === part.toLowerCase());
+    if (!isMatch) return <span key={i}>{part}</span>;
+    return (
+      <strong key={i} className="text-foreground font-black">
+        {part}
+      </strong>
+    );
+  });
+}
+
 interface SectionCTAProps {
   title?: string;
   subtitle?: string;
@@ -59,10 +91,10 @@ const SectionCTA = ({
           </div>
 
           <h3 className="text-xl lg:text-2xl font-black text-foreground mb-2">
-            {title}
+            {emphasizeOfferText(title)}
           </h3>
 
-          <p className="text-muted-foreground mb-2">{subtitle}</p>
+          <p className="text-muted-foreground mb-2">{emphasizeOfferText(subtitle)}</p>
 
           <p className="text-sm text-foreground font-semibold mb-4">
             De <span className="line-through">R$ 179,90</span> → Agora:{" "}
@@ -71,7 +103,7 @@ const SectionCTA = ({
           </p>
 
           {priceHighlight && (
-            <p className="text-sm text-success font-semibold mb-4">{priceHighlight}</p>
+            <p className="text-sm text-success font-semibold mb-4">{emphasizeOfferText(priceHighlight)}</p>
           )}
 
           <p className="text-sm text-muted-foreground mb-5">
