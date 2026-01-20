@@ -213,18 +213,15 @@ export function SizeHelperQuiz({
             )}
 
             <DialogFooter className="gap-2 sm:gap-2">
-              <Button type="submit" variant="secondary" className="w-full sm:w-auto">
-                Ver sugestão
-              </Button>
-              <Button
-                ref={applyBtnRef}
-                type="button"
-                onClick={apply}
-                disabled={!result}
-                className="w-full sm:w-auto"
-              >
-                Usar esse tamanho
-              </Button>
+              {!result ? (
+                <Button type="submit" className="w-full sm:w-auto">
+                  Ver sugestão
+                </Button>
+              ) : (
+                <Button ref={applyBtnRef} type="button" onClick={apply} className="w-full sm:w-auto">
+                  Usar esse tamanho
+                </Button>
+              )}
             </DialogFooter>
           </form>
         </Form>
