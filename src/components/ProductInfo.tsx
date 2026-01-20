@@ -77,21 +77,17 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       </div>
 
       {/* Price */}
-      <div className="bg-gradient-hero rounded-2xl p-4 sm:p-5 space-y-3 border border-border shadow-sm">
-        {/* Top row */}
-        <div className="flex items-center justify-between gap-3">
-          <span className="inline-flex items-center rounded-md border border-primary/20 bg-background/60 backdrop-blur px-2 py-1 text-[11px] font-bold uppercase tracking-wide text-primary">
-            Pix à vista
-          </span>
-        </div>
+      <div className="bg-gradient-hero rounded-xl p-4 sm:p-5 space-y-3 border border-border">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+          <p className="text-lg sm:text-xl font-black text-foreground leading-tight text-center sm:text-left">
+            De <span className="line-through text-muted-foreground">R$ 179,90</span> → Agora:{" "}
+            <span className="text-success">R$ 69,90</span> no Pix{" "}
+            <span className="text-sm font-semibold text-muted-foreground">• R$ 23 cada</span>
+          </p>
 
-        {/* Main price line */}
-        <div className="flex flex-wrap items-baseline justify-center sm:justify-start gap-x-2 gap-y-1">
-          <span className="price-old">R$ 179,90</span>
-          <span className="text-muted-foreground font-black">→</span>
-          <span className="price-new">R$ 69,90</span>
-          <span className="text-sm font-bold text-foreground">(kit com 3)</span>
-          <span className="text-sm font-semibold text-muted-foreground">• R$ 23 cada</span>
+          <span className="inline-flex items-center rounded-md border border-primary/20 bg-background/60 backdrop-blur px-2 py-1 text-[11px] font-bold uppercase tracking-wide text-primary self-center sm:self-auto whitespace-nowrap">
+            ⚡ Oferta de lançamento
+          </span>
         </div>
 
         <p className="text-xs text-muted-foreground text-center sm:text-left">
