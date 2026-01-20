@@ -87,7 +87,7 @@ export function OptionsDrawer({
         }
       }}
     >
-      <DrawerContent>
+      <DrawerContent className="max-h-[90vh]">
         <DrawerHeader>
           <DrawerTitle>Escolha cor e tamanho</DrawerTitle>
           <div className="mt-2 flex flex-wrap items-center gap-2">
@@ -100,7 +100,7 @@ export function OptionsDrawer({
           </div>
         </DrawerHeader>
 
-        <div className="px-4 pb-2 space-y-4">
+        <div className="flex-1 overflow-y-auto px-4 pb-2 space-y-4">
           <div>
             <p className="text-sm font-semibold text-foreground mb-2">Cor</p>
             <ToggleGroup
