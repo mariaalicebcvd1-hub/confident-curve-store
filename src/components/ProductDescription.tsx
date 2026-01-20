@@ -185,7 +185,7 @@ const ProductDescription = ({
             }}
             className="btn-compra inline-flex items-center gap-2 bg-success text-white px-6 py-3 rounded-lg font-bold hover:bg-success/90 transition-colors"
           >
-            <span className="flex flex-col items-start leading-tight text-left">
+            <span className="flex flex-col items-center leading-tight text-center">
               <span className="uppercase">QUERO A MINHA AGORA</span>
               <span className="text-[11px] font-semibold opacity-90 normal-case tracking-normal">
                 Escolha sua cor e tamanho na próxima etapa
