@@ -77,27 +77,51 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       </div>
 
       {/* Price */}
-      <div className="bg-gradient-hero rounded-xl p-4 sm:p-5 space-y-3 border border-border">
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-          <p className="text-lg sm:text-xl font-black text-foreground leading-tight text-center sm:text-left">
-            De <span className="line-through text-muted-foreground">R$ 179,90</span> → Agora:{" "}
-            <span className="text-success">R$ 69,90</span> no Pix{" "}
-            <span className="text-sm font-semibold text-muted-foreground">• R$ 23 cada</span>
-          </p>
-
-          <span className="inline-flex items-center rounded-md border border-primary/20 bg-background/60 backdrop-blur px-2 py-1 text-[11px] font-bold uppercase tracking-wide text-primary self-center sm:self-auto whitespace-nowrap">
+      <div className="bg-gradient-hero rounded-xl p-4 sm:p-5 space-y-4 border border-border">
+        {/* Topo do card */}
+        <div className="text-center sm:text-left space-y-1">
+          <p className="inline-flex items-center justify-center rounded-md border border-primary/20 bg-background/60 backdrop-blur px-2 py-1 text-[11px] font-bold uppercase tracking-wide text-primary">
             ⚡ Oferta de lançamento
-          </span>
+          </p>
+          <p className="text-sm sm:text-base font-semibold text-foreground">
+            Kit com 3 Calcinhas Modeladoras
+          </p>
         </div>
 
-        <p className="text-xs text-muted-foreground text-center sm:text-left">
-          Modela sem apertar, empina com conforto e não marca na roupa.
-        </p>
+        {/* Preço */}
+        <div className="space-y-1 text-center sm:text-left">
+          <p className="text-sm text-muted-foreground">
+            De <span className="line-through">R$ 179,90</span>
+          </p>
+          <p className="text-xl sm:text-2xl font-black text-foreground leading-tight">
+            Agora: <span className="text-success">R$ 69,90</span> no Pix
+          </p>
+          <p className="text-sm sm:text-base font-semibold text-muted-foreground">
+            Só <span className="text-foreground">R$ 23</span> por peça
+          </p>
+        </div>
 
+        {/* Valor lógico + confiança */}
+        <ul className="space-y-2">
+          <li className="flex items-start gap-2 text-sm">
+            <Check className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
+            <span>Modela sem apertar</span>
+          </li>
+          <li className="flex items-start gap-2 text-sm">
+            <Check className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
+            <span>Não marca na roupa</span>
+          </li>
+          <li className="flex items-start gap-2 text-sm">
+            <Check className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
+            <span>Troca grátis e frete com rastreio</span>
+          </li>
+        </ul>
+
+        {/* Cartão (sem vergonha) */}
         <div className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm">
           <CreditCard className="w-4 h-4 text-muted-foreground" />
           <span className="text-muted-foreground">
-            💳 Ou <strong className="text-foreground">R$ 77,70</strong> no cartão (12x de{" "}
+            Ou <strong className="text-foreground">R$ 77,70</strong> no cartão (12x de{" "}
             <strong className="text-foreground">R$ 6,47</strong> sem juros)
           </span>
         </div>
