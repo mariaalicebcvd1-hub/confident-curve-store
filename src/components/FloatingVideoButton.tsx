@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Play, X, ShoppingBag, ChevronLeft, ChevronRight, Volume2, VolumeX } from "lucide-react";
+import { Play, ShoppingBag, ChevronLeft, ChevronRight, Volume2, VolumeX } from "lucide-react";
 import { Dialog, DialogContent, DialogClose, DialogTitle } from "@/components/ui/dialog";
 import videoProduto from "@/assets/video-produto.mp4";
 import { trackEventDirect } from "@/hooks/useTracking";
@@ -275,11 +275,6 @@ const FloatingVideoButton = ({
               <Play className="w-6 h-6 text-white fill-white" />
             </div>
           </div>
-          
-          {/* Story count indicator */}
-          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-[10px] font-bold px-1.5 py-0.5 rounded-full">
-            {storyVideos.length}
-          </div>
         </div>
       </button>
 
@@ -378,10 +373,7 @@ const FloatingVideoButton = ({
               </button>
             </div>
 
-            {/* Close Button */}
-            <DialogClose className="absolute top-3 right-3 z-20 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors">
-              <X className="w-5 h-5" />
-            </DialogClose>
+            {/* Close removed (mantém a experiência limpa) */}
           </div>
         </DialogContent>
       </Dialog>
