@@ -94,12 +94,28 @@ export function SizeHelperQuiz({
 
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>Qual seu tamanho ideal? Descubra em 5 segundos.</DialogTitle>
-          <DialogDescription>
-            Com base nos dados de +2.000 clientes, sugerimos o tamanho mais provável pra você acertar de primeira — sem medo de errar.
-            <br />
-            <span className="text-muted-foreground">💡 Prefere mais conforto? Na dúvida, escolha 1 acima.</span>
-          </DialogDescription>
+          <div className="flex items-start justify-between gap-4">
+            <div className="space-y-2">
+              <DialogTitle className="leading-tight">
+                Qual seu tamanho ideal? Descubra em 5 segundos.
+              </DialogTitle>
+              <DialogDescription className="leading-relaxed">
+                Com base nos dados de +2.000 clientes, sugerimos o tamanho mais provável pra você acertar de primeira — sem medo de errar.
+              </DialogDescription>
+            </div>
+            <div className="shrink-0 rounded-full border border-border bg-secondary/40 px-3 py-1 text-xs font-semibold text-foreground">
+              Rápido & privado
+            </div>
+          </div>
+
+          <div className="mt-3 rounded-xl border border-border bg-secondary/30 p-3 text-sm text-foreground">
+            <div className="flex items-start gap-2">
+              <span aria-hidden className="mt-0.5">💡</span>
+              <p className="leading-relaxed">
+                Prefere mais conforto? Na dúvida, escolha <span className="font-semibold">1 acima</span>.
+              </p>
+            </div>
+          </div>
         </DialogHeader>
 
         <Form {...form}>
@@ -149,19 +165,31 @@ export function SizeHelperQuiz({
               />
             </div>
 
-            <FormDescription>
+            <FormDescription className="text-xs">
               Usamos só esses dados pra sugerir o tamanho. Não salvamos nada.
             </FormDescription>
 
             {result && (
-              <div className="rounded-xl border border-border bg-secondary/40 p-4">
-                <p className="text-sm text-muted-foreground">Tamanho recomendado:</p>
-                <p className="text-2xl font-black text-foreground leading-tight">
-                  {result}
-                </p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Dica: se gosta de peça mais soltinha, prefira 1 tamanho acima.
-                </p>
+              <div className="rounded-2xl border border-border bg-secondary/40 p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-sm font-semibold text-foreground">Tamanho recomendado</p>
+                  <span className="rounded-full border border-border bg-background px-2.5 py-1 text-xs font-semibold text-muted-foreground">
+                    sugestão
+                  </span>
+                </div>
+
+                <div className="mt-3 flex items-end justify-between">
+                  <p className="text-4xl font-black text-foreground leading-none tracking-tight">
+                    {result}
+                  </p>
+                  <p className="text-xs text-muted-foreground">(mais provável)</p>
+                </div>
+
+                <div className="mt-3 rounded-xl border border-border bg-background/60 p-3">
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    <span aria-hidden>✅</span> Dica: se gosta de peça mais soltinha, prefira <span className="font-semibold">1 tamanho acima</span>.
+                  </p>
+                </div>
               </div>
             )}
 
