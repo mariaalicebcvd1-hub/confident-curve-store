@@ -14,6 +14,8 @@ import FloatingVideoButton from "@/components/FloatingVideoButton";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import { trackEventDirect, useTracking } from "@/hooks/useTracking";
 import { OptionsDrawer } from "@/components/OptionsDrawer";
+import { trackInitiateCheckout } from "@/lib/facebook-pixel";
+import { buildCheckoutUrl } from "@/lib/checkout";
 
 const Index = () => {
   useTracking();
@@ -35,6 +37,45 @@ const Index = () => {
   const openOptionsDrawer = (opts?: { showSizeHint?: boolean }) => {
     setOptionsDrawerSizeHint(!!opts?.showSizeHint);
     setOptionsDrawerOpen(true);
+  };
+
+  const openCheckout = (source: string) => {
+    // Se por algum motivo ainda não tiver tamanho selecionado, volta pro drawer
+    if (selectedSizeIndex < 0) {
+      openOptionsDrawer({ showSizeHint: true });
+      return;
+    }
+
+    trackInitiateCheckout({
+      content_name: "Calcinha Modeladora - Kit 3 unidades",
+      value: 69.9,
+      num_items: 3,
+    });
+
+    trackEventDirect("checkout_start", `CTA → Checkout (${source})`, source, {
+      color: selectedColor,
+      sizeIndex: selectedSizeIndex,
+    });
+
+    const sizeOptions = ["P", "M", "G", "GG", "XG"] as const;
+    const checkoutUrl = buildCheckoutUrl({
+      cor: selectedColor,
+      tamanho: sizeOptions[selectedSizeIndex],
+    });
+
+    window.open(checkoutUrl, "_blank");
+  };
+
+  const smartCTA = (source: string, opts?: { showSizeHint?: boolean }) => {
+    const missingSize = selectedSizeIndex < 0;
+    const missingColor = !selectedColor;
+
+    if (missingSize || missingColor) {
+      openOptionsDrawer({ showSizeHint: opts?.showSizeHint ?? missingSize });
+      return;
+    }
+
+    openCheckout(source);
   };
 
   useEffect(() => {
@@ -86,7 +127,7 @@ const Index = () => {
       </main>
 
       {/* Product Description */}
-      <ProductDescription onOpenOptionsDrawer={() => openOptionsDrawer()} />
+      <ProductDescription onOpenOptionsDrawer={() => smartCTA("cta_product_description")} />
 
 
       {/* Reviews Section */}
@@ -98,7 +139,7 @@ const Index = () => {
         subtitle="No cartão: R$ 77,70 ou em até 12x de R$ 6,47 sem juros. No PIX você paga menos."
         priceHighlight="Frete grátis • troca grátis • rastreio"
         trackingLabel="cta_after_reviews"
-        onOpenOptionsDrawer={() => openOptionsDrawer()}
+        onOpenOptionsDrawer={() => smartCTA("cta_after_reviews")}
       />
 
       {/* Trust & Guarantee Section */}
@@ -110,7 +151,7 @@ const Index = () => {
         subtitle="De R$ 179,90 por R$ 69,90 no PIX (kit com 3). No cartão: R$ 77,70 ou 12x de R$ 6,47 sem juros."
         buttonText="ESCOLHER COR E TAMANHO"
         trackingLabel="cta_after_trust"
-        onOpenOptionsDrawer={() => openOptionsDrawer()}
+        onOpenOptionsDrawer={() => smartCTA("cta_after_trust")}
       />
 
       {/* FAQ Section */}
@@ -123,7 +164,7 @@ const Index = () => {
         priceHighlight="Frete grátis + rastreio por WhatsApp"
         buttonText="ESCOLHER MINHA COR E TAMANHO"
         trackingLabel="cta_after_faq"
-        onOpenOptionsDrawer={() => openOptionsDrawer()}
+        onOpenOptionsDrawer={() => smartCTA("cta_after_faq")}
       />
 
       {/* Footer */}
@@ -139,10 +180,10 @@ const Index = () => {
       />
 
       {/* Floating Video Button */}
-      <FloatingVideoButton onOpenOptionsDrawer={() => openOptionsDrawer()} />
+      <FloatingVideoButton onOpenOptionsDrawer={() => smartCTA("cta_video_button")} />
 
       {/* Exit Intent Popup */}
-      <ExitIntentPopup onOpenOptionsDrawer={() => openOptionsDrawer()} />
+      <ExitIntentPopup onOpenOptionsDrawer={() => smartCTA("cta_exit_intent")} />
 
       <OptionsDrawer
         open={optionsDrawerOpen}
@@ -153,7 +194,10 @@ const Index = () => {
         onSelectSizeIndex={setSelectedSizeIndex}
         showSizeHint={optionsDrawerSizeHint}
         setShowSizeHint={setOptionsDrawerSizeHint}
-        onProceed={() => setOptionsDrawerOpen(false)}
+        onProceed={() => {
+          setOptionsDrawerOpen(false);
+          openCheckout("cta_options_drawer");
+        }}
       />
     </div>
   );
