@@ -79,14 +79,14 @@ const ProductDescription = ({
                 <strong className="text-foreground"> Não é cinta desconfortável</strong> — você consegue sentar, trabalhar e fazer suas atividades normalmente. 
                 E diferente de cintas caras, essa não enrola, não desce e não marca.
               </p>
-              <div className="flex flex-wrap gap-3">
-                <span className="bg-secondary text-foreground px-3 py-1.5 rounded-full text-sm">
+              <div className="flex flex-nowrap gap-2 sm:gap-3 overflow-x-auto scrollbar-hide">
+                <span className="bg-secondary text-foreground px-3 py-1.5 rounded-full text-sm whitespace-nowrap">
                   Barriga mais lisa
                 </span>
-                <span className="bg-secondary text-foreground px-3 py-1.5 rounded-full text-sm">
+                <span className="bg-secondary text-foreground px-3 py-1.5 rounded-full text-sm whitespace-nowrap">
                   Não enrola
                 </span>
-                <span className="bg-secondary text-foreground px-3 py-1.5 rounded-full text-sm">
+                <span className="bg-secondary text-foreground px-3 py-1.5 rounded-full text-sm whitespace-nowrap">
                   Usa o dia todo
                 </span>
               </div>
