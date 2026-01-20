@@ -7,36 +7,36 @@ import {
 
 const faqs = [
   {
-    question: "Funciona mesmo ou é exagero de propaganda?",
-    answer: "Funciona, mas não é mágica. O design da calcinha — o corte e o tecido — foi pensado pra levantar o bumbum e suavizar a barriga. É um efeito real, mas sutil. Você vai notar diferença no espelho e no caimento da roupa. Se não gostar do resultado, você tem 30 dias pra trocar ou devolver.",
+    question: "Funciona mesmo ou é propaganda exagerada?",
+    answer: "Funciona, mas não é milagre. O design da calcinha — corte estratégico + tecido de alta elasticidade — foi projetado pra erguer o bumbum e suavizar a barriga. É um efeito real e visível, mas sutil. Você vai notar diferença no espelho e no caimento da roupa. Se não gostar do resultado, você tem 30 dias pra devolver e receber o dinheiro de volta.",
   },
   {
-    question: "Por que o preço tá mais baixo que o normal?",
-    answer: "O kit com 3 calcinhas permite um preço melhor por unidade (menos de R$ 30 cada). É uma forma de você testar o produto pagando menos. Não tem pegadinha — o produto é o mesmo.",
+    question: "Por que tá tão barato? Tem alguma pegadinha?",
+    answer: "Não tem pegadinha. O kit com 3 calcinhas permite um preço melhor por unidade — cada uma sai por menos de R$ 30. É uma forma de você testar o produto pagando menos e ter opções de cores pro dia a dia. O produto é exatamente o mesmo que vendemos unitariamente.",
   },
   {
     question: "Quanto tempo demora pra chegar?",
-    answer: "Enviamos em até 24h após a confirmação do pagamento. O prazo de entrega varia de 5 a 12 dias úteis dependendo da região. Você recebe o código de rastreio por e-mail e WhatsApp pra acompanhar a entrega. Frete grátis pra todo o Brasil.",
+    answer: "Enviamos em até 24h após confirmação do pagamento (pedidos feitos até às 14h). O prazo de entrega varia de 5 a 12 dias úteis dependendo da sua região. Você recebe o código de rastreio por e-mail e WhatsApp pra acompanhar cada passo. Frete grátis pra todo o Brasil.",
   },
   {
     question: "E se o tamanho não servir?",
-    answer: "A gente tem uma tabela de medidas bem detalhada (P: 60-68cm, M: 68-76cm, G: 76-84cm, GG: 84-92cm, XG: 92-100cm de cintura). Dica: se você estiver entre dois tamanhos, peça o maior. E se mesmo assim não servir, a troca é por nossa conta — você só paga o frete de retorno.",
+    answer: "A gente tem uma tabela de medidas detalhada (P: 60-68cm, M: 68-76cm, G: 76-84cm, GG: 84-92cm, XG: 92-100cm de cintura). Dica: se você estiver entre dois tamanhos, peça o maior. E se mesmo assim não servir, a troca é por nossa conta — a gente envia o novo tamanho sem custo adicional.",
   },
   {
-    question: "Como funciona a garantia?",
-    answer: "Você tem 30 dias pra decidir se gostou. Se não gostar ou o tamanho não servir, entre em contato pelo WhatsApp e a gente resolve. Troca grátis ou devolução do dinheiro. Sem perguntas chatas.",
+    question: "Como funciona a garantia de 30 dias?",
+    answer: "Você tem 30 dias pra decidir se gostou. Se não gostar, se o tamanho não servir, ou se simplesmente mudar de ideia — entra em contato pelo WhatsApp e a gente resolve. Troca grátis ou devolução do dinheiro. Sem perguntas chatas, sem burocracia.",
   },
   {
-    question: "É seguro comprar nesse site?",
-    answer: "Sim. O site usa criptografia SSL (o cadeado no navegador), a mesma tecnologia de segurança de bancos. Aceitamos PIX, cartão de crédito (até 12x) e boleto. Somos uma empresa brasileira com CNPJ e emitimos nota fiscal em todos os pedidos.",
+    question: "É seguro comprar nesse site? Como sei que não é golpe?",
+    answer: "Entendemos a desconfiança — tem muito golpe por aí mesmo. Mas somos uma empresa brasileira real, com CNPJ ativo (você pode consultar), atendimento via WhatsApp, e emitimos nota fiscal em todos os pedidos. O site usa criptografia SSL (o cadeado no navegador), a mesma segurança de bancos. E se der qualquer problema, você tem 30 dias pra devolver e receber seu dinheiro de volta.",
   },
   {
-    question: "Como é o 'Pague 1 Leve 3'?",
-    answer: "É simples: você paga R$ 87,90 e recebe 3 calcinhas. Pode escolher uma cor só ou o kit misto (preto, bege e rosé). Cada calcinha sai por menos de R$ 30 — um bom custo-benefício pra testar o produto.",
+    question: "Como funciona o 'Pague 1 Leve 3'?",
+    answer: "É simples e direto: você paga R$ 87,90 e recebe 3 calcinhas. Pode escolher uma cor só (preto, bege ou rosé) ou o kit misto com as três cores. Cada calcinha sai por menos de R$ 30 — muito mais em conta do que cintas modeladoras que custam R$ 150+ e são desconfortáveis.",
   },
   {
     question: "Posso falar com alguém antes de comprar?",
-    answer: "Pode. A gente atende pelo WhatsApp pra tirar dúvidas sobre tamanho, cores, entrega ou qualquer outra coisa. O atendimento é de segunda a sexta, das 9h às 18h.",
+    answer: "Pode sim. A gente atende pelo WhatsApp pra tirar dúvidas sobre tamanho, cores, entrega ou qualquer outra coisa. Atendimento humanizado, de segunda a sexta, das 9h às 18h. É só clicar no ícone do WhatsApp ou mandar mensagem diretamente.",
   },
 ];
 
@@ -45,10 +45,10 @@ const FAQ = () => {
     <section className="py-12 bg-background">
       <div className="container mx-auto px-4 max-w-3xl">
         <h2 className="text-2xl lg:text-3xl font-bold text-center mb-3">
-          Dúvidas Frequentes
+          Perguntas que Você Quer Fazer
         </h2>
         <p className="text-center text-muted-foreground mb-8">
-          Respondemos as perguntas que você provavelmente quer fazer
+          Respondemos as dúvidas mais comuns — inclusive as sobre segurança
         </p>
 
         <Accordion type="single" collapsible className="space-y-3">

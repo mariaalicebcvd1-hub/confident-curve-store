@@ -16,11 +16,11 @@ const colors: { name: string; value: string; key: ColorKey }[] = [
 const sizes = ["P", "M", "G", "GG", "XG"];
 
 const benefits = [
-  "Levanta e valoriza o bumbum naturalmente",
-  "Suaviza a barriga sem apertar",
-  "Costuras finas que não marcam na roupa",
-  "Tecido respirável para usar o dia todo",
-  "Troca grátis se o tamanho não servir",
+  "Levanta o bumbum sem parecer artificial",
+  "Suaviza a barriga sem comprimir a respiração",
+  "Costura fina + tecido liso = não marca na roupa",
+  "Tecido que respira — dá pra usar o dia inteiro",
+  "Se não servir, troca grátis. A gente resolve.",
 ];
 
 interface ProductInfoProps {
@@ -59,11 +59,11 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
     <div className="space-y-5 px-1 sm:px-0">
       {/* Title & Rating */}
       <div className="text-center sm:text-left">
-        <p className="text-xs sm:text-sm text-primary font-semibold mb-1 uppercase tracking-wide">Kit com 3 Calcinhas</p>
+        <p className="text-xs sm:text-sm text-primary font-semibold mb-1 uppercase tracking-wide">Pague 1, Leve 3</p>
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground leading-tight">
-          Calcinha Modeladora que <span className="text-primary">Valoriza Seu Corpo</span>
+          Bumbum Empinado, Barriga Suave, <span className="text-primary">Sem Apertar</span>
         </h1>
-        <p className="text-sm text-muted-foreground mt-2">Confortável pra usar o dia inteiro. Levanta o bumbum e suaviza a barriga sem apertar.</p>
+        <p className="text-sm text-muted-foreground mt-2">Calcinha modeladora que você usa o dia todo e esquece que tá vestindo — mas o espelho lembra.</p>
         
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 mt-3">
           <div className="flex items-center gap-1 review-stars">
@@ -72,7 +72,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
             ))}
           </div>
           <span className="font-semibold text-sm sm:text-base">4.8</span>
-          <span className="text-muted-foreground text-sm">(2.341 avaliações verificadas)</span>
+          <span className="text-muted-foreground text-sm">(2.341 avaliações reais)</span>
         </div>
       </div>
 
@@ -193,8 +193,8 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
 
       {/* Guarantee Badge */}
       <div className="bg-success/5 border border-success/20 rounded-xl p-4">
-        <p className="text-sm font-semibold text-success text-center">Garantia de 30 dias para troca ou devolução</p>
-        <p className="text-xs text-muted-foreground mt-1 text-center">Se não gostar ou o tamanho não servir, a gente resolve.</p>
+        <p className="text-sm font-semibold text-success text-center">30 dias pra testar sem risco</p>
+        <p className="text-xs text-muted-foreground mt-1 text-center">Não gostou? Tamanho errado? A gente troca ou devolve o dinheiro. Sem burocracia.</p>
       </div>
 
       {/* Add to Cart Button */}
@@ -205,9 +205,9 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
           className="btn-compra w-full text-sm sm:text-base inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-success text-white hover:bg-success/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide h-12 sm:h-14 px-4 sm:px-8"
         >
           <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
-          COMPRAR MEU KIT AGORA
+          QUERO MEU KIT COM 3
         </button>
-        <p className="text-xs text-center text-muted-foreground">Pagamento seguro • Frete grátis • Entrega com rastreio</p>
+        <p className="text-xs text-center text-muted-foreground">Pagamento 100% seguro • Frete grátis pra todo Brasil • Rastreio por WhatsApp</p>
       </div>
 
       {/* Trust Badges */}
