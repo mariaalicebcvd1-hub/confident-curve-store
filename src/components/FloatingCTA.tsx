@@ -63,8 +63,8 @@ const FloatingCTA = ({
   const handleClick = (e: React.MouseEvent) => {
     if (isSelectionMissing) {
       e.preventDefault();
-      // Em vez de forçar checkout, guia a pessoa pra selecionar com segurança.
-      document.getElementById("product-options")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Padrão e-commerce: mantém o CTA, mas abre o seletor imediatamente.
+      setSizeOpen(true);
       return;
     }
 
@@ -184,11 +184,6 @@ const FloatingCTA = ({
                 </ToggleGroupItem>
               ))}
             </ToggleGroup>
-            {isSelectionMissing && (
-              <p className="mt-1 text-[11px] text-muted-foreground">
-                Falta escolher o tamanho pra finalizar com segurança.
-              </p>
-            )}
           </div>
 
           <button
@@ -197,7 +192,7 @@ const FloatingCTA = ({
             className="btn-compra flex-1 sm:flex-initial text-sm sm:text-base h-10 sm:h-11 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-success text-white hover:bg-success/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide px-4"
           >
             <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-            <span className="truncate">{isSelectionMissing ? "ESCOLHER TAMANHO" : "COMPRAR AGORA"}</span>
+            <span className="truncate">FINALIZAR COMPRA</span>
           </button>
 
           <button
