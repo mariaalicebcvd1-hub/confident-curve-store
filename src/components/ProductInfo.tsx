@@ -59,7 +59,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
     <div className="space-y-5 px-1 sm:px-0">
       {/* Title & Rating */}
       <div className="text-center sm:text-left">
-        <p className="text-xs sm:text-sm text-primary font-semibold mb-1 uppercase tracking-wide">SÓ NO PIX: kit com 3 por R$ 69,90</p>
+        <p className="text-xs sm:text-sm text-primary font-semibold mb-1 uppercase tracking-wide">Preço especial no PIX (desconto do PIX)</p>
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground leading-tight">
           Bumbum Empinado, Barriga Suave, <span className="text-primary">Sem Desconforto</span>
         </h1>
@@ -81,7 +81,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
         <div className="flex flex-wrap items-baseline justify-center sm:justify-start gap-2 sm:gap-3">
           <span className="price-old text-base sm:text-lg">R$ 179,90</span>
           <span className="price-new text-2xl sm:text-3xl">R$ 69,90</span>
-          <span className="badge-discount text-xs">SÓ NO PIX • Kit com 3</span>
+          <span className="badge-discount text-xs">De R$ 179,90 por R$ 69,90 • PIX</span>
         </div>
 
         <p className="text-xs text-muted-foreground text-center sm:text-left">

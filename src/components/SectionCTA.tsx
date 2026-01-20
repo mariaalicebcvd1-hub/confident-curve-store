@@ -11,7 +11,7 @@ interface SectionCTAProps {
 }
 
 const SectionCTA = ({ 
-  title = "SÓ NO PIX: R$ 69,90 (kit com 3)",
+  title = "De R$ 179,90 por R$ 69,90 no PIX (kit com 3)",
   subtitle = "No cartão: R$ 77,70 ou em até 12x de R$ 6,47 sem juros.",
   priceHighlight,
   buttonText = "ESCOLHER MINHA COR E TAMANHO",
@@ -49,8 +49,8 @@ const SectionCTA = ({
       <div className="container mx-auto px-4">
         <div className="text-center max-w-xl mx-auto bg-card rounded-2xl p-8 border border-border shadow-sm">
           <div className="inline-flex items-center justify-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-3">
-            PIX vale mais a pena
-            <span className="text-foreground/80 font-semibold normal-case">(economiza R$ 7,80)</span>
+            Preço especial no PIX
+            <span className="text-foreground/80 font-semibold normal-case">(desconto do PIX)</span>
           </div>
 
           <h3 className="text-xl lg:text-2xl font-black text-foreground mb-2">
