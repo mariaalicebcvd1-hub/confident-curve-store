@@ -77,30 +77,36 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       </div>
 
       {/* Price */}
-      <div className="bg-gradient-hero rounded-xl p-4 sm:p-5 space-y-3 border border-border">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-          <p className="text-lg sm:text-xl font-black text-foreground leading-tight text-center sm:text-left">
-            De <span className="line-through text-muted-foreground">R$ 179,90</span> → Agora:{" "}
-            <span className="text-success">R$ 69,90</span>
-          </p>
-
-          <div className="inline-flex items-center justify-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide whitespace-nowrap self-center sm:self-auto">
-            NO PIX <span className="text-foreground/80 font-semibold normal-case">• R$ 23 cada</span>
-          </div>
+      <div className="bg-gradient-hero rounded-2xl p-4 sm:p-5 space-y-3 border border-border shadow-sm">
+        {/* Top row */}
+        <div className="flex items-center justify-between gap-3">
+          <span className="inline-flex items-center rounded-md border border-primary/20 bg-background/60 backdrop-blur px-2 py-1 text-[11px] font-bold uppercase tracking-wide text-primary">
+            Pix à vista
+          </span>
+          <span className="text-[11px] font-semibold text-muted-foreground whitespace-nowrap">
+            no Pix <span className="text-foreground font-bold">• R$ 23 cada</span>
+          </span>
         </div>
 
-          <p className="text-xs text-muted-foreground text-center sm:text-left">
-            Cada peça sai por <strong className="text-foreground">menos de R$ 24</strong>, com conforto real,
-            troca grátis e envio com rastreio.
-          </p>
+        {/* Main price line */}
+        <div className="flex flex-wrap items-baseline justify-center sm:justify-start gap-x-2 gap-y-1">
+          <span className="price-old">R$ 179,90</span>
+          <span className="text-muted-foreground font-black">→</span>
+          <span className="price-new">R$ 69,90</span>
+          <span className="text-sm font-bold text-foreground">(kit com 3)</span>
+        </div>
 
-          <div className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm">
-            <CreditCard className="w-4 h-4 text-muted-foreground" />
-            <span className="text-muted-foreground">
-              💳 Ou <strong className="text-foreground">R$ 77,70</strong> no cartão (12x de{" "}
-              <strong className="text-foreground">R$ 6,47</strong> sem juros)
-            </span>
-          </div>
+        <p className="text-xs text-muted-foreground text-center sm:text-left">
+          Modela sem apertar, empina com conforto e não marca na roupa.
+        </p>
+
+        <div className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm">
+          <CreditCard className="w-4 h-4 text-muted-foreground" />
+          <span className="text-muted-foreground">
+            💳 Ou <strong className="text-foreground">R$ 77,70</strong> no cartão (12x de{" "}
+            <strong className="text-foreground">R$ 6,47</strong> sem juros)
+          </span>
+        </div>
       </div>
 
       {/* Color Selection */}
