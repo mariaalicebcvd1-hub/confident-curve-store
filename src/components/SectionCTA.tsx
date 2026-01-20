@@ -90,22 +90,26 @@ const SectionCTA = ({
   return (
     <div className="py-10 bg-gradient-to-b from-transparent via-secondary/30 to-transparent">
       <div className="container mx-auto px-4">
-        <div className="text-center max-w-xl mx-auto bg-card rounded-2xl p-8 border border-border shadow-sm">
+        <div className="text-center max-w-xl mx-auto bg-gradient-hero rounded-2xl p-6 sm:p-8 border border-border shadow-elegant">
           <div className="inline-flex items-center justify-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-3">
             ⚡ Oferta Especial de Lançamento
           </div>
 
-          <h3 className="text-xl lg:text-2xl font-black text-foreground mb-2">
+          <h3 className="text-xl lg:text-2xl font-black text-foreground mb-2 leading-tight">
             {emphasizeOfferText(title)}
           </h3>
 
-          <p className="text-muted-foreground mb-2">{emphasizeOfferText(subtitle)}</p>
+          <p className="text-muted-foreground mb-3">{emphasizeOfferText(subtitle)}</p>
 
-          <p className="text-sm text-foreground font-semibold mb-4">
-            De <span className="line-through">R$ 179,90</span> → Agora:{" "}
-            <span className="font-black text-success">R$ 69,90</span> no Pix{" "}
-            <span className="text-muted-foreground">• R$ 23 cada</span>
-          </p>
+          <div className="rounded-xl border border-border bg-background/60 backdrop-blur px-4 py-3 mb-4">
+            <p className="text-sm text-muted-foreground">
+              De <span className="line-through">R$ 179,90</span>
+            </p>
+            <p className="text-lg sm:text-xl font-black text-foreground leading-tight">
+              Agora: <span className="text-success">R$ 69,90</span> no Pix{" "}
+              <span className="text-sm font-extrabold text-muted-foreground">• R$ 23 cada</span>
+            </p>
+          </div>
 
           {priceHighlight && (
             <p className="text-sm text-success font-semibold mb-4">{emphasizeOfferText(priceHighlight)}</p>
@@ -129,7 +133,9 @@ const SectionCTA = ({
             </span>
           </button>
 
-          <p className="text-xs text-muted-foreground mt-3">Frete grátis • Troca garantida • Loja com CNPJ</p>
+          <p className="text-xs font-semibold text-foreground/80 mt-3">
+            Frete grátis • Troca garantida • Loja com CNPJ
+          </p>
         </div>
       </div>
     </div>
