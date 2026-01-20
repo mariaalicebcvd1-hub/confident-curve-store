@@ -1,38 +1,6 @@
 import { ShoppingBag } from "lucide-react";
 import { trackEventDirect } from "@/hooks/useTracking";
 
-function emphasizeOfferText(text: string) {
-  // Destaques pensados para tráfego frio: preço/valor e pontos de confiança.
-  const tokens = [
-    "R$ 69,90",
-    "R$ 77,70",
-    "R$ 6,47",
-    "R$ 23",
-    "30 dias",
-    "Frete grátis",
-    "troca grátis",
-    "Compra segura",
-    "Loja com CNPJ",
-    "rastreio",
-  ];
-
-  const escaped = tokens
-    .map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
-    .sort((a, b) => b.length - a.length);
-  const re = new RegExp(`(${escaped.join("|")})`, "gi");
-
-  const parts = text.split(re);
-  return parts.map((part, i) => {
-    const isMatch = tokens.some((t) => t.toLowerCase() === part.toLowerCase());
-    if (!isMatch) return <span key={i}>{part}</span>;
-    return (
-      <strong key={i} className="text-foreground font-black">
-        {part}
-      </strong>
-    );
-  });
-}
-
 interface SectionCTAProps {
   title?: string;
   subtitle?: string;
@@ -47,7 +15,7 @@ const SectionCTA = ({
   title = "Kit com 3 Calcinhas Modeladoras por R$ 69,90 no Pix",
   subtitle = "Modela sem apertar, empina com conforto e não marca na roupa",
   priceHighlight,
-  buttonText = "QUERO A MINHA AGORA",
+  buttonText = "ESCOLHER MINHA COR E TAMANHO",
   variant = "default",
   trackingLabel = "section_cta",
   onOpenOptionsDrawer,
@@ -76,12 +44,7 @@ const SectionCTA = ({
           className="inline-flex items-center justify-center gap-2 bg-success hover:bg-success/90 text-white font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 uppercase tracking-wide"
         >
           <ShoppingBag className="w-5 h-5" />
-          <span className="flex flex-col items-center leading-tight text-center">
-            <span>{buttonText}</span>
-            <span className="text-[11px] font-semibold opacity-90 normal-case tracking-normal">
-              Escolha sua cor e tamanho na próxima etapa
-            </span>
-          </span>
+          {buttonText}
         </button>
         <p className="text-xs text-muted-foreground mt-3">Frete grátis • Troca garantida • Pagamento seguro</p>
       </div>
@@ -96,10 +59,10 @@ const SectionCTA = ({
           </div>
 
           <h3 className="text-xl lg:text-2xl font-black text-foreground mb-2">
-            {emphasizeOfferText(title)}
+            {title}
           </h3>
 
-          <p className="text-muted-foreground mb-2">{emphasizeOfferText(subtitle)}</p>
+          <p className="text-muted-foreground mb-2">{subtitle}</p>
 
           <p className="text-sm text-foreground font-semibold mb-4">
             De <span className="line-through">R$ 179,90</span> → Agora:{" "}
@@ -108,7 +71,7 @@ const SectionCTA = ({
           </p>
 
           {priceHighlight && (
-            <p className="text-sm text-success font-semibold mb-4">{emphasizeOfferText(priceHighlight)}</p>
+            <p className="text-sm text-success font-semibold mb-4">{priceHighlight}</p>
           )}
 
           <p className="text-sm text-muted-foreground mb-5">
@@ -121,12 +84,7 @@ const SectionCTA = ({
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-success hover:bg-success/90 text-white font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 uppercase tracking-wide"
           >
             <ShoppingBag className="w-5 h-5" />
-            <span className="flex flex-col items-center leading-tight text-center">
-              <span>{buttonText}</span>
-              <span className="text-[11px] font-semibold opacity-90 normal-case tracking-normal">
-                Escolha sua cor e tamanho na próxima etapa
-              </span>
-            </span>
+            {buttonText}
           </button>
 
           <p className="text-xs text-muted-foreground mt-3">Frete grátis • Troca garantida • Loja com CNPJ</p>

@@ -12,7 +12,7 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import tabelaMedidas from "@/assets/tabela-medidas.avif";
-import { Ruler, ShieldCheck, ShoppingBag } from "lucide-react";
+import { Ruler, ShoppingBag } from "lucide-react";
 
 const sizeOptions = [
   { value: "P", label: "P" },
@@ -117,7 +117,7 @@ export function OptionsDrawer({
                   key={c.key}
                   value={c.key}
                   aria-label={`Cor ${c.label}`}
-                  className="h-11 px-4 rounded-full border border-border bg-background shadow-sm text-foreground hover:text-foreground data-[state=on]:border-primary data-[state=on]:bg-primary/10 data-[state=on]:text-foreground"
+                  className="h-11 px-4 rounded-full border border-border bg-background shadow-sm data-[state=on]:border-primary data-[state=on]:bg-primary/10"
                 >
                   <span
                     className="h-4 w-4 rounded-full border border-border ring-1 ring-border"
@@ -160,7 +160,7 @@ export function OptionsDrawer({
                   key={s.value}
                   value={s.value}
                   aria-label={`Tamanho ${s.label}`}
-                  className="h-11 w-14 rounded-xl border border-border bg-background shadow-sm text-foreground hover:text-foreground text-sm font-extrabold data-[state=on]:border-primary data-[state=on]:bg-primary/10 data-[state=on]:text-foreground"
+                  className="h-11 w-14 rounded-xl border border-border bg-background shadow-sm text-sm font-extrabold data-[state=on]:border-primary data-[state=on]:bg-primary/10"
                 >
                   {s.label}
                 </ToggleGroupItem>
@@ -204,11 +204,6 @@ export function OptionsDrawer({
             <ShoppingBag className="w-5 h-5" />
             Levar 3 por R$ 69,90
           </button>
-
-          <div className="flex items-center justify-center gap-1.5 text-[11px] font-semibold text-muted-foreground">
-            <ShieldCheck className="w-4 h-4 text-primary" />
-            <span>Frete e troca grátis • Compra segura</span>
-          </div>
 
           <DrawerClose asChild>
             <button

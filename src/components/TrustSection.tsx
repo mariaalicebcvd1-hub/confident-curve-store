@@ -44,8 +44,7 @@ const TrustSection = () => {
             Compra Segura, Sem Pegadinha
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Sabemos que tem muito golpe por aí. Por isso a gente faz questão de ser transparente: <strong className="text-foreground">CNPJ ativo</strong>,
-            <strong className="text-foreground"> nota fiscal</strong>, <strong className="text-foreground">rastreio real</strong> e <strong className="text-foreground">30 dias</strong> pra você testar.
+            Sabemos que tem muito golpe por aí. Por isso a gente faz questão de ser transparente: CNPJ ativo, nota fiscal, rastreio real e 30 dias pra você testar.
           </p>
         </div>
 
