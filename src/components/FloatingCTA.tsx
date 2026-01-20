@@ -48,7 +48,7 @@ const FloatingCTA = () => {
 
     trackInitiateCheckout({
       content_name: 'Calcinha Modeladora - Kit 3 unidades',
-      value: 87.90,
+      value: 69.90,
       num_items: 3,
     });
 
@@ -77,7 +77,7 @@ const FloatingCTA = () => {
           <p className="font-bold text-foreground text-sm">Kit com 3 Calcinhas</p>
           <p className="text-xs text-muted-foreground">
             <span className="line-through">R$ 179,90</span>{" "}
-            <span className="text-primary font-bold">por R$ 87,90</span>
+            <span className="text-primary font-bold">SÓ NO PIX: R$ 69,90</span>
           </p>
         </div>
 

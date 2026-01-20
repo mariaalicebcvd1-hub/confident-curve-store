@@ -76,7 +76,9 @@ const SectionCTA = ({
             <ShoppingBag className="w-5 h-5" />
             {buttonText}
           </button>
-          <p className="text-xs text-muted-foreground mt-3">Frete grátis • Troca garantida • Loja com CNPJ</p>
+          {!priceHighlight && (
+            <p className="text-xs text-muted-foreground mt-3">Frete grátis • Troca garantida • Loja com CNPJ</p>
+          )}
         </div>
       </div>
     </div>
