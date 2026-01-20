@@ -75,6 +75,13 @@ export function SizeHelperQuiz({
     setOpen(false);
   };
 
+  const applyOrSuggest = form.handleSubmit((values) => {
+    const size = recommendSize(values);
+    setResult(size);
+    onSelectSize(size);
+    setOpen(false);
+  });
+
   return (
     <Dialog open={open} onOpenChange={(v) => {
       setOpen(v);
@@ -135,7 +142,7 @@ export function SizeHelperQuiz({
 
             {result && (
               <div className="rounded-xl border border-border bg-secondary/40 p-4">
-                <p className="text-sm text-muted-foreground">Tamanho mais provável:</p>
+                <p className="text-sm text-muted-foreground">Sugestão certeira pro seu conforto:</p>
                 <p className="text-2xl font-black text-foreground leading-tight">
                   {result}
                 </p>
@@ -149,8 +156,8 @@ export function SizeHelperQuiz({
               <Button type="submit" variant="secondary" className="w-full sm:w-auto">
                 Ver sugestão
               </Button>
-              <Button type="button" onClick={apply} disabled={!result} className="w-full sm:w-auto">
-                Usar esse tamanho
+              <Button type="button" onClick={() => (result ? apply() : applyOrSuggest())} className="w-full sm:w-auto">
+                {result ? "Usar esse tamanho" : "Usar sugestão"}
               </Button>
             </DialogFooter>
           </form>
