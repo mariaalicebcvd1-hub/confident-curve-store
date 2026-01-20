@@ -79,14 +79,14 @@ const ProductDescription = ({
                 <strong className="text-foreground"> Não é cinta desconfortável</strong> — você consegue sentar, trabalhar e fazer suas atividades normalmente. 
                 E diferente de cintas caras, essa não enrola, não desce e não marca.
               </p>
-              <div className="flex flex-wrap gap-3">
-                <span className="bg-secondary text-foreground px-3 py-1.5 rounded-full text-sm">
+              <div className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-3">
+                <span className="bg-secondary text-foreground px-2.5 sm:px-3 py-1.5 rounded-full text-xs sm:text-sm whitespace-nowrap">
                   Barriga mais lisa
                 </span>
-                <span className="bg-secondary text-foreground px-3 py-1.5 rounded-full text-sm">
+                <span className="bg-secondary text-foreground px-2.5 sm:px-3 py-1.5 rounded-full text-xs sm:text-sm whitespace-nowrap">
                   Não enrola
                 </span>
-                <span className="bg-secondary text-foreground px-3 py-1.5 rounded-full text-sm">
+                <span className="bg-secondary text-foreground px-2.5 sm:px-3 py-1.5 rounded-full text-xs sm:text-sm whitespace-nowrap">
                   Usa o dia todo
                 </span>
               </div>
@@ -185,7 +185,12 @@ const ProductDescription = ({
             }}
             className="btn-compra inline-flex items-center gap-2 bg-success text-white px-6 py-3 rounded-lg font-bold hover:bg-success/90 transition-colors"
           >
-            Escolher Minha Cor e Tamanho
+            <span className="flex flex-col items-center leading-tight text-center">
+              <span className="uppercase">QUERO A MINHA AGORA</span>
+              <span className="text-[11px] font-semibold opacity-90 normal-case tracking-normal">
+                Escolha sua cor e tamanho na próxima etapa
+              </span>
+            </span>
           </button>
           <p className="text-xs text-muted-foreground mt-3">Frete grátis • Loja com CNPJ • Rastreio por WhatsApp</p>
         </div>

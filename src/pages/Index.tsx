@@ -20,6 +20,8 @@ import { buildCheckoutUrl } from "@/lib/checkout";
 const Index = () => {
   useTracking();
   const scrolledTrackedRef = useRef(false);
+  const utmifyAddToCartFiredRef = useRef(false);
+  const utmifyAddToCartBtnRef = useRef<HTMLButtonElement | null>(null);
 
   const [selectedColor, setSelectedColor] = useState<ColorKey>("misto");
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -97,9 +99,43 @@ const Index = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // UTMify AddToCart: dispara quando a pessoa completa cor+tamanho (1x por sessão da página)
+  useEffect(() => {
+    const hasSize = selectedSizeIndex >= 0;
+    const hasColor = !!selectedColor;
+    if (!hasSize || !hasColor) return;
+    if (utmifyAddToCartFiredRef.current) return;
+
+    // Espera um tick pra garantir que scripts e DOM estejam prontos.
+    const t = window.setTimeout(() => {
+      const btn = utmifyAddToCartBtnRef.current;
+      if (!btn) return;
+
+      // Usa click real (MouseEvent) para maximizar compatibilidade com detectores.
+      btn.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true, view: window }));
+      utmifyAddToCartFiredRef.current = true;
+    }, 50);
+
+    return () => window.clearTimeout(t);
+  }, [selectedColor, selectedSizeIndex]);
+
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
+      {/* Botão invisível somente para disparar regra AddToCart da UTMify por texto */}
+      <button
+        ref={utmifyAddToCartBtnRef}
+        type="button"
+        className="sr-only"
+        aria-hidden="true"
+        tabIndex={-1}
+        onClick={() => {
+          // Intencionalmente vazio: o tracker externo captura o clique pelo texto do botão.
+        }}
+      >
+        ADICIONAR AO CARRINHO
+      </button>
+
       {/* Top Bar */}
       <TopBar />
 
@@ -149,7 +185,7 @@ const Index = () => {
       <SectionCTA 
         title="Teste sem risco por 30 dias"
         subtitle="De R$ 179,90 por R$ 69,90 no PIX (kit com 3). No cartão: R$ 77,70 ou 12x de R$ 6,47 sem juros."
-        buttonText="ESCOLHER COR E TAMANHO"
+        buttonText="QUERO A MINHA AGORA"
         trackingLabel="cta_after_trust"
         onOpenOptionsDrawer={() => smartCTA("cta_after_trust")}
       />
@@ -162,7 +198,7 @@ const Index = () => {
         title="De R$ 179,90 por R$ 69,90 no PIX (kit com 3)"
         subtitle="No cartão: R$ 77,70 ou em até 12x de R$ 6,47 sem juros. Compra segura e você pode testar por 30 dias."
         priceHighlight="Frete grátis + rastreio por WhatsApp"
-        buttonText="ESCOLHER MINHA COR E TAMANHO"
+        buttonText="QUERO A MINHA AGORA"
         trackingLabel="cta_after_faq"
         onOpenOptionsDrawer={() => smartCTA("cta_after_faq")}
       />

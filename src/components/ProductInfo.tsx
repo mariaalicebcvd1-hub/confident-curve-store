@@ -89,7 +89,7 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
           <span className="text-primary">Sem marcar — sem sufocar.</span>
         </h1>
         <p className="text-sm text-muted-foreground mt-2">
-          Modelagem de verdade (corte + tecido): você veste, se olha no espelho e já sente a diferença.
+          <strong className="text-foreground">Modelagem de verdade</strong> (corte + tecido): você veste, se olha no espelho e já sente a diferença.
         </p>
         
         <div className="mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-start gap-2">
@@ -126,7 +126,7 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
             <span className="text-base sm:text-lg font-extrabold text-foreground"> no Pix</span>
           </p>
           <p className="text-xs sm:text-sm text-muted-foreground font-semibold">
-            Sem “história” no preço: é custo de fábrica + envio + suporte. Simples.
+            Sem “história” no preço: é <strong className="text-foreground">custo de fábrica</strong> + envio + suporte. Simples.
           </p>
 
           <div className="pt-1">
@@ -166,6 +166,10 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
             <strong className="text-foreground">R$ 6,47</strong> sem juros)
           </span>
         </div>
+
+        <p className="text-xs font-semibold text-foreground/80 text-center sm:text-left">
+          Frete grátis • Loja com CNPJ • Rastreio por WhatsApp
+        </p>
       </div>
 
       {/* Options (make it impossible to miss) */}
@@ -203,7 +207,7 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
                 key={color.key}
                 value={color.key}
                 aria-label={`Cor ${color.name}`}
-                className="h-11 px-4 rounded-full border border-border bg-background shadow-sm hover:bg-secondary data-[state=on]:border-primary data-[state=on]:bg-primary/10"
+                  className="h-11 px-4 rounded-full border border-border bg-background shadow-sm text-foreground hover:bg-secondary hover:text-foreground data-[state=on]:border-primary data-[state=on]:bg-primary/10 data-[state=on]:text-foreground"
               >
                 <span
                   className="h-4 w-4 rounded-full border border-border ring-1 ring-border"
@@ -248,7 +252,7 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
               key={size}
               value={size}
               aria-label={`Tamanho ${size}`}
-              className="h-11 w-14 rounded-xl border border-border bg-background shadow-sm hover:bg-secondary text-sm font-extrabold data-[state=on]:border-primary data-[state=on]:bg-primary/10"
+              className="h-11 w-14 rounded-xl border border-border bg-background shadow-sm text-foreground hover:bg-secondary hover:text-foreground text-sm font-extrabold data-[state=on]:border-primary data-[state=on]:bg-primary/10 data-[state=on]:text-foreground"
             >
               {size}
             </ToggleGroupItem>
@@ -329,7 +333,7 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
           className="btn-compra w-full text-sm sm:text-base inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-success text-white hover:bg-success/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide h-12 sm:h-14 px-4 sm:px-8"
         >
           <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
-          LEVAR 3 POR R$ 69,90 AGORA
+            LEVAR 3 POR <span className="font-black">R$ 69,90</span> AGORA
         </button>
       </div>
 
