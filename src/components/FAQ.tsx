@@ -7,32 +7,36 @@ import {
 
 const faqs = [
   {
-    question: "🤔 Será que funciona mesmo ou é só marketing?",
-    answer: "Entendemos sua dúvida! Mais de 47.000 mulheres já compraram e 96% ficaram satisfeitas (veja os depoimentos acima!). O segredo está na tecnologia E-SLEEP com compressão estratégica que levanta o bumbum e esconde a pochete instantaneamente. Se não funcionar pra você, devolvemos 100% do seu dinheiro em até 30 dias. Zero risco!",
+    question: "Funciona mesmo ou é exagero de propaganda?",
+    answer: "Funciona, mas não é mágica. O design da calcinha — o corte e o tecido — foi pensado pra levantar o bumbum e suavizar a barriga. É um efeito real, mas sutil. Você vai notar diferença no espelho e no caimento da roupa. Se não gostar do resultado, você tem 30 dias pra trocar ou devolver.",
   },
   {
-    question: "💸 Por que está tão barato? É produto de qualidade?",
-    answer: "Ótima pergunta! Normalmente vendemos a R$ 289,99, mas estamos em promoção de queima de estoque. O produto é EXATAMENTE o mesmo - tecido premium antibacteriano, costuras invisíveis e acabamento impecável. Aproveitamos para conquistar novas clientes que voltam a comprar pelo preço cheio. É sua chance de testar com 70% OFF!",
+    question: "Por que o preço tá mais baixo que o normal?",
+    answer: "O kit com 3 calcinhas permite um preço melhor por unidade (menos de R$ 30 cada). É uma forma de você testar o produto pagando menos. Não tem pegadinha — o produto é o mesmo.",
   },
   {
-    question: "📦 Quanto tempo demora pra chegar?",
-    answer: "Enviamos em até 24h após a confirmação do pagamento! Prazo médio: 5-12 dias úteis dependendo da região. Você recebe código de rastreio por e-mail e WhatsApp para acompanhar cada etapa. E o FRETE É GRÁTIS para todo o Brasil!",
+    question: "Quanto tempo demora pra chegar?",
+    answer: "Enviamos em até 24h após a confirmação do pagamento. O prazo de entrega varia de 5 a 12 dias úteis dependendo da região. Você recebe o código de rastreio por e-mail e WhatsApp pra acompanhar a entrega. Frete grátis pra todo o Brasil.",
   },
   {
-    question: "👗 E se o tamanho não servir?",
-    answer: "Sem stress! Temos tabela de medidas precisa: P (cintura 60-68cm), M (68-76cm), G (76-84cm), GG (84-92cm), XG (92-100cm). Dica: se estiver entre dois tamanhos, escolha o maior. E se mesmo assim não servir, trocamos sem custo adicional!",
+    question: "E se o tamanho não servir?",
+    answer: "A gente tem uma tabela de medidas bem detalhada (P: 60-68cm, M: 68-76cm, G: 76-84cm, GG: 84-92cm, XG: 92-100cm de cintura). Dica: se você estiver entre dois tamanhos, peça o maior. E se mesmo assim não servir, a troca é por nossa conta — você só paga o frete de retorno.",
   },
   {
-    question: "🔒 É seguro comprar aqui?",
-    answer: "100% seguro! Usamos a mesma tecnologia de segurança dos grandes bancos. Seus dados são criptografados e NUNCA compartilhados. Aceitamos PIX, cartão de crédito (até 12x) e boleto. Mais de 47.000 pedidos entregues com sucesso!",
+    question: "Como funciona a garantia?",
+    answer: "Você tem 30 dias pra decidir se gostou. Se não gostar ou o tamanho não servir, entre em contato pelo WhatsApp e a gente resolve. Troca grátis ou devolução do dinheiro. Sem perguntas chatas.",
   },
   {
-    question: "😰 E se eu não gostar do produto?",
-    answer: "Oferecemos GARANTIA INCONDICIONAL de 30 dias! Se não amar sua calcinha modeladora, devolvemos 100% do valor. Sem perguntas, sem burocracia. Basta entrar em contato pelo WhatsApp que resolvemos tudo rapidinho. Seu dinheiro de volta ou troca grátis!",
+    question: "É seguro comprar nesse site?",
+    answer: "Sim. O site usa criptografia SSL (o cadeado no navegador), a mesma tecnologia de segurança de bancos. Aceitamos PIX, cartão de crédito (até 12x) e boleto. Somos uma empresa brasileira com CNPJ e emitimos nota fiscal em todos os pedidos.",
   },
   {
-    question: "🎁 Como funciona o 'Pague 1 Leve 3'?",
-    answer: "É simples: você paga apenas R$ 87,90 (com 70% OFF) e recebe 3 calcinhas modeladoras! Pode escolher cores iguais ou o Kit Misto com Preto + Rose + Bege. É o melhor custo-benefício do mercado - cada calcinha sai por menos de R$ 29!",
+    question: "Como é o 'Pague 1 Leve 3'?",
+    answer: "É simples: você paga R$ 87,90 e recebe 3 calcinhas. Pode escolher uma cor só ou o kit misto (preto, bege e rosé). Cada calcinha sai por menos de R$ 30 — um bom custo-benefício pra testar o produto.",
+  },
+  {
+    question: "Posso falar com alguém antes de comprar?",
+    answer: "Pode. A gente atende pelo WhatsApp pra tirar dúvidas sobre tamanho, cores, entrega ou qualquer outra coisa. O atendimento é de segunda a sexta, das 9h às 18h.",
   },
 ];
 
@@ -40,21 +44,24 @@ const FAQ = () => {
   return (
     <section className="py-12 bg-background">
       <div className="container mx-auto px-4 max-w-3xl">
-        <h2 className="text-2xl lg:text-3xl font-bold text-center mb-8">
-          Perguntas Frequentes
+        <h2 className="text-2xl lg:text-3xl font-bold text-center mb-3">
+          Dúvidas Frequentes
         </h2>
+        <p className="text-center text-muted-foreground mb-8">
+          Respondemos as perguntas que você provavelmente quer fazer
+        </p>
 
         <Accordion type="single" collapsible className="space-y-3">
           {faqs.map((faq, index) => (
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className="bg-card rounded-xl border border-border px-5 shadow-soft"
+              className="bg-card rounded-xl border border-border px-5"
             >
               <AccordionTrigger className="text-left font-semibold py-4 hover:no-underline">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground pb-4">
+              <AccordionContent className="text-muted-foreground pb-4 leading-relaxed">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>

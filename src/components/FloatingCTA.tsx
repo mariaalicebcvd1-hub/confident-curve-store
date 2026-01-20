@@ -25,12 +25,9 @@ const FloatingCTA = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Find the ProductDescription section by its ID
       const descriptionSection = document.getElementById('product-description');
-
       if (descriptionSection && !isDismissed) {
         const rect = descriptionSection.getBoundingClientRect();
-        // Show when ProductDescription section enters the viewport
         setIsVisible(rect.top <= window.innerHeight * 0.7);
       } else {
         setIsVisible(false);
@@ -38,7 +35,6 @@ const FloatingCTA = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    // Initial check
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isDismissed]);
@@ -50,9 +46,8 @@ const FloatingCTA = () => {
       return;
     }
 
-    // Dispara evento do Facebook Pixel
     trackInitiateCheckout({
-      content_name: 'Calcinha Empina Bumbum - Kit 3 unidades',
+      content_name: 'Calcinha Modeladora - Kit 3 unidades',
       value: 87.90,
       num_items: 3,
     });
@@ -61,12 +56,10 @@ const FloatingCTA = () => {
       size: selectedSize,
     });
 
-    // Monta URL com parâmetro de tamanho e UTMs
     const checkoutUrl = buildCheckoutUrl({
       tamanho: selectedSize,
     });
 
-    // Abre o checkout em nova aba
     window.open(checkoutUrl, "_blank");
   };
 
@@ -78,18 +71,17 @@ const FloatingCTA = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border shadow-xl p-3 sm:p-4 animate-slide-up">
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border shadow-xl p-3 sm:p-4">
       <div className="container mx-auto flex items-center justify-between gap-2 sm:gap-3 max-w-full px-2 sm:px-4">
         <div className="hidden sm:block flex-shrink-0">
-          <p className="font-bold text-foreground text-sm">🔥 Última chance - 70% OFF</p>
+          <p className="font-bold text-foreground text-sm">Kit com 3 Calcinhas</p>
           <p className="text-xs text-muted-foreground">
-            <span className="line-through">R$ 289,99</span>{" "}
-            <span className="text-primary font-bold">3 calcinhas por R$ 87,90</span>
+            <span className="line-through">R$ 179,90</span>{" "}
+            <span className="text-primary font-bold">por R$ 87,90</span>
           </p>
         </div>
 
         <div className="flex items-center gap-2 flex-1 sm:flex-initial min-w-0">
-          {/* Size Selector */}
           <Popover open={sizeOpen} onOpenChange={setSizeOpen}>
             <PopoverTrigger asChild>
               <button
@@ -140,10 +132,10 @@ const FloatingCTA = () => {
           <button
             type="button"
             onClick={handleClick}
-            className="btn-compra flex-1 sm:flex-initial text-sm sm:text-base h-10 sm:h-11 animate-pulse inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-success text-white hover:bg-success/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide px-4"
+            className="btn-compra flex-1 sm:flex-initial text-sm sm:text-base h-10 sm:h-11 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-success text-white hover:bg-success/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide px-4"
           >
             <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-            <span className="truncate">GARANTIR MINHA OFERTA</span>
+            <span className="truncate">COMPRAR AGORA</span>
           </button>
 
           <button
