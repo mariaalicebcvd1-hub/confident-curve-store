@@ -89,8 +89,16 @@ export function OptionsDrawer({
     >
       <DrawerContent className="mx-auto w-full max-w-lg max-h-[90vh]">
         <DrawerHeader>
-          <DrawerTitle>Escolha cor e tamanho</DrawerTitle>
-          <div className="mt-2 flex flex-wrap items-center gap-2">
+          <DrawerTitle>Você vai levar 3 calcinhas por só R$ 69,90 no Pix</DrawerTitle>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Menos de <strong className="text-foreground">R$ 24 por peça</strong> + frete e troca grátis.
+          </p>
+
+          <div className="mt-3 rounded-xl border border-border bg-secondary/50 p-3 text-sm text-foreground">
+            <strong className="text-foreground">Compra garantida:</strong> se não servir, a troca é por nossa conta.
+          </div>
+
+          <div className="mt-3 flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center rounded-full border border-border bg-secondary/50 px-2.5 py-1 text-[11px] font-semibold text-foreground">
               Cor: <span className="ml-1 text-primary font-bold">{selectedColorLabel}</span>
             </span>
@@ -102,7 +110,14 @@ export function OptionsDrawer({
 
          <div className="flex-1 overflow-y-auto px-4 pb-2 space-y-4 text-center">
           <div>
-            <p className="text-sm font-semibold text-foreground mb-2">Cor</p>
+            <div className="text-left">
+              <p className="text-base font-extrabold text-foreground">Escolha cor e tamanho</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Não sabe qual cor escolher? <strong className="text-foreground">Vai de kit misto</strong> e leve as três.
+              </p>
+            </div>
+
+            <p className="text-sm font-semibold text-foreground mb-2 mt-3">Cor</p>
             <ToggleGroup
               type="single"
               value={selectedColor}
@@ -167,7 +182,11 @@ export function OptionsDrawer({
               ))}
             </ToggleGroup>
 
-            {showSizeTable && (
+             <div className="-mt-1 text-left text-sm text-muted-foreground">
+               📏 Na dúvida, escolha <strong className="text-foreground">1 número maior</strong> — a gente troca sem custo.
+             </div>
+
+             {showSizeTable && (
               <div className="mt-3 rounded-xl border border-border bg-secondary/50 p-3">
                 <div className="flex items-center gap-2 mb-2">
                   <Ruler className="w-4 h-4 text-primary" />
@@ -202,8 +221,12 @@ export function OptionsDrawer({
             className="btn-compra w-full inline-flex items-center justify-center gap-2 rounded-md bg-success text-success-foreground font-extrabold uppercase tracking-wide h-12 px-4"
           >
             <ShoppingBag className="w-5 h-5" />
-            Levar 3 por R$ 69,90
+            🛍️ LEVAR 3 POR R$ 69,90
           </button>
+
+          <p className="text-xs text-muted-foreground text-center">
+            🔒 <strong className="text-foreground">Frete e troca grátis</strong> • Compra segura
+          </p>
 
           <DrawerClose asChild>
             <button
@@ -211,7 +234,7 @@ export function OptionsDrawer({
               className="w-full h-11 rounded-md border border-border bg-background text-foreground font-semibold"
               onClick={() => setShowSizeHint(false)}
             >
-              Voltar
+              ← Voltar
             </button>
           </DrawerClose>
         </DrawerFooter>
