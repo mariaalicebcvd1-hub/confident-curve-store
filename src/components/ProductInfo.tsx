@@ -61,19 +61,19 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       <div className="text-center sm:text-left">
         
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground leading-tight">
-          Bumbum Mais Empinado, Barriga Suave.
+          Modela, Empina e Não Marca
           <br />
-          <span className="text-primary">Sem parecer que tá usando nada.</span>
+          <span className="text-primary">— sem sufocar</span>
         </h1>
         <p className="text-sm text-muted-foreground mt-2">
-          A calcinha modeladora mais confortável do Brasil. Modela sem apertar, empina sem marcar na roupa.
+          Some a barriga, levanta o bumbum e fica invisível na roupa. Você usa o dia todo sem desconforto.
         </p>
         
         <div className="mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-start gap-2">
           <div className="inline-flex items-center justify-center sm:justify-start gap-2 rounded-full border border-border bg-secondary/40 px-3 py-1.5 w-fit mx-auto sm:mx-0">
             <Star className="w-4 h-4 fill-current text-primary" aria-hidden="true" />
             <span className="text-sm font-semibold text-foreground">4.8</span>
-            <span className="text-sm text-muted-foreground">de 2.341 brasileiras satisfeitas</span>
+            <span className="text-sm text-muted-foreground">— +2.000 brasileiras já testaram</span>
           </div>
         </div>
       </div>
@@ -83,10 +83,10 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
         {/* Topo do card */}
         <div className="text-center sm:text-left space-y-2">
           <p className="inline-flex items-center justify-center rounded-full border border-primary/25 bg-background/60 backdrop-blur px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-primary">
-            ⚡ LANÇAMENTO EXCLUSIVO – 70% OFF HOJE
+            ⚡ Direto da fábrica — sem revenda
           </p>
           <p className="text-sm sm:text-base font-semibold text-foreground">
-            Kit com 3 Calcinhas Modeladoras
+            3 unidades (pra usar e trocar sem stress)
           </p>
         </div>
 
@@ -99,25 +99,36 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
             R$ <span className="text-success">69,90</span>
             <span className="text-base sm:text-lg font-extrabold text-foreground"> no Pix</span>
           </p>
-          <p className="text-xs sm:text-sm text-muted-foreground font-semibold">(direto da fábrica)</p>
-          <p className="text-sm sm:text-base font-semibold text-muted-foreground">
-            Só <span className="text-foreground">R$ 23</span> por peça
+          <p className="text-xs sm:text-sm text-muted-foreground font-semibold">
+            Sem repasse de revenda: você paga pelo produto, não pela promessa.
           </p>
+
+          <div className="pt-1">
+            <span className="inline-flex items-center rounded-full border border-border bg-secondary/50 px-3 py-1 text-sm font-semibold text-foreground">
+              Dá <span className="mx-1 text-success font-black">R$ 23</span> por peça
+            </span>
+          </div>
         </div>
 
         {/* Garantias & confiança */}
         <ul className="grid gap-2 sm:grid-cols-3">
           <li className="flex items-center gap-2 rounded-xl border border-border bg-background/60 px-3 py-2 text-sm">
             <RotateCcw className="w-4 h-4 text-success flex-shrink-0" />
-            <span>Troca grátis</span>
+            <span>
+              <strong className="text-foreground">Troca grátis</strong> (sem burocracia)
+            </span>
           </li>
           <li className="flex items-center gap-2 rounded-xl border border-border bg-background/60 px-3 py-2 text-sm">
             <Truck className="w-4 h-4 text-success flex-shrink-0" />
-            <span>Rastreio</span>
+            <span>
+              <strong className="text-foreground">Rastreio</strong> em todos os pedidos
+            </span>
           </li>
           <li className="flex items-center gap-2 rounded-xl border border-border bg-background/60 px-3 py-2 text-sm">
             <ShieldCheck className="w-4 h-4 text-success flex-shrink-0" />
-            <span>30 dias de garantia</span>
+            <span>
+              <strong className="text-foreground">30 dias</strong> pra testar sem risco
+            </span>
           </li>
         </ul>
 
@@ -241,7 +252,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
           className="btn-compra w-full text-sm sm:text-base inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-success text-white hover:bg-success/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide h-12 sm:h-14 px-4 sm:px-8"
         >
           <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
-          LEVE 3 POR R$ 69,90
+          LEVAR 3 POR R$ 69,90 AGORA
         </button>
       </div>
 
