@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { X, ShieldCheck, Truck, Sparkles, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const ExitIntentPopup = () => {
+const ExitIntentPopup = ({
+  onOpenOptionsDrawer,
+}: {
+  onOpenOptionsDrawer?: () => void;
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [hasShown, setHasShown] = useState(false);
@@ -93,6 +97,11 @@ const ExitIntentPopup = () => {
     // Aguarda animação de saída e então rola
     setTimeout(() => {
       setIsAnimating(false);
+      if (onOpenOptionsDrawer) {
+        onOpenOptionsDrawer();
+        return;
+      }
+
       const productInfo = document.getElementById("product-options");
       if (productInfo) {
         productInfo.scrollIntoView({ behavior: "smooth", block: "center" });

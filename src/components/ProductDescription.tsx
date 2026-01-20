@@ -48,7 +48,11 @@ const features = [
   },
 ];
 
-const ProductDescription = () => {
+const ProductDescription = ({
+  onOpenOptionsDrawer,
+}: {
+  onOpenOptionsDrawer?: () => void;
+}) => {
   return (
     <section id="product-description" className="py-12 lg:py-16 bg-gradient-to-b from-secondary/50 to-background">
       <div className="container mx-auto px-4">
@@ -169,6 +173,11 @@ const ProductDescription = () => {
 
           <button 
             onClick={() => {
+              if (onOpenOptionsDrawer) {
+                onOpenOptionsDrawer();
+                return;
+              }
+
               const productOptions = document.getElementById('product-options');
               if (productOptions) {
                 productOptions.scrollIntoView({ behavior: 'smooth', block: 'center' });

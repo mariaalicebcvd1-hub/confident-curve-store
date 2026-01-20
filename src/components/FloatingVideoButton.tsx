@@ -12,7 +12,11 @@ const storyVideos = [
   // Adicione mais vídeos aqui conforme necessário
 ];
 
-const FloatingVideoButton = () => {
+const FloatingVideoButton = ({
+  onOpenOptionsDrawer,
+}: {
+  onOpenOptionsDrawer?: () => void;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
@@ -218,6 +222,11 @@ const FloatingVideoButton = () => {
 
   const handleCTAClick = () => {
     setIsOpen(false);
+    if (onOpenOptionsDrawer) {
+      onOpenOptionsDrawer();
+      return;
+    }
+
     const sizeSection = document.querySelector('.size-option');
     if (sizeSection) {
       sizeSection.scrollIntoView({ behavior: 'smooth', block: 'center' });

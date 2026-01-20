@@ -8,6 +8,7 @@ interface SectionCTAProps {
   buttonText?: string;
   variant?: "default" | "minimal";
   trackingLabel?: string;
+  onOpenOptionsDrawer?: () => void;
 }
 
 const SectionCTA = ({ 
@@ -16,10 +17,16 @@ const SectionCTA = ({
   priceHighlight,
   buttonText = "ESCOLHER MINHA COR E TAMANHO",
   variant = "default",
-  trackingLabel = "section_cta"
+  trackingLabel = "section_cta",
+  onOpenOptionsDrawer,
 }: SectionCTAProps) => {
   const handleClick = () => {
     trackEventDirect('click', 'Section CTA → Color Selection', trackingLabel);
+
+    if (onOpenOptionsDrawer) {
+      onOpenOptionsDrawer();
+      return;
+    }
 
     const productOptions = document.getElementById('product-options');
     if (productOptions) {

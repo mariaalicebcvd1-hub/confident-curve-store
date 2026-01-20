@@ -13,6 +13,7 @@ import FloatingCTA from "@/components/FloatingCTA";
 import FloatingVideoButton from "@/components/FloatingVideoButton";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import { trackEventDirect, useTracking } from "@/hooks/useTracking";
+import { OptionsDrawer } from "@/components/OptionsDrawer";
 
 const Index = () => {
   useTracking();
@@ -22,10 +23,18 @@ const Index = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [selectedSizeIndex, setSelectedSizeIndex] = useState<number>(-1);
 
+  const [optionsDrawerOpen, setOptionsDrawerOpen] = useState(false);
+  const [optionsDrawerSizeHint, setOptionsDrawerSizeHint] = useState(false);
+
   const handleColorChange = (color: ColorKey) => {
     setSelectedColor(color);
     // Direciona para a primeira imagem da cor selecionada
     setSelectedImageIndex(colorFirstImageIndex[color]);
+  };
+
+  const openOptionsDrawer = (opts?: { showSizeHint?: boolean }) => {
+    setOptionsDrawerSizeHint(!!opts?.showSizeHint);
+    setOptionsDrawerOpen(true);
   };
 
   useEffect(() => {
@@ -71,12 +80,13 @@ const Index = () => {
             onColorChange={handleColorChange}
             selectedSizeIndex={selectedSizeIndex}
             onSizeChange={setSelectedSizeIndex}
+            onOpenOptionsDrawer={(showHint) => openOptionsDrawer({ showSizeHint: showHint })}
           />
         </div>
       </main>
 
       {/* Product Description */}
-      <ProductDescription />
+      <ProductDescription onOpenOptionsDrawer={() => openOptionsDrawer()} />
 
 
       {/* Reviews Section */}
@@ -88,6 +98,7 @@ const Index = () => {
         subtitle="No cartão: R$ 77,70 ou em até 12x de R$ 6,47 sem juros. No PIX você paga menos."
         priceHighlight="Frete grátis • troca grátis • rastreio"
         trackingLabel="cta_after_reviews"
+        onOpenOptionsDrawer={() => openOptionsDrawer()}
       />
 
       {/* Trust & Guarantee Section */}
@@ -99,6 +110,7 @@ const Index = () => {
         subtitle="De R$ 179,90 por R$ 69,90 no PIX (kit com 3). No cartão: R$ 77,70 ou 12x de R$ 6,47 sem juros."
         buttonText="ESCOLHER COR E TAMANHO"
         trackingLabel="cta_after_trust"
+        onOpenOptionsDrawer={() => openOptionsDrawer()}
       />
 
       {/* FAQ Section */}
@@ -111,6 +123,7 @@ const Index = () => {
         priceHighlight="Frete grátis + rastreio por WhatsApp"
         buttonText="ESCOLHER MINHA COR E TAMANHO"
         trackingLabel="cta_after_faq"
+        onOpenOptionsDrawer={() => openOptionsDrawer()}
       />
 
       {/* Footer */}
@@ -119,16 +132,29 @@ const Index = () => {
       {/* Floating CTA */}
       <FloatingCTA
         selectedColor={selectedColor}
-        onSelectColor={setSelectedColor}
+        onSelectColor={handleColorChange}
         selectedSizeIndex={selectedSizeIndex}
         onSelectSizeIndex={setSelectedSizeIndex}
+        onOpenOptionsDrawer={(showHint) => openOptionsDrawer({ showSizeHint: showHint })}
       />
 
       {/* Floating Video Button */}
-      <FloatingVideoButton />
+      <FloatingVideoButton onOpenOptionsDrawer={() => openOptionsDrawer()} />
 
       {/* Exit Intent Popup */}
-      <ExitIntentPopup />
+      <ExitIntentPopup onOpenOptionsDrawer={() => openOptionsDrawer()} />
+
+      <OptionsDrawer
+        open={optionsDrawerOpen}
+        onOpenChange={setOptionsDrawerOpen}
+        selectedColor={selectedColor}
+        onSelectColor={handleColorChange}
+        selectedSizeIndex={selectedSizeIndex}
+        onSelectSizeIndex={setSelectedSizeIndex}
+        showSizeHint={optionsDrawerSizeHint}
+        setShowSizeHint={setOptionsDrawerSizeHint}
+        onProceed={() => setOptionsDrawerOpen(false)}
+      />
     </div>
   );
 };
