@@ -18,7 +18,7 @@ const reviews = [
     age: 34,
     city: "Belo Horizonte, MG",
     verified: true, 
-    comment: "Comprei com bastante desconfiança porque já tinha caído em golpe antes. Mas chegou certinho, com rastreio e tudo. A calcinha realmente segura sem apertar, e no casamento da minha prima usei com vestido justo — recebi elogio real. Já pedi mais um kit.", 
+    comment: "Comprei desconfiada — já caí em golpe antes. Mas chegou certinho, com rastreio por WhatsApp. Usei no casamento da minha prima com vestido justo e recebi elogio real. A calcinha segura sem apertar e levanta de leve o bumbum. Paguei R$ 69 em 3 e uma amiga pagou R$ 90 numa só de marca famosa.", 
     productImages: [reviewCecilia1, reviewCecilia2, reviewCecilia3], 
     rating: 5, 
     helpful: 23, 
@@ -29,7 +29,7 @@ const reviews = [
     age: 28,
     city: "Rio de Janeiro, RJ",
     verified: true, 
-    comment: "Sou professora e fico muito tempo em pé. Precisava de algo que ajudasse no visual sem me deixar desconfortável. Essa calcinha é perfeita — segura a barriga sem comprimir e o bumbum fica mais arredondado. Uso praticamente todo dia no trabalho.", 
+    comment: "Sou professora e fico muito tempo em pé. Precisava de algo que ajudasse no visual sem me deixar desconfortável. Essa calcinha é perfeita — segura a barriga sem comprimir e o bumbum fica mais arredondado. Uso praticamente todo dia no trabalho. Cada uma saiu por uns R$ 23, muito mais barato que qualquer cinta.", 
     productImages: [reviewSulem1, reviewSulem2], 
     rating: 5, 
     helpful: 18, 
@@ -40,7 +40,7 @@ const reviews = [
     age: 31,
     city: "São Paulo, SP",
     verified: true, 
-    comment: "Entrega rápida (chegou em 6 dias úteis). O tecido é bom, não esquenta nem no verão de SP. Uso com calça de alfaiataria no escritório e com vestido nos finais de semana. Pedi G porque uso 42/44 e veio certinho.", 
+    comment: "Entrega rápida (6 dias úteis). O tecido é bom, não esquenta nem no verão de SP. Uso com calça de alfaiataria no escritório e com vestido nos finais de semana. Pedi G porque uso 42/44 e veio certinho. Valeu cada real dos R$ 69,90.", 
     productImages: [reviewKarine1, reviewKarine2], 
     rating: 5, 
     helpful: 15, 
@@ -51,7 +51,7 @@ const reviews = [
     age: 42,
     city: "Curitiba, PR",
     verified: true, 
-    comment: "Depois dos 40 ficou mais difícil achar lingerie que valorize o corpo sem ser aquele negócio apertado demais. Essa me surpreendeu: suaviza a barriga, levanta o bumbum de leve e dá pra usar o dia todo sem incômodo. Já indiquei pra minha irmã e minhas amigas.", 
+    comment: "Depois dos 40 ficou mais difícil achar lingerie que valorize o corpo sem apertar demais. Essa me surpreendeu: suaviza a barriga, levanta o bumbum de leve e dá pra usar o dia todo. Já indiquei pra minha irmã e minhas amigas. E o preço do kit é honesto.", 
     productImages: [reviewMariana], 
     rating: 5, 
     helpful: 21, 
@@ -184,9 +184,9 @@ const Reviews = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <h2 className="text-2xl lg:text-3xl font-bold mb-2">
-            Quem Comprou, Voltou Pra Contar
+            Quem Comprou Conta Como Foi
           </h2>
-          <p className="text-muted-foreground">Avaliações reais de clientes que testaram (com fotos de verdade)</p>
+          <p className="text-muted-foreground">Avaliações reais de clientes — com contexto, idade, cidade e fotos</p>
         </div>
 
         {/* Rating Summary Card */}

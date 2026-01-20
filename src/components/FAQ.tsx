@@ -8,35 +8,35 @@ import {
 const faqs = [
   {
     question: "Funciona mesmo ou é propaganda exagerada?",
-    answer: "Funciona, mas não é milagre. O design da calcinha — corte estratégico + tecido de alta elasticidade — foi projetado pra erguer o bumbum e suavizar a barriga. É um efeito real e visível, mas sutil. Você vai notar diferença no espelho e no caimento da roupa. Se não gostar do resultado, você tem 30 dias pra devolver e receber o dinheiro de volta.",
+    answer: "Funciona, mas não é milagre. O corte estratégico + tecido de alta elasticidade ergue o bumbum e suaviza a barriga de verdade. É sutil, não exagerado — você nota no espelho e no caimento da roupa. Se não ficar satisfeita, tem 30 dias pra devolver e receber o dinheiro de volta.",
   },
   {
-    question: "Por que tá tão barato? Tem alguma pegadinha?",
-    answer: "Não tem pegadinha. O kit com 3 calcinhas permite um preço melhor por unidade — cada uma sai por menos de R$ 30. É uma forma de você testar o produto pagando menos e ter opções de cores pro dia a dia. O produto é exatamente o mesmo que vendemos unitariamente.",
+    question: "R$ 69,90 por 3 calcinhas? Qual é a pegadinha?",
+    answer: "Nenhuma. O kit com 3 permite preço menor por unidade — cada calcinha sai por R$ 23,30. Compare com modeladoras comuns que custam R$ 89+ a unidade. A gente trabalha com margem menor pra você comprar, testar e voltar. Produto é exatamente o mesmo.",
   },
   {
     question: "Quanto tempo demora pra chegar?",
-    answer: "Enviamos em até 24h após confirmação do pagamento (pedidos feitos até às 14h). O prazo de entrega varia de 5 a 12 dias úteis dependendo da sua região. Você recebe o código de rastreio por e-mail e WhatsApp pra acompanhar cada passo. Frete grátis pra todo o Brasil.",
+    answer: "Enviamos em até 24h após confirmação do pagamento. Entrega de 5 a 12 dias úteis dependendo da região. Você recebe rastreio por e-mail e WhatsApp. Frete grátis pra todo Brasil.",
   },
   {
     question: "E se o tamanho não servir?",
-    answer: "A gente tem uma tabela de medidas detalhada (P: 60-68cm, M: 68-76cm, G: 76-84cm, GG: 84-92cm, XG: 92-100cm de cintura). Dica: se você estiver entre dois tamanhos, peça o maior. E se mesmo assim não servir, a troca é por nossa conta — a gente envia o novo tamanho sem custo adicional.",
+    answer: "Temos tabela de medidas detalhada (P: 60-68cm, M: 68-76cm, G: 76-84cm, GG: 84-92cm, XG: 92-100cm). Na dúvida, peça o maior. Se ainda assim não servir, a troca é por nossa conta — enviamos o novo tamanho sem custo.",
   },
   {
     question: "Como funciona a garantia de 30 dias?",
-    answer: "Você tem 30 dias pra decidir se gostou. Se não gostar, se o tamanho não servir, ou se simplesmente mudar de ideia — entra em contato pelo WhatsApp e a gente resolve. Troca grátis ou devolução do dinheiro. Sem perguntas chatas, sem burocracia.",
+    answer: "Você tem 30 dias pra testar. Não gostou, não serviu, mudou de ideia — entra em contato no WhatsApp e a gente resolve. Troca grátis ou devolução do dinheiro. Sem burocracia.",
   },
   {
-    question: "É seguro comprar nesse site? Como sei que não é golpe?",
-    answer: "Entendemos a desconfiança — tem muito golpe por aí mesmo. Mas somos uma empresa brasileira real, com CNPJ ativo (você pode consultar), atendimento via WhatsApp, e emitimos nota fiscal em todos os pedidos. O site usa criptografia SSL (o cadeado no navegador), a mesma segurança de bancos. E se der qualquer problema, você tem 30 dias pra devolver e receber seu dinheiro de volta.",
+    question: "Como sei que não é golpe?",
+    answer: "Empresa brasileira com CNPJ ativo, nota fiscal em todos os pedidos, atendimento via WhatsApp, site com SSL (cadeado no navegador). E se der qualquer problema: 30 dias pra devolver e receber seu dinheiro de volta.",
   },
   {
-    question: "Como funciona o 'Pague 1 Leve 3'?",
-    answer: "É simples e direto: você paga R$ 87,90 e recebe 3 calcinhas. Pode escolher uma cor só (preto, bege ou rosé) ou o kit misto com as três cores. Cada calcinha sai por menos de R$ 30 — muito mais em conta do que cintas modeladoras que custam R$ 150+ e são desconfortáveis.",
+    question: "Por que é mais barato que cinta modeladora?",
+    answer: "Cintas custam R$ 150+ porque usam materiais pesados e complexos. Nossa calcinha usa design inteligente — o corte e o tecido fazem o trabalho, não camadas de compressão desconfortáveis. Resultado parecido, preço muito menor, conforto muito maior.",
   },
   {
     question: "Posso falar com alguém antes de comprar?",
-    answer: "Pode sim. A gente atende pelo WhatsApp pra tirar dúvidas sobre tamanho, cores, entrega ou qualquer outra coisa. Atendimento humanizado, de segunda a sexta, das 9h às 18h. É só clicar no ícone do WhatsApp ou mandar mensagem diretamente.",
+    answer: "Pode. Atendimento via WhatsApp, de segunda a sexta, das 9h às 18h. Tire dúvidas sobre tamanho, cores, entrega. É só clicar no ícone do WhatsApp.",
   },
 ];
 

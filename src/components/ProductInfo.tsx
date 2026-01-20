@@ -16,11 +16,11 @@ const colors: { name: string; value: string; key: ColorKey }[] = [
 const sizes = ["P", "M", "G", "GG", "XG"];
 
 const benefits = [
-  "Levanta o bumbum sem parecer artificial",
-  "Suaviza a barriga sem comprimir a respiração",
-  "Costura fina + tecido liso = não marca na roupa",
-  "Tecido que respira — dá pra usar o dia inteiro",
-  "Se não servir, troca grátis. A gente resolve.",
+  "Levanta o bumbum — corte estratégico, não enchimento",
+  "Suaviza a barriga sem apertar a respiração",
+  "Costura fina + tecido liso = invisível na roupa",
+  "Tecido que respira — usa o dia todo sem abafar",
+  "Não serviu? Troca grátis, sem burocracia",
 ];
 
 interface ProductInfoProps {
@@ -36,7 +36,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
   const handleAddToCart = () => {
     trackInitiateCheckout({
       content_name: 'Calcinha Modeladora - Kit 3 unidades',
-      value: 87.90 * quantity,
+      value: 69.90 * quantity,
       num_items: 3 * quantity,
     });
 
@@ -59,11 +59,11 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
     <div className="space-y-5 px-1 sm:px-0">
       {/* Title & Rating */}
       <div className="text-center sm:text-left">
-        <p className="text-xs sm:text-sm text-primary font-semibold mb-1 uppercase tracking-wide">Pague 1, Leve 3</p>
+        <p className="text-xs sm:text-sm text-primary font-semibold mb-1 uppercase tracking-wide">Kit com 3 Calcinhas — Cada uma sai por R$ 23</p>
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground leading-tight">
-          Bumbum Empinado, Barriga Suave, <span className="text-primary">Sem Apertar</span>
+          Bumbum Empinado, Barriga Suave, <span className="text-primary">Sem Desconforto</span>
         </h1>
-        <p className="text-sm text-muted-foreground mt-2">Calcinha modeladora que você usa o dia todo e esquece que tá vestindo — mas o espelho lembra.</p>
+        <p className="text-sm text-muted-foreground mt-2">A calcinha que modela sem apertar, não marca na roupa e você esquece que tá usando.</p>
         
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 mt-3">
           <div className="flex items-center gap-1 review-stars">
@@ -77,21 +77,25 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       </div>
 
       {/* Price */}
-      <div className="bg-gradient-hero rounded-xl p-4 sm:p-5 space-y-2 border border-border">
+      <div className="bg-gradient-hero rounded-xl p-4 sm:p-5 space-y-3 border border-border">
         <div className="flex flex-wrap items-baseline justify-center sm:justify-start gap-2 sm:gap-3">
           <span className="price-old text-base sm:text-lg">R$ 179,90</span>
-          <span className="price-new text-2xl sm:text-3xl">R$ 87,90</span>
+          <span className="price-new text-2xl sm:text-3xl">R$ 69,90</span>
           <span className="badge-discount text-xs">Kit com 3</span>
+        </div>
+        
+        <p className="text-xs text-muted-foreground text-center sm:text-left">
+          Cada calcinha sai por <strong className="text-foreground">R$ 23,30</strong> — menos que modeladoras comuns de R$ 89+
+        </p>
+        
+        <div className="flex items-center justify-center sm:justify-start gap-2 text-success font-semibold text-sm bg-success/10 py-2 px-3 rounded-lg">
+          <Zap className="w-4 h-4" />
+          <span>No PIX você paga apenas R$ 62,91</span>
         </div>
         
         <div className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm">
           <CreditCard className="w-4 h-4 text-muted-foreground" />
-          <span className="text-muted-foreground">ou <strong className="text-foreground">12x</strong> de <strong className="text-foreground">R$ 8,74</strong> sem juros</span>
-        </div>
-        
-        <div className="flex items-center justify-center sm:justify-start gap-2 text-success font-semibold text-sm bg-success/10 py-2 px-3 rounded-lg">
-          <Zap className="w-4 h-4" />
-          <span>PIX com 10% de desconto: R$ 79,11</span>
+          <span className="text-muted-foreground">ou <strong className="text-foreground">12x</strong> de <strong className="text-foreground">R$ 6,99</strong> sem juros</span>
         </div>
       </div>
 
@@ -205,9 +209,9 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
           className="btn-compra w-full text-sm sm:text-base inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-success text-white hover:bg-success/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide h-12 sm:h-14 px-4 sm:px-8"
         >
           <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
-          QUERO MEU KIT COM 3
+          QUERO MEU KIT POR R$ 69,90
         </button>
-        <p className="text-xs text-center text-muted-foreground">Pagamento 100% seguro • Frete grátis pra todo Brasil • Rastreio por WhatsApp</p>
+        <p className="text-xs text-center text-muted-foreground">Frete grátis • Troca garantida • Loja com CNPJ</p>
       </div>
 
       {/* Trust Badges */}

@@ -4,26 +4,26 @@ import { CHECKOUT_URL } from "@/lib/constants";
 const guarantees = [
   {
     icon: RefreshCw,
-    title: "30 Dias Pra Testar",
-    description: "Não serviu ou não gostou? A gente troca ou devolve o dinheiro. Sem perguntas chatas, sem burocracia.",
+    title: "30 Dias Pra Testar Sem Risco",
+    description: "Não gostou? Tamanho errado? A gente troca ou devolve o dinheiro. Sem perguntas, sem burocracia.",
     highlight: true,
-  },
-  {
-    icon: Truck,
-    title: "Frete Grátis + Rastreio",
-    description: "Entrega pra todo Brasil. Você acompanha cada passo pelo WhatsApp ou e-mail.",
-    highlight: false,
-  },
-  {
-    icon: Lock,
-    title: "Site 100% Seguro",
-    description: "Criptografia SSL (o cadeado do navegador). Seus dados protegidos como em banco.",
-    highlight: false,
   },
   {
     icon: Building2,
     title: "Loja Real com CNPJ",
-    description: "Empresa brasileira registrada. Nota fiscal em todos os pedidos. Nada de importação duvidosa.",
+    description: "Empresa brasileira registrada. Nota fiscal em todos os pedidos. Atendimento via WhatsApp.",
+    highlight: false,
+  },
+  {
+    icon: Truck,
+    title: "Frete Grátis + Rastreio",
+    description: "Entrega pra todo Brasil. Código de rastreio enviado por e-mail e WhatsApp.",
+    highlight: false,
+  },
+  {
+    icon: Lock,
+    title: "Pagamento 100% Seguro",
+    description: "Criptografia SSL (cadeado no navegador). Mesma segurança de bancos e grandes lojas.",
     highlight: false,
   },
 ];
@@ -41,10 +41,10 @@ const TrustSection = () => {
         {/* Header */}
         <div className="text-center mb-10">
           <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-3">
-            Por Que Você Pode Confiar
+            Compra Segura, Sem Pegadinha
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Sabemos que comprar online gera dúvidas — especialmente com tanto golpe por aí. Por isso, garantimos uma experiência segura do início ao fim.
+            Sabemos que tem muito golpe por aí. Por isso a gente faz questão de ser transparente: CNPJ ativo, nota fiscal, rastreio real e 30 dias pra você testar.
           </p>
         </div>
 

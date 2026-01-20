@@ -55,11 +55,10 @@ const ProductDescription = () => {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-4 leading-tight">
-            Por Que Funciona de Verdade?
+            Por Que Funciona (Sem Ser Milagre)?
           </h2>
           <p className="text-muted-foreground leading-relaxed">
-            Sem promessa milagrosa. O segredo está no <strong className="text-foreground">corte estratégico</strong> e no <strong className="text-foreground">tecido de alta elasticidade</strong>. 
-            O design ergue o bumbum, suaviza a barriga e não marca — sem apertar, sem incomodar.
+            Não é enchimento, não é compressão exagerada. O segredo está no <strong className="text-foreground">corte estratégico</strong> que abraça e levanta, e no <strong className="text-foreground">tecido de alta elasticidade</strong> que modela sem sufocar. Resultado real no espelho, conforto real no dia a dia.
           </p>
         </div>
 
@@ -149,10 +148,13 @@ const ProductDescription = () => {
         {/* CTA Section */}
         <div className="mt-12 text-center bg-card rounded-2xl p-8 border border-border">
           <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-3">
-            Quer testar sem compromisso?
+            3 Calcinhas por R$ 69,90
           </h3>
-          <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Você tem <strong className="text-foreground">30 dias pra decidir</strong>. Se não gostar ou o tamanho não servir, é só chamar no WhatsApp — troca ou devolução sem burocracia.
+          <p className="text-muted-foreground mb-2 max-w-2xl mx-auto">
+            Cada uma sai por <strong className="text-foreground">R$ 23,30</strong> — menos que metade do preço de modeladoras comuns.
+          </p>
+          <p className="text-sm text-muted-foreground mb-6 max-w-2xl mx-auto">
+            E você tem <strong className="text-foreground">30 dias pra testar</strong>. Não gostou? Troca ou devolução sem burocracia.
           </p>
           <button 
             onClick={() => {
@@ -165,7 +167,7 @@ const ProductDescription = () => {
           >
             Escolher Minha Cor e Tamanho
           </button>
-          <p className="text-xs text-muted-foreground mt-3">Frete grátis • Troca garantida • CNPJ ativo</p>
+          <p className="text-xs text-muted-foreground mt-3">Frete grátis • Loja com CNPJ • Rastreio por WhatsApp</p>
         </div>
       </div>
     </section>
