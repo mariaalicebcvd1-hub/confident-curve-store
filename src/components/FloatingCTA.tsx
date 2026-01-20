@@ -25,16 +25,20 @@ const FloatingCTA = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const descriptionSection = document.getElementById('product-description');
-      if (descriptionSection && !isDismissed) {
-        const rect = descriptionSection.getBoundingClientRect();
-        setIsVisible(rect.top <= window.innerHeight * 0.7);
-      } else {
+      // Mostra o sticky assim que o card de preço sair totalmente da tela (scroll mínimo após a dobra)
+      const priceCard = document.getElementById("price-card");
+
+      if (!priceCard || isDismissed) {
         setIsVisible(false);
+        return;
       }
+
+      const rect = priceCard.getBoundingClientRect();
+      const isPastPriceCard = rect.bottom <= 0; // card ficou acima do topo da viewport
+      setIsVisible(isPastPriceCard);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isDismissed]);
