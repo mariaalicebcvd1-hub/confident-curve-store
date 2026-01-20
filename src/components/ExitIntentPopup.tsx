@@ -162,13 +162,18 @@ const ExitIntentPopup = () => {
               </div>
               <div className="flex items-center gap-2 text-xs sm:text-sm">
                 <Heart className="w-4 h-4 text-success flex-shrink-0" />
-                <span className="font-semibold">Modela cintura e abdômen</span>
+                <span className="font-semibold">Modela sem apertar</span>
               </div>
             </div>
 
             {/* Preço */}
             <div className="pt-1">
-              <p className="text-sm sm:text-base font-bold text-foreground">
+              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wide">
+                PIX vale mais a pena
+                <span className="text-foreground/80 font-semibold normal-case">(economiza R$ 7,80)</span>
+              </div>
+
+              <p className="text-sm sm:text-base font-bold text-foreground mt-2">
                 Leve <span className="text-primary">3 calcinhas</span> por:
               </p>
               <p className="text-2xl sm:text-3xl font-black text-success">
@@ -176,6 +181,9 @@ const ExitIntentPopup = () => {
               </p>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                 No cartão: <strong className="text-foreground">R$ 77,70</strong> ou <strong className="text-foreground">12x de R$ 6,47</strong> sem juros
+              </p>
+              <p className="text-xs sm:text-sm text-foreground font-semibold mt-2">
+                Cada peça sai por <span className="font-black">menos de R$ 24</span> • troca grátis • rastreio
               </p>
             </div>
           </div>

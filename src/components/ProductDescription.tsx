@@ -147,16 +147,23 @@ const ProductDescription = () => {
 
         {/* CTA Section */}
         <div className="mt-12 text-center bg-card rounded-2xl p-8 border border-border">
-          <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-3">
-            SÓ NO PIX: R$ 69,90 (kit com 3 calcinhas)
+          <div className="inline-flex items-center justify-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-3">
+            PIX vale mais a pena
+            <span className="text-foreground/80 font-semibold normal-case">(economiza R$ 7,80)</span>
+          </div>
+
+          <h3 className="text-xl lg:text-2xl font-black text-foreground mb-2">
+            SÓ NO PIX: R$ 69,90 <span className="text-muted-foreground font-bold">(kit com 3)</span>
           </h3>
+
           <p className="text-muted-foreground mb-2 max-w-2xl mx-auto">
             No cartão: <strong className="text-foreground">R$ 77,70</strong> ou em até <strong className="text-foreground">12x de R$ 6,47</strong> sem juros.
           </p>
-          <p className="text-sm text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Cada peça sai por <strong className="text-foreground">menos de R$ 24</strong> e você tem <strong className="text-foreground">30 dias pra testar</strong>.
-            Não gostou? Troca ou devolução sem burocracia.
+
+          <p className="text-sm text-foreground font-semibold mb-6 max-w-2xl mx-auto">
+            Cada peça sai por <strong className="text-foreground font-black">menos de R$ 24</strong> — conforto real, troca grátis e envio com rastreio.
           </p>
+
           <button 
             onClick={() => {
               const productOptions = document.getElementById('product-options');
