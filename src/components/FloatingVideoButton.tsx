@@ -307,10 +307,6 @@ const FloatingVideoButton = () => {
               ))}
             </div>
 
-            {/* Story Counter */}
-            <div className="absolute top-6 left-3 z-20 text-white/80 text-xs font-medium">
-              {currentStoryIndex + 1} / {storyVideos.length}
-            </div>
 
             {/* Video */}
             <video
