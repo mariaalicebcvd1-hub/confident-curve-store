@@ -169,8 +169,8 @@ const ExitIntentPopup = () => {
             {/* Preço */}
             <div className="pt-1">
               <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wide">
-                Preço especial no PIX
-                <span className="text-foreground/80 font-semibold normal-case">(desconto do PIX)</span>
+                PIX à vista
+                <span className="text-foreground/80 font-semibold normal-case">(pagamento no PIX)</span>
               </div>
 
               <p className="text-sm sm:text-base font-bold text-foreground mt-2">
