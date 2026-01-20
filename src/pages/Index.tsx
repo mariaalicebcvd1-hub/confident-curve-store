@@ -185,7 +185,7 @@ const Index = () => {
       <SectionCTA 
         title="Teste sem risco por 30 dias"
         subtitle="De R$ 179,90 por R$ 69,90 no PIX (kit com 3). No cartão: R$ 77,70 ou 12x de R$ 6,47 sem juros."
-        buttonText="ESCOLHER COR E TAMANHO"
+        buttonText="QUERO A MINHA AGORA"
         trackingLabel="cta_after_trust"
         onOpenOptionsDrawer={() => smartCTA("cta_after_trust")}
       />
@@ -198,7 +198,7 @@ const Index = () => {
         title="De R$ 179,90 por R$ 69,90 no PIX (kit com 3)"
         subtitle="No cartão: R$ 77,70 ou em até 12x de R$ 6,47 sem juros. Compra segura e você pode testar por 30 dias."
         priceHighlight="Frete grátis + rastreio por WhatsApp"
-        buttonText="ESCOLHER MINHA COR E TAMANHO"
+        buttonText="QUERO A MINHA AGORA"
         trackingLabel="cta_after_faq"
         onOpenOptionsDrawer={() => smartCTA("cta_after_faq")}
       />
