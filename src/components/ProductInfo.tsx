@@ -79,7 +79,10 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       </div>
 
       {/* Price */}
-      <div className="bg-gradient-hero rounded-2xl p-4 sm:p-6 space-y-4 border border-border shadow-elegant">
+      <div
+        id="price-card"
+        className="bg-gradient-hero rounded-2xl p-4 sm:p-6 space-y-4 border border-border shadow-elegant"
+      >
         {/* Topo do card */}
         <div className="text-center sm:text-left space-y-2">
           <p className="inline-flex items-center justify-center rounded-full border border-primary/25 bg-background/60 backdrop-blur px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-primary">
