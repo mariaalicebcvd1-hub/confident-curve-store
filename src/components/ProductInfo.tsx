@@ -1,5 +1,5 @@
 import React from "react";
-import { Star, Truck, ShieldCheck, CreditCard, Zap, Check, Minus, Plus, ShoppingCart, Ruler, MessageCircle } from "lucide-react";
+import { Star, Truck, ShieldCheck, CreditCard, Check, Minus, Plus, ShoppingCart, Ruler, MessageCircle } from "lucide-react";
 import { ColorKey } from "./ProductGallery";
 import tabelaMedidas from "@/assets/tabela-medidas.avif";
 import { trackEventDirect } from "@/hooks/useTracking";
@@ -59,7 +59,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
     <div className="space-y-5 px-1 sm:px-0">
       {/* Title & Rating */}
       <div className="text-center sm:text-left">
-        <p className="text-xs sm:text-sm text-primary font-semibold mb-1 uppercase tracking-wide">Kit com 3 Calcinhas — Cada uma sai por R$ 23</p>
+        <p className="text-xs sm:text-sm text-primary font-semibold mb-1 uppercase tracking-wide">SÓ NO PIX: kit com 3 por R$ 69,90</p>
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground leading-tight">
           Bumbum Empinado, Barriga Suave, <span className="text-primary">Sem Desconforto</span>
         </h1>
@@ -81,21 +81,22 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
         <div className="flex flex-wrap items-baseline justify-center sm:justify-start gap-2 sm:gap-3">
           <span className="price-old text-base sm:text-lg">R$ 179,90</span>
           <span className="price-new text-2xl sm:text-3xl">R$ 69,90</span>
-          <span className="badge-discount text-xs">Kit com 3</span>
+          <span className="badge-discount text-xs">SÓ NO PIX • Kit com 3</span>
         </div>
-        
+
         <p className="text-xs text-muted-foreground text-center sm:text-left">
-          Cada calcinha sai por <strong className="text-foreground">R$ 23,30</strong> — menos que modeladoras comuns de R$ 89+
+          Cada peça sai por <strong className="text-foreground">menos de R$ 24</strong>, com conforto real,
+          troca grátis e envio com rastreio.
         </p>
-        
-        <div className="flex items-center justify-center sm:justify-start gap-2 text-success font-semibold text-sm bg-success/10 py-2 px-3 rounded-lg">
-          <Zap className="w-4 h-4" />
-          <span>No PIX você paga apenas R$ 62,91</span>
-        </div>
-        
+
         <div className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm">
           <CreditCard className="w-4 h-4 text-muted-foreground" />
-          <span className="text-muted-foreground">ou <strong className="text-foreground">12x</strong> de <strong className="text-foreground">R$ 6,99</strong> sem juros</span>
+          <span className="text-muted-foreground">
+            No cartão: <strong className="text-foreground">R$ 77,70</strong> ou em até{" "}
+            <strong className="text-foreground">12x</strong> de{" "}
+            <strong className="text-foreground">R$ 6,47</strong> sem juros
+            <span className="text-muted-foreground"> (PIX vale mais a pena)</span>
+          </span>
         </div>
       </div>
 
