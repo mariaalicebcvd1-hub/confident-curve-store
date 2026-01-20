@@ -59,7 +59,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
     <div className="space-y-5 px-1 sm:px-0">
       {/* Title & Rating */}
       <div className="text-center sm:text-left">
-        <p className="text-xs sm:text-sm text-primary font-semibold mb-1 uppercase tracking-wide">⚡ Oferta Especial de Lançamento</p>
+        
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground leading-tight">
           Bumbum Empinado, Barriga Suave, <span className="text-primary">Sem Desconforto</span>
         </h1>
