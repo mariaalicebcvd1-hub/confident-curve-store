@@ -33,6 +33,13 @@ const colorOptions = [
   },
 ] as const;
 
+const colorLabelMap: Record<ColorKey, string> = {
+  preto: "Preto",
+  bege: "Bege",
+  rose: "Rose",
+  misto: "Kit Misto",
+};
+
 export function OptionsDrawer({
   open,
   onOpenChange,
@@ -58,6 +65,8 @@ export function OptionsDrawer({
   const isSelectionMissing = selectedSizeIndex < 0;
   const [showSizeTable, setShowSizeTable] = React.useState(false);
 
+  const selectedColorLabel = colorLabelMap[selectedColor] ?? selectedColor;
+
   const handleSelectSizeValue = React.useCallback(
     (size: (typeof sizeOptions)[number]["value"]) => {
       const idx = sizeOptions.findIndex((s) => s.value === size);
@@ -81,6 +90,14 @@ export function OptionsDrawer({
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>Escolha cor e tamanho</DrawerTitle>
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center rounded-full border border-border bg-secondary/50 px-2.5 py-1 text-[11px] font-semibold text-foreground">
+              Cor: <span className="ml-1 text-primary font-bold">{selectedColorLabel}</span>
+            </span>
+            <span className="inline-flex items-center rounded-full border border-border bg-secondary/50 px-2.5 py-1 text-[11px] font-semibold text-foreground">
+              Tam: <span className="ml-1 text-primary font-bold">{selectedSize || "Escolha"}</span>
+            </span>
+          </div>
         </DrawerHeader>
 
         <div className="px-4 pb-2 space-y-4">
