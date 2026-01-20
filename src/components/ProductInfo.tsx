@@ -85,7 +85,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
           </p>
 
           <div className="inline-flex items-center justify-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide whitespace-nowrap self-center sm:self-auto">
-            NO PIX <span className="text-foreground/80 font-semibold normal-case">(só R$ 23 cada)</span>
+            NO PIX <span className="text-foreground/80 font-semibold normal-case">• R$ 23 cada</span>
           </div>
         </div>
 

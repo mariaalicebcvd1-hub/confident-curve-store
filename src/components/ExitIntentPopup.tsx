@@ -179,7 +179,7 @@ const ExitIntentPopup = () => {
                 Modela sem apertar, empina com conforto e não marca na roupa
               </p>
               <p className="text-xs sm:text-sm text-foreground font-semibold mt-2">
-                De <span className="line-through text-muted-foreground">R$ 179,90</span> → Agora: <span className="font-black text-success">R$ 69,90</span> no Pix <span className="text-muted-foreground">(só R$ 23 cada)</span>
+                De <span className="line-through text-muted-foreground">R$ 179,90</span> → Agora: <span className="font-black text-success">R$ 69,90</span> no Pix <span className="text-muted-foreground">• R$ 23 cada</span>
               </p>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                 💳 Ou <strong className="text-foreground">R$ 77,70</strong> no cartão (12x de <strong className="text-foreground">R$ 6,47</strong> sem juros)
