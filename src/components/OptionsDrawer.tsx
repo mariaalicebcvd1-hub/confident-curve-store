@@ -87,7 +87,7 @@ export function OptionsDrawer({
         }
       }}
     >
-      <DrawerContent className="max-h-[90vh]">
+      <DrawerContent className="mx-auto w-full max-w-lg max-h-[90vh]">
         <DrawerHeader>
           <DrawerTitle>Escolha cor e tamanho</DrawerTitle>
           <div className="mt-2 flex flex-wrap items-center gap-2">
@@ -100,7 +100,7 @@ export function OptionsDrawer({
           </div>
         </DrawerHeader>
 
-        <div className="flex-1 overflow-y-auto px-4 pb-2 space-y-4">
+         <div className="flex-1 overflow-y-auto px-4 pb-2 space-y-4 text-center">
           <div>
             <p className="text-sm font-semibold text-foreground mb-2">Cor</p>
             <ToggleGroup
@@ -110,7 +110,7 @@ export function OptionsDrawer({
                 if (!v) return;
                 onSelectColor(v as ColorKey);
               }}
-              className="flex flex-wrap justify-start gap-2"
+              className="flex flex-wrap justify-center gap-2"
             >
               {colorOptions.map((c) => (
                 <ToggleGroupItem
@@ -153,7 +153,7 @@ export function OptionsDrawer({
                 if (!v) return;
                 handleSelectSizeValue(v as (typeof sizeOptions)[number]["value"]);
               }}
-              className="flex flex-wrap justify-start gap-2"
+              className="flex flex-wrap justify-center gap-2"
             >
               {sizeOptions.map((s) => (
                 <ToggleGroupItem
