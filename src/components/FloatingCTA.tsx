@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ShoppingBag, X } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import { trackEventDirect } from "@/hooks/useTracking";
 import { trackInitiateCheckout } from "@/lib/facebook-pixel";
 import { buildCheckoutUrl } from "@/lib/checkout";
@@ -28,7 +28,6 @@ const FloatingCTA = ({
   onOpenOptionsDrawer: (showSizeHint: boolean) => void;
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isDismissed, setIsDismissed] = useState(false);
 
 
   const selectedSize = useMemo(() => {
@@ -53,7 +52,7 @@ const FloatingCTA = ({
       // Mostra o sticky assim que o card de preço sair totalmente da tela (scroll mínimo após a dobra)
       const priceCard = document.getElementById("price-card");
 
-      if (!priceCard || isDismissed) {
+      if (!priceCard) {
         setIsVisible(false);
         return;
       }
@@ -66,7 +65,7 @@ const FloatingCTA = ({
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isDismissed]);
+  }, []);
 
   const handleClick = (e: React.MouseEvent) => {
     if (isSelectionMissing) {
@@ -132,14 +131,12 @@ const FloatingCTA = ({
             className="btn-compra flex-1 sm:flex-initial text-sm sm:text-base h-12 sm:h-12 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-extrabold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-success text-success-foreground hover:bg-success/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide px-4"
           >
             <ShoppingBag className="w-5 h-5 flex-shrink-0" />
-            <span className="truncate">Levar 3 por R$ 69,90</span>
-          </button>
-
-          <button
-            onClick={() => setIsDismissed(true)}
-            className="p-2 hover:bg-secondary rounded-lg transition-colors flex-shrink-0"
-          >
-            <X className="w-5 h-5 text-muted-foreground" />
+            <span className="min-w-0 flex flex-col items-start leading-tight">
+              <span className="truncate">Levar 3 por R$ 69,90</span>
+              <span className="text-[11px] font-semibold normal-case tracking-normal text-success-foreground/90">
+                🔒 Frete e troca grátis • Compra segura
+              </span>
+            </span>
           </button>
         </div>
       </div>
