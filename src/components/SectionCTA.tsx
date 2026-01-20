@@ -78,8 +78,7 @@ const SectionCTA = ({
           <ShoppingBag className="w-5 h-5" />
           {buttonText}
         </button>
-        <p className="text-xs text-muted-foreground mt-2">Escolha sua cor e tamanho na próxima etapa</p>
-        <p className="text-[11px] text-muted-foreground/90 mt-2">Frete grátis • Troca garantida • Pagamento seguro</p>
+        <p className="text-xs text-muted-foreground mt-3">Escolha sua cor e tamanho na próxima etapa</p>
       </div>
     );
   }
@@ -120,8 +119,7 @@ const SectionCTA = ({
             {buttonText}
           </button>
 
-          <p className="text-xs text-muted-foreground mt-2">Escolha sua cor e tamanho na próxima etapa</p>
-          <p className="text-[11px] text-muted-foreground/90 mt-2">Frete grátis • Troca garantida • Loja com CNPJ</p>
+          <p className="text-xs text-muted-foreground mt-3">Escolha sua cor e tamanho na próxima etapa</p>
         </div>
       </div>
     </div>
