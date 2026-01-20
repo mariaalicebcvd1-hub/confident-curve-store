@@ -3,13 +3,14 @@ import { Play, X, ShoppingBag, ChevronLeft, ChevronRight, Volume2, VolumeX } fro
 import { Dialog, DialogContent, DialogClose, DialogTitle } from "@/components/ui/dialog";
 import videoProduto from "@/assets/video-produto.mp4";
 import videoStories1 from "@/assets/video-stories-1.mp4";
+import videoStories2 from "@/assets/video-stories-2.mp4";
 import { trackEventDirect } from "@/hooks/useTracking";
 
 // Lista de vídeos do Stories
 const storyVideos = [
-  { id: 1, src: videoProduto, label: "Produto" },
-  { id: 2, src: videoStories1, label: "Detalhe" },
-  // Adicione mais vídeos aqui conforme necessário
+  { id: 1, src: videoProduto },
+  { id: 2, src: videoStories1 },
+  { id: 3, src: videoStories2 },
 ];
 
 const FloatingVideoButton = () => {
@@ -287,7 +288,7 @@ const FloatingVideoButton = () => {
             onClick={handleClick}
           >
             {/* Progress Bars */}
-            <div className="absolute top-3 left-3 right-3 z-20 flex gap-1">
+            <div className="absolute top-3 left-3 right-12 z-20 flex gap-1">
               {storyVideos.map((_, index) => (
                 <div 
                   key={index}
@@ -304,12 +305,7 @@ const FloatingVideoButton = () => {
                     }}
                   />
                 </div>
-              ))}
-            </div>
-
-            {/* Story Counter */}
-            <div className="absolute top-6 left-3 z-20 text-white/80 text-xs font-medium">
-              {currentStoryIndex + 1} / {storyVideos.length}
+            ))}
             </div>
 
             {/* Video */}
