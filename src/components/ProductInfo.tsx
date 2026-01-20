@@ -78,13 +78,13 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
 
       {/* Price */}
       <div className="bg-gradient-hero rounded-xl p-4 sm:p-5 space-y-3 border border-border">
-        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-          <p className="text-lg sm:text-xl font-black text-foreground leading-tight">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <p className="text-lg sm:text-xl font-black text-foreground leading-tight text-center sm:text-left">
             De <span className="line-through text-muted-foreground">R$ 179,90</span> → Agora:{" "}
             <span className="text-success">R$ 69,90</span>
           </p>
 
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+          <div className="inline-flex items-center justify-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide whitespace-nowrap self-center sm:self-auto">
             NO PIX <span className="text-foreground/80 font-semibold normal-case">(só R$ 23 cada)</span>
           </div>
         </div>
