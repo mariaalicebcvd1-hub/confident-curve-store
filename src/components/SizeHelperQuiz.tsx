@@ -142,7 +142,7 @@ export function SizeHelperQuiz({
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             {!result && (
-              <>
+              <div key="inputs" className="animate-enter">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <FormField
                     control={form.control}
@@ -191,11 +191,11 @@ export function SizeHelperQuiz({
                 <FormDescription className="text-xs">
                   Usamos só esses dados pra sugerir o tamanho. Não salvamos nada.
                 </FormDescription>
-              </>
+              </div>
             )}
 
             {result && (
-              <div className="rounded-2xl border border-border bg-secondary/40 p-4">
+              <div key="result" className="animate-enter rounded-2xl border border-border bg-secondary/40 p-4">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-sm font-semibold text-foreground">Tamanho recomendado</p>
                   <span className="rounded-full border border-border bg-background px-2.5 py-1 text-xs font-semibold text-muted-foreground">
