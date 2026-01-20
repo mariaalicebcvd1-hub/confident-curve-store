@@ -218,9 +218,32 @@ export function SizeHelperQuiz({
                   Ver sugestão
                 </Button>
               ) : (
-                <Button ref={applyBtnRef} type="button" onClick={apply} className="w-full sm:w-auto">
-                  Usar esse tamanho
-                </Button>
+                <div className="grid w-full grid-cols-1 gap-2 sm:w-auto sm:grid-cols-2">
+                  <Button
+                    ref={applyBtnRef}
+                    type="button"
+                    onClick={() => {
+                      onSelectSize(result);
+                      setOpen(false);
+                    }}
+                    className="w-full"
+                  >
+                    Usar {result}
+                  </Button>
+
+                  {comfortSize && (
+                    <Button
+                      type="button"
+                      onClick={() => {
+                        onSelectSize(comfortSize);
+                        setOpen(false);
+                      }}
+                      className="w-full"
+                    >
+                      Prefiro mais soltinho ({comfortSize})
+                    </Button>
+                  )}
+                </div>
               )}
             </DialogFooter>
           </form>
