@@ -69,24 +69,20 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
           A calcinha modeladora mais confortável do Brasil. Modela sem apertar, empina sem marcar na roupa.
         </p>
         
-        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 mt-3">
-          <div className="flex items-center gap-1 review-stars" aria-label="Avaliação média 4.8">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-current" />
-            ))}
+        <div className="mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-start gap-2">
+          <div className="inline-flex items-center justify-center sm:justify-start gap-2 rounded-full border border-border bg-secondary/40 px-3 py-1.5 w-fit mx-auto sm:mx-0">
+            <Star className="w-4 h-4 fill-current text-primary" aria-hidden="true" />
+            <span className="text-sm font-semibold text-foreground">4.8</span>
+            <span className="text-sm text-muted-foreground">de 2.341 brasileiras satisfeitas</span>
           </div>
-          <p className="text-sm sm:text-base">
-            <span className="font-semibold">4.8</span>
-            <span className="text-muted-foreground"> de 2.341 brasileiras satisfeitas</span>
-          </p>
         </div>
       </div>
 
       {/* Price */}
-      <div className="bg-gradient-hero rounded-xl p-4 sm:p-5 space-y-4 border border-border">
+      <div className="bg-gradient-hero rounded-2xl p-4 sm:p-6 space-y-4 border border-border shadow-elegant">
         {/* Topo do card */}
-        <div className="text-center sm:text-left space-y-1">
-          <p className="inline-flex items-center justify-center rounded-md border border-primary/20 bg-background/60 backdrop-blur px-2 py-1 text-[11px] font-bold uppercase tracking-wide text-primary">
+        <div className="text-center sm:text-left space-y-2">
+          <p className="inline-flex items-center justify-center rounded-full border border-primary/25 bg-background/60 backdrop-blur px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-primary">
             ⚡ LANÇAMENTO EXCLUSIVO – 70% OFF HOJE
           </p>
           <p className="text-sm sm:text-base font-semibold text-foreground">
@@ -99,31 +95,33 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
           <p className="text-sm text-muted-foreground">
             De <span className="line-through">R$ 179,90</span>
           </p>
-          <p className="text-xl sm:text-2xl font-black text-foreground leading-tight">
-            Agora: <span className="text-success">R$ 69,90</span> no Pix <span className="text-muted-foreground font-semibold">(direto da fábrica)</span>
+          <p className="text-2xl sm:text-3xl font-black text-foreground leading-tight">
+            R$ <span className="text-success">69,90</span>
+            <span className="text-base sm:text-lg font-extrabold text-foreground"> no Pix</span>
           </p>
+          <p className="text-xs sm:text-sm text-muted-foreground font-semibold">(direto da fábrica)</p>
           <p className="text-sm sm:text-base font-semibold text-muted-foreground">
             Só <span className="text-foreground">R$ 23</span> por peça
           </p>
         </div>
 
-        {/* Valor lógico + confiança */}
-        <ul className="space-y-2">
-          <li className="flex items-start gap-2 text-sm">
-            <RotateCcw className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
+        {/* Garantias & confiança */}
+        <ul className="grid gap-2 sm:grid-cols-3">
+          <li className="flex items-center gap-2 rounded-xl border border-border bg-background/60 px-3 py-2 text-sm">
+            <RotateCcw className="w-4 h-4 text-success flex-shrink-0" />
             <span>Troca grátis</span>
           </li>
-          <li className="flex items-start gap-2 text-sm">
-            <Truck className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
-            <span>Frete com rastreio</span>
+          <li className="flex items-center gap-2 rounded-xl border border-border bg-background/60 px-3 py-2 text-sm">
+            <Truck className="w-4 h-4 text-success flex-shrink-0" />
+            <span>Rastreio</span>
           </li>
-          <li className="flex items-start gap-2 text-sm">
-            <ShieldCheck className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
-            <span>Teste por 30 dias ou seu dinheiro de volta</span>
+          <li className="flex items-center gap-2 rounded-xl border border-border bg-background/60 px-3 py-2 text-sm">
+            <ShieldCheck className="w-4 h-4 text-success flex-shrink-0" />
+            <span>30 dias de garantia</span>
           </li>
         </ul>
 
-        {/* Cartão (sem vergonha) */}
+        {/* Cartão */}
         <div className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm">
           <CreditCard className="w-4 h-4 text-muted-foreground" />
           <span className="text-muted-foreground">
