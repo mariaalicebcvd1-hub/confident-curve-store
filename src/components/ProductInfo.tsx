@@ -207,7 +207,7 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
                 key={color.key}
                 value={color.key}
                 aria-label={`Cor ${color.name}`}
-                className="h-11 px-4 rounded-full border border-border bg-background shadow-sm hover:bg-secondary data-[state=on]:border-primary data-[state=on]:bg-primary/10"
+                  className="h-11 px-4 rounded-full border border-border bg-background shadow-sm text-foreground hover:bg-secondary hover:text-foreground data-[state=on]:border-primary data-[state=on]:bg-primary/10 data-[state=on]:text-foreground"
               >
                 <span
                   className="h-4 w-4 rounded-full border border-border ring-1 ring-border"
@@ -252,7 +252,7 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
               key={size}
               value={size}
               aria-label={`Tamanho ${size}`}
-              className="h-11 w-14 rounded-xl border border-border bg-background shadow-sm hover:bg-secondary text-sm font-extrabold data-[state=on]:border-primary data-[state=on]:bg-primary/10"
+              className="h-11 w-14 rounded-xl border border-border bg-background shadow-sm text-foreground hover:bg-secondary hover:text-foreground text-sm font-extrabold data-[state=on]:border-primary data-[state=on]:bg-primary/10 data-[state=on]:text-foreground"
             >
               {size}
             </ToggleGroupItem>

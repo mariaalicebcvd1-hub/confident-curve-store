@@ -117,7 +117,7 @@ export function OptionsDrawer({
                   key={c.key}
                   value={c.key}
                   aria-label={`Cor ${c.label}`}
-                  className="h-11 px-4 rounded-full border border-border bg-background shadow-sm data-[state=on]:border-primary data-[state=on]:bg-primary/10"
+                  className="h-11 px-4 rounded-full border border-border bg-background shadow-sm text-foreground hover:text-foreground data-[state=on]:border-primary data-[state=on]:bg-primary/10 data-[state=on]:text-foreground"
                 >
                   <span
                     className="h-4 w-4 rounded-full border border-border ring-1 ring-border"
@@ -160,7 +160,7 @@ export function OptionsDrawer({
                   key={s.value}
                   value={s.value}
                   aria-label={`Tamanho ${s.label}`}
-                  className="h-11 w-14 rounded-xl border border-border bg-background shadow-sm text-sm font-extrabold data-[state=on]:border-primary data-[state=on]:bg-primary/10"
+                  className="h-11 w-14 rounded-xl border border-border bg-background shadow-sm text-foreground hover:text-foreground text-sm font-extrabold data-[state=on]:border-primary data-[state=on]:bg-primary/10 data-[state=on]:text-foreground"
                 >
                   {s.label}
                 </ToggleGroupItem>
