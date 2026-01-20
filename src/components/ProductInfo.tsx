@@ -5,6 +5,8 @@ import tabelaMedidas from "@/assets/tabela-medidas.avif";
 import { trackEventDirect } from "@/hooks/useTracking";
 import { trackInitiateCheckout } from "@/lib/facebook-pixel";
 import { buildCheckoutUrl } from "@/lib/checkout";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { SizeHelperQuiz } from "@/components/SizeHelperQuiz";
 
 const colors: { name: string; value: string; key: ColorKey }[] = [
   { name: "Preto", value: "#1a1a1a", key: "preto" },
@@ -32,6 +34,13 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
   const selectedColorData = colors.find((c) => c.key === selectedColor);
   const [selectedSize, setSelectedSize] = React.useState(0);
   const [quantity, setQuantity] = React.useState(1);
+
+  const selectedSizeLabel = sizes[selectedSize] as (typeof sizes)[number];
+
+  const handleSelectSizeLabel = (size: (typeof sizes)[number]) => {
+    const idx = sizes.indexOf(size);
+    if (idx >= 0) setSelectedSize(idx);
+  };
 
   const handleAddToCart = () => {
     trackInitiateCheckout({
@@ -149,47 +158,72 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
 
       {/* Color Selection */}
       <div id="product-options">
-        <p className="font-semibold mb-3 text-center sm:text-left">Cor: <span className="text-primary">{selectedColorData?.name}</span></p>
-        <div className="flex justify-center sm:justify-start gap-3">
+        <p className="font-semibold mb-3 text-center sm:text-left">
+          Cor: <span className="text-primary">{selectedColorData?.name}</span>
+        </p>
+
+        <ToggleGroup
+          type="single"
+          value={selectedColor}
+          onValueChange={(v) => {
+            if (!v) return;
+            onColorChange(v as ColorKey);
+          }}
+          className="flex flex-wrap justify-center sm:justify-start gap-2"
+        >
           {colors.map((color) => (
-            <button
-              key={color.name}
-              onClick={() => onColorChange(color.key)}
-              className={`relative rounded-lg overflow-hidden transition-all duration-200 w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center ${
-                selectedColor === color.key
-                  ? "ring-2 ring-primary ring-offset-2 scale-105"
-                  : "hover:scale-105 border-2 border-border"
-              }`}
-              style={{
-                background: color.value === "mixed" 
-                  ? "linear-gradient(135deg, #1a1a1a 33%, #d4b896 33%, #d4b896 66%, #e8b4b8 66%)" 
-                  : color.value
-              }}
+            <ToggleGroupItem
+              key={color.key}
+              value={color.key}
+              aria-label={`Cor ${color.name}`}
+              className="h-10 px-3 rounded-full data-[state=on]:border-primary data-[state=on]:bg-primary/10"
             >
-              {selectedColor === color.key && (
-                <div className="absolute inset-0 bg-primary/10 flex items-center justify-center">
-                  <Check className="w-5 h-5 text-white drop-shadow-md" />
-                </div>
-              )}
-            </button>
+              <span
+                className="h-3 w-3 rounded-full border border-border"
+                style={{
+                  background:
+                    color.value === "mixed"
+                      ? "linear-gradient(135deg, #1a1a1a 33%, #d4b896 33%, #d4b896 66%, #e8b4b8 66%)"
+                      : color.value,
+                }}
+              />
+              <span className="ml-2 text-sm font-semibold">{color.name}</span>
+            </ToggleGroupItem>
           ))}
-        </div>
+        </ToggleGroup>
       </div>
 
       {/* Size Selection */}
       <div>
-        <p className="font-semibold mb-3 text-center sm:text-left">Tamanho: <span className="text-primary">{sizes[selectedSize]}</span></p>
-        <div className="flex flex-wrap justify-center sm:justify-start gap-2">
-          {sizes.map((size, index) => (
-            <button
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+          <p className="font-semibold text-center sm:text-left">
+            Tamanho: <span className="text-primary">{selectedSizeLabel}</span>
+          </p>
+          <div className="flex justify-center sm:justify-end">
+            <SizeHelperQuiz onSelectSize={handleSelectSizeLabel} />
+          </div>
+        </div>
+
+        <ToggleGroup
+          type="single"
+          value={selectedSizeLabel}
+          onValueChange={(v) => {
+            if (!v) return;
+            handleSelectSizeLabel(v as (typeof sizes)[number]);
+          }}
+          className="flex flex-wrap justify-center sm:justify-start gap-2"
+        >
+          {sizes.map((size) => (
+            <ToggleGroupItem
               key={size}
-              onClick={() => setSelectedSize(index)}
-              className={`size-option ${selectedSize === index ? "selected" : ""}`}
+              value={size}
+              aria-label={`Tamanho ${size}`}
+              className="h-11 w-14 rounded-xl text-sm font-extrabold data-[state=on]:border-primary data-[state=on]:bg-primary/10"
             >
               {size}
-            </button>
+            </ToggleGroupItem>
           ))}
-        </div>
+        </ToggleGroup>
         
         {/* Size Guide */}
         <div className="mt-4 bg-secondary/50 rounded-xl p-4 border border-border">
