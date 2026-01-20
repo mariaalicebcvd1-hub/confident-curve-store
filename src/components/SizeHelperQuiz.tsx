@@ -94,7 +94,7 @@ export function SizeHelperQuiz({
 
       <DialogContent className="max-w-md max-h-[85vh] overflow-y-auto">
         <DialogHeader>
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
             <div className="space-y-2">
               <DialogTitle className="leading-tight">
                 Qual seu tamanho ideal? Descubra em 5 segundos.
@@ -103,7 +103,7 @@ export function SizeHelperQuiz({
                 Com base nos dados de +2.000 clientes, sugerimos o tamanho mais provável pra você acertar de primeira — sem medo de errar.
               </DialogDescription>
             </div>
-            <div className="shrink-0 rounded-full border border-border bg-secondary/40 px-3 py-1 text-xs font-semibold text-foreground">
+            <div className="shrink-0 self-start rounded-full border border-border bg-secondary/40 px-3 py-1 text-xs font-semibold text-foreground">
               Rápido & privado
             </div>
           </div>
