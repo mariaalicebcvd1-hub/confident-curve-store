@@ -167,7 +167,7 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
           </span>
         </div>
 
-        <p className="text-xs text-muted-foreground text-center sm:text-left">
+        <p className="text-xs font-semibold text-foreground/80 text-center sm:text-left">
           Frete grátis • Loja com CNPJ • Rastreio por WhatsApp
         </p>
       </div>
