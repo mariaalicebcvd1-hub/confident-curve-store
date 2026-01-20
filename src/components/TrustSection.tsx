@@ -1,39 +1,36 @@
-import { Shield, Truck, CreditCard, RefreshCw, Lock, Award, Clock, HeadphonesIcon } from "lucide-react";
+import { Shield, Truck, CreditCard, RefreshCw, Lock, Clock, HeadphonesIcon, Building2 } from "lucide-react";
 import { CHECKOUT_URL } from "@/lib/constants";
 
 const guarantees = [
   {
-    icon: Shield,
-    title: "Garantia de 30 Dias",
-    description: "Não gostou? Devolvemos 100% do seu dinheiro. Sem perguntas!",
+    icon: RefreshCw,
+    title: "30 Dias pra Trocar",
+    description: "Não serviu ou não gostou? A gente troca ou devolve o dinheiro. Sem burocracia.",
     highlight: true,
   },
   {
     icon: Truck,
     title: "Frete Grátis",
-    description: "Entrega gratuita para todo o Brasil. Sem taxa escondida!",
+    description: "Entrega pra todo Brasil. Você acompanha pelo rastreio.",
     highlight: false,
   },
   {
     icon: Lock,
-    title: "Compra 100% Segura",
-    description: "Seus dados protegidos com criptografia de ponta.",
+    title: "Pagamento Seguro",
+    description: "Site protegido com criptografia. Seus dados estão seguros.",
     highlight: false,
   },
   {
-    icon: RefreshCw,
-    title: "Troca Facilitada",
-    description: "Tamanho errado? Trocamos sem custo adicional.",
+    icon: Building2,
+    title: "Loja Real com CNPJ",
+    description: "Empresa brasileira registrada. Nota fiscal em todos os pedidos.",
     highlight: false,
   },
 ];
 
 const paymentMethods = [
   { name: "PIX", discount: "10% OFF" },
-  { name: "Visa" },
-  { name: "Mastercard" },
-  { name: "Elo" },
-  { name: "Amex" },
+  { name: "Cartão de Crédito" },
   { name: "Boleto" },
 ];
 
@@ -43,20 +40,11 @@ const TrustSection = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-10">
-          <a 
-            href={CHECKOUT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-compra inline-flex items-center gap-2 bg-success/10 text-success px-4 py-2 rounded-full text-sm font-bold mb-4 hover:bg-success/20 transition-colors cursor-pointer"
-          >
-            <Award className="w-4 h-4" />
-            COMPRA 100% GARANTIDA
-          </a>
           <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-3">
-            Sua Satisfação é Nossa Prioridade
+            Compre com Tranquilidade
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Mais de <strong className="text-foreground">47.000 clientes satisfeitas</strong> em todo o Brasil. Compre com total segurança!
+            Entendemos que comprar online pode gerar dúvidas. Por isso, garantimos uma experiência segura do início ao fim.
           </p>
         </div>
 
@@ -65,15 +53,15 @@ const TrustSection = () => {
           {guarantees.map((item, index) => (
             <div
               key={index}
-              className={`relative rounded-2xl p-5 text-center transition-all duration-300 hover:scale-105 ${
+              className={`relative rounded-2xl p-5 text-center transition-all duration-300 ${
                 item.highlight
-                  ? "bg-gradient-to-br from-success/10 to-success/5 border-2 border-success/30 shadow-lg"
-                  : "bg-card border border-border shadow-soft hover:shadow-md"
+                  ? "bg-gradient-to-br from-success/10 to-success/5 border-2 border-success/30"
+                  : "bg-card border border-border"
               }`}
             >
               {item.highlight && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-success text-success-foreground px-3 py-1 rounded-full text-xs font-bold">
-                  GARANTIA TOTAL
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-success text-white px-3 py-1 rounded-full text-xs font-bold">
+                  GARANTIA
                 </div>
               )}
               <div className={`w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center ${
@@ -87,15 +75,15 @@ const TrustSection = () => {
           ))}
         </div>
 
-        {/* Trust Badges Row */}
-        <div className="bg-card rounded-2xl p-6 border border-border shadow-soft mb-10">
+        {/* Trust Details Row */}
+        <div className="bg-card rounded-2xl p-6 border border-border mb-10">
           <div className="grid sm:grid-cols-3 gap-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
                 <Clock className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <p className="font-semibold text-foreground">Envio em 24h</p>
+                <p className="font-semibold text-foreground">Envio em até 24h</p>
                 <p className="text-sm text-muted-foreground">Pedidos confirmados até 14h</p>
               </div>
             </div>
@@ -104,8 +92,8 @@ const TrustSection = () => {
                 <HeadphonesIcon className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <p className="font-semibold text-foreground">Suporte WhatsApp</p>
-                <p className="text-sm text-muted-foreground">Atendimento humanizado</p>
+                <p className="font-semibold text-foreground">Atendimento via WhatsApp</p>
+                <p className="text-sm text-muted-foreground">Tire dúvidas antes e depois da compra</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -113,8 +101,8 @@ const TrustSection = () => {
                 <CreditCard className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <p className="font-semibold text-foreground">Até 12x Sem Juros</p>
-                <p className="text-sm text-muted-foreground">Em todos os cartões</p>
+                <p className="font-semibold text-foreground">Parcele em até 12x</p>
+                <p className="text-sm text-muted-foreground">Sem juros no cartão</p>
               </div>
             </div>
           </div>
@@ -122,7 +110,7 @@ const TrustSection = () => {
 
         {/* Payment Methods */}
         <div className="text-center">
-          <p className="text-sm text-muted-foreground mb-4">Formas de Pagamento Aceitas</p>
+          <p className="text-sm text-muted-foreground mb-4">Formas de pagamento</p>
           <div className="flex flex-wrap justify-center gap-3">
             {paymentMethods.map((method, index) => (
               <div
@@ -141,19 +129,15 @@ const TrustSection = () => {
             ))}
           </div>
           
-          {/* Security Seals */}
+          {/* Security Info */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-6">
             <div className="flex items-center gap-2 text-muted-foreground">
               <Lock className="w-5 h-5 text-success" />
-              <span className="text-sm">SSL Seguro</span>
+              <span className="text-sm">Site seguro (SSL)</span>
             </div>
             <div className="flex items-center gap-2 text-muted-foreground">
               <Shield className="w-5 h-5 text-success" />
-              <span className="text-sm">Site Protegido</span>
-            </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Award className="w-5 h-5 text-success" />
-              <span className="text-sm">Loja Verificada</span>
+              <span className="text-sm">Dados protegidos</span>
             </div>
           </div>
         </div>

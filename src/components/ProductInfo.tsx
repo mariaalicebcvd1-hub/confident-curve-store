@@ -1,5 +1,5 @@
 import React from "react";
-import { Star, Truck, ShieldCheck, CreditCard, Zap, Check, Minus, Plus, ShoppingCart, Ruler } from "lucide-react";
+import { Star, Truck, ShieldCheck, CreditCard, Zap, Check, Minus, Plus, ShoppingCart, Ruler, MessageCircle } from "lucide-react";
 import { ColorKey } from "./ProductGallery";
 import tabelaMedidas from "@/assets/tabela-medidas.avif";
 import { trackEventDirect } from "@/hooks/useTracking";
@@ -16,11 +16,11 @@ const colors: { name: string; value: string; key: ColorKey }[] = [
 const sizes = ["P", "M", "G", "GG", "XG"];
 
 const benefits = [
-  "Bumbum empinado em segundos (sem cirurgia!)",
-  "Esconde a pochete instantaneamente",
-  "Tecido invisível - ZERO marcas na roupa",
-  "Tão confortável que você esquece que está usando",
-  "Pode usar o dia inteiro sem apertar",
+  "Levanta e valoriza o bumbum naturalmente",
+  "Suaviza a barriga sem apertar",
+  "Costuras finas que não marcam na roupa",
+  "Tecido respirável para usar o dia todo",
+  "Troca grátis se o tamanho não servir",
 ];
 
 interface ProductInfoProps {
@@ -34,9 +34,8 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
   const [quantity, setQuantity] = React.useState(1);
 
   const handleAddToCart = () => {
-    // Dispara evento do Facebook Pixel
     trackInitiateCheckout({
-      content_name: 'Calcinha Empina Bumbum - Kit 3 unidades',
+      content_name: 'Calcinha Modeladora - Kit 3 unidades',
       value: 87.90 * quantity,
       num_items: 3 * quantity,
     });
@@ -48,13 +47,11 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       { size: sizes[selectedSize], qty: quantity, color: selectedColor }
     );
 
-    // Monta URL com parâmetros de cor, tamanho e UTMs
     const checkoutUrl = buildCheckoutUrl({
       cor: selectedColor,
       tamanho: sizes[selectedSize],
     });
 
-    // Abre o checkout em nova aba
     window.open(checkoutUrl, "_blank");
   };
 
@@ -62,11 +59,11 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
     <div className="space-y-5 px-1 sm:px-0">
       {/* Title & Rating */}
       <div className="text-center sm:text-left">
-        <p className="text-xs sm:text-sm text-primary font-semibold mb-1 uppercase tracking-wide">⚡ Oferta Especial de Lançamento</p>
+        <p className="text-xs sm:text-sm text-primary font-semibold mb-1 uppercase tracking-wide">Kit com 3 Calcinhas</p>
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground leading-tight">
-          Calcinha Empina Bumbum - <span className="text-primary">Pague 1 e Leve 3!</span>
+          Calcinha Modeladora que <span className="text-primary">Valoriza Seu Corpo</span>
         </h1>
-        <p className="text-sm text-muted-foreground mt-2">O segredo das influenciadoras para um bumbum perfeito em qualquer roupa</p>
+        <p className="text-sm text-muted-foreground mt-2">Confortável pra usar o dia inteiro. Levanta o bumbum e suaviza a barriga sem apertar.</p>
         
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 mt-3">
           <div className="flex items-center gap-1 review-stars">
@@ -74,19 +71,17 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
               <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-current" />
             ))}
           </div>
-          <span className="font-semibold text-sm sm:text-base">4.9</span>
-          <span className="text-muted-foreground text-sm">(2.847+ clientes satisfeitas)</span>
-          <span className="text-success font-medium text-sm">• Últimas unidades!</span>
+          <span className="font-semibold text-sm sm:text-base">4.8</span>
+          <span className="text-muted-foreground text-sm">(2.341 avaliações verificadas)</span>
         </div>
       </div>
 
       {/* Price */}
-      <div className="bg-gradient-hero rounded-xl p-4 sm:p-5 space-y-2 border-2 border-primary/20">
-        <p className="text-xs text-destructive font-bold animate-pulse">🔥 PROMOÇÃO ACABA EM BREVE - 70% OFF</p>
+      <div className="bg-gradient-hero rounded-xl p-4 sm:p-5 space-y-2 border border-border">
         <div className="flex flex-wrap items-baseline justify-center sm:justify-start gap-2 sm:gap-3">
-          <span className="price-old text-base sm:text-lg">R$ 289,99</span>
+          <span className="price-old text-base sm:text-lg">R$ 179,90</span>
           <span className="price-new text-2xl sm:text-3xl">R$ 87,90</span>
-          <span className="badge-discount text-xs">-70% OFF</span>
+          <span className="badge-discount text-xs">Kit com 3</span>
         </div>
         
         <div className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm">
@@ -94,9 +89,9 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
           <span className="text-muted-foreground">ou <strong className="text-foreground">12x</strong> de <strong className="text-foreground">R$ 8,74</strong> sem juros</span>
         </div>
         
-        <div className="flex items-center justify-center sm:justify-start gap-2 text-success font-bold text-sm sm:text-base bg-success/10 py-2 px-3 rounded-lg">
+        <div className="flex items-center justify-center sm:justify-start gap-2 text-success font-semibold text-sm bg-success/10 py-2 px-3 rounded-lg">
           <Zap className="w-4 h-4" />
-          <span>PIX COM 10% EXTRA = R$ 79,11 (só hoje!)</span>
+          <span>PIX com 10% de desconto: R$ 79,11</span>
         </div>
       </div>
 
@@ -149,6 +144,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
           <div className="flex items-center gap-2 mb-3">
             <Ruler className="w-4 h-4 text-primary" />
             <p className="text-sm font-semibold">Tabela de Medidas</p>
+            <span className="text-xs text-muted-foreground ml-auto">Dica: na dúvida, peça um número maior</span>
           </div>
           <img 
             src={tabelaMedidas} 
@@ -180,15 +176,9 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
             </button>
           </div>
           <span className="text-sm text-muted-foreground">
-            🎁 Você levará <strong className="text-success">{quantity * 3} calcinhas</strong> pelo preço de 1!
+            Você recebe <strong className="text-success">{quantity * 3} calcinhas</strong> (kit com 3)
           </span>
         </div>
-      </div>
-
-      {/* Guarantee Badge */}
-      <div className="bg-success/5 border border-success/20 rounded-xl p-4 text-center">
-        <p className="text-sm font-semibold text-success">✅ GARANTIA TOTAL DE 30 DIAS</p>
-        <p className="text-xs text-muted-foreground mt-1">Não gostou? Devolvemos 100% do seu dinheiro. Sem perguntas.</p>
       </div>
 
       {/* Benefits */}
@@ -201,36 +191,42 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
         ))}
       </div>
 
+      {/* Guarantee Badge */}
+      <div className="bg-success/5 border border-success/20 rounded-xl p-4">
+        <p className="text-sm font-semibold text-success text-center">Garantia de 30 dias para troca ou devolução</p>
+        <p className="text-xs text-muted-foreground mt-1 text-center">Se não gostar ou o tamanho não servir, a gente resolve.</p>
+      </div>
+
       {/* Add to Cart Button */}
       <div className="space-y-2">
         <button
           type="button"
           onClick={handleAddToCart}
-          className="btn-compra w-full text-sm sm:text-base animate-pulse inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-success text-white hover:bg-success/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide h-12 sm:h-14 px-4 sm:px-8"
+          className="btn-compra w-full text-sm sm:text-base inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-success text-white hover:bg-success/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide h-12 sm:h-14 px-4 sm:px-8"
         >
           <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
-          QUERO MEU KIT COM 70% OFF
+          COMPRAR MEU KIT AGORA
         </button>
-        <p className="text-xs text-center text-muted-foreground">🔒 Compra 100% segura • Entrega garantida</p>
+        <p className="text-xs text-center text-muted-foreground">Pagamento seguro • Frete grátis • Entrega com rastreio</p>
       </div>
 
       {/* Trust Badges */}
       <div className="grid grid-cols-2 gap-2 sm:gap-3">
         <div className="badge-trust flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm">
           <Truck className="w-4 h-4 sm:w-5 sm:h-5 text-trust flex-shrink-0" />
-          <span>Frete Grátis</span>
+          <span>Frete Grátis Brasil</span>
         </div>
         <div className="badge-trust flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm">
           <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-trust flex-shrink-0" />
-          <span>Compra Segura</span>
+          <span>Loja com CNPJ</span>
         </div>
         <div className="badge-trust flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm">
-          <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-trust flex-shrink-0" />
-          <span>Envio Imediato</span>
+          <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-trust flex-shrink-0" />
+          <span>Suporte WhatsApp</span>
         </div>
         <div className="badge-trust flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm">
           <CreditCard className="w-4 h-4 sm:w-5 sm:h-5 text-trust flex-shrink-0" />
-          <span>Parcelamos em 12x</span>
+          <span>12x sem juros</span>
         </div>
       </div>
     </div>
