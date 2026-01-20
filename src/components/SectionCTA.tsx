@@ -116,6 +116,10 @@ const SectionCTA = ({
             <strong className="text-foreground">R$ 6,47</strong> sem juros)
           </p>
 
+          <p className="text-xs text-muted-foreground mb-5">
+            Frete grátis • Loja com CNPJ • Rastreio por WhatsApp
+          </p>
+
           <button
             onClick={handleClick}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-success hover:bg-success/90 text-white font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 uppercase tracking-wide"
