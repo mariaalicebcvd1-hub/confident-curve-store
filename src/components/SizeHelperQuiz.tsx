@@ -57,6 +57,7 @@ export function SizeHelperQuiz({
 }) {
   const [open, setOpen] = React.useState(false);
   const [result, setResult] = React.useState<"P" | "M" | "G" | "GG" | "XG" | null>(null);
+  const applyBtnRef = React.useRef<HTMLButtonElement | null>(null);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -67,6 +68,8 @@ export function SizeHelperQuiz({
   const onSubmit = (values: FormValues) => {
     const size = recommendSize(values);
     setResult(size);
+    // Micro-melhoria: após calcular, leva o foco pro CTA de aplicar.
+    requestAnimationFrame(() => applyBtnRef.current?.focus());
   };
 
   const apply = () => {
@@ -85,15 +88,17 @@ export function SizeHelperQuiz({
     }}>
       <DialogTrigger asChild>
         <Button type="button" variant="outline" className="h-10 rounded-full">
-          Qual meu tamanho?
+          Qual seu tamanho ideal?
         </Button>
       </DialogTrigger>
 
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>Vamos te indicar o tamanho</DialogTitle>
+          <DialogTitle>Qual seu tamanho ideal? Descubra em 5 segundos.</DialogTitle>
           <DialogDescription>
-            É uma ajuda rápida pra você acertar com mais confiança. Se você prefere mais confortável, na dúvida escolha 1 tamanho maior.
+            Com base nos dados de +2.000 clientes, sugerimos o tamanho mais provável pra você acertar de primeira — sem medo de errar.
+            <br />
+            <span className="text-muted-foreground">💡 Prefere mais conforto? Na dúvida, escolha 1 acima.</span>
           </DialogDescription>
         </DialogHeader>
 
@@ -107,7 +112,15 @@ export function SizeHelperQuiz({
                   <FormItem>
                     <FormLabel>Altura (cm)</FormLabel>
                     <FormControl>
-                      <Input inputMode="numeric" placeholder="Ex: 165" {...field} />
+                      <Input
+                        autoFocus
+                        type="number"
+                        inputMode="numeric"
+                        min={140}
+                        max={200}
+                        placeholder="165"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -121,7 +134,14 @@ export function SizeHelperQuiz({
                   <FormItem>
                     <FormLabel>Peso (kg)</FormLabel>
                     <FormControl>
-                      <Input inputMode="numeric" placeholder="Ex: 68" {...field} />
+                      <Input
+                        type="number"
+                        inputMode="numeric"
+                        min={40}
+                        max={150}
+                        placeholder="68"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -130,17 +150,17 @@ export function SizeHelperQuiz({
             </div>
 
             <FormDescription>
-              A gente usa só esses dados pra sugerir o tamanho. Não salvamos nada.
+              Usamos só esses dados pra sugerir o tamanho. Não salvamos nada.
             </FormDescription>
 
             {result && (
               <div className="rounded-xl border border-border bg-secondary/40 p-4">
-                <p className="text-sm text-muted-foreground">Tamanho mais provável:</p>
+                <p className="text-sm text-muted-foreground">Tamanho recomendado:</p>
                 <p className="text-2xl font-black text-foreground leading-tight">
                   {result}
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Dica: se você não gosta de peça mais firme, escolha 1 tamanho acima.
+                  Dica: se gosta de peça mais soltinha, prefira 1 tamanho acima.
                 </p>
               </div>
             )}
@@ -149,7 +169,13 @@ export function SizeHelperQuiz({
               <Button type="submit" variant="secondary" className="w-full sm:w-auto">
                 Ver sugestão
               </Button>
-              <Button type="button" onClick={apply} disabled={!result} className="w-full sm:w-auto">
+              <Button
+                ref={applyBtnRef}
+                type="button"
+                onClick={apply}
+                disabled={!result}
+                className="w-full sm:w-auto"
+              >
                 Usar esse tamanho
               </Button>
             </DialogFooter>
