@@ -2,14 +2,12 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { Play, X, ShoppingBag, ChevronLeft, ChevronRight, Volume2, VolumeX } from "lucide-react";
 import { Dialog, DialogContent, DialogClose, DialogTitle } from "@/components/ui/dialog";
 import videoProduto from "@/assets/video-produto.mp4";
-import videoStories1 from "@/assets/video-stories-1.mp4";
 import { trackEventDirect } from "@/hooks/useTracking";
 
 // Lista de vídeos do Stories
 const storyVideos = [
   { id: 1, src: videoProduto, label: "Produto" },
-  { id: 2, src: videoStories1, label: "Detalhe" },
-  // Adicione mais vídeos aqui conforme necessário
+  // (mantendo apenas o primeiro vídeo)
 ];
 
 const FloatingVideoButton = ({
