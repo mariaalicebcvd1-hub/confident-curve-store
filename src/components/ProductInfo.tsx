@@ -61,9 +61,13 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       <div className="text-center sm:text-left">
         
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground leading-tight">
-          Bumbum Empinado, Barriga Suave, <span className="text-primary">Sem Desconforto</span>
+          Bumbum Mais Empinado, Barriga Suave.
+          <br />
+          <span className="text-primary">Sem parecer que tá usando nada.</span>
         </h1>
-        <p className="text-sm text-muted-foreground mt-2">A calcinha que modela sem apertar, não marca na roupa e você esquece que tá usando.</p>
+        <p className="text-sm text-muted-foreground mt-2">
+          A calcinha modeladora mais confortável do Brasil. Modela sem apertar, empina sem marcar na roupa.
+        </p>
         
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 mt-3">
           <div className="flex items-center gap-1 review-stars">
@@ -105,15 +109,15 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
         <ul className="space-y-2">
           <li className="flex items-start gap-2 text-sm">
             <Check className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
-            <span>Modela sem apertar</span>
+            <span>Troca grátis e rastreio</span>
           </li>
           <li className="flex items-start gap-2 text-sm">
             <Check className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
-            <span>Não marca na roupa</span>
+            <span>Loja com CNPJ</span>
           </li>
           <li className="flex items-start gap-2 text-sm">
             <Check className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
-            <span>Troca grátis e frete com rastreio</span>
+            <span>Teste por 30 dias ou seu dinheiro de volta</span>
           </li>
         </ul>
 
@@ -237,7 +241,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
           className="btn-compra w-full text-sm sm:text-base inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-success text-white hover:bg-success/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 uppercase tracking-wide h-12 sm:h-14 px-4 sm:px-8"
         >
           <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
-          QUERO MEU KIT POR R$ 69,90
+          LEVE 3 POR R$ 69,90
         </button>
       </div>
 
