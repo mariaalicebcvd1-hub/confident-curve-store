@@ -185,9 +185,10 @@ const ProductDescription = ({
             }}
             className="btn-compra inline-flex items-center gap-2 bg-success text-white px-6 py-3 rounded-lg font-bold hover:bg-success/90 transition-colors"
           >
-            Escolher Minha Cor e Tamanho
+            QUERO A MINHA AGORA
           </button>
-          <p className="text-xs text-muted-foreground mt-3">Frete grátis • Loja com CNPJ • Rastreio por WhatsApp</p>
+          <p className="text-xs text-muted-foreground mt-2">Escolha sua cor e tamanho na próxima etapa</p>
+          <p className="text-[11px] text-muted-foreground/90 mt-2">Frete grátis • Loja com CNPJ • Rastreio por WhatsApp</p>
         </div>
       </div>
     </section>
