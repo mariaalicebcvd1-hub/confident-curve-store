@@ -4,14 +4,16 @@ import { trackEventDirect } from "@/hooks/useTracking";
 interface SectionCTAProps {
   title?: string;
   subtitle?: string;
+  priceHighlight?: string;
   buttonText?: string;
   variant?: "default" | "minimal";
   trackingLabel?: string;
 }
 
 const SectionCTA = ({ 
-  title = "Pronta pra experimentar?",
-  subtitle = "Escolha sua cor e tamanho — se não servir, a troca é grátis.",
+  title = "Kit com 3 Calcinhas por R$ 69,90",
+  subtitle = "Cada uma sai por R$ 23,30 — menos que metade do preço comum.",
+  priceHighlight,
   buttonText = "ESCOLHER MINHA COR E TAMANHO",
   variant = "default",
   trackingLabel = "section_cta"
@@ -50,9 +52,13 @@ const SectionCTA = ({
           <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-2">
             {title}
           </h3>
-          <p className="text-muted-foreground mb-6">
+          <p className="text-muted-foreground mb-2">
             {subtitle}
           </p>
+          {priceHighlight && (
+            <p className="text-sm text-success font-semibold mb-4">{priceHighlight}</p>
+          )}
+          {!priceHighlight && <div className="mb-4" />}
           <button
             onClick={handleClick}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-success hover:bg-success/90 text-white font-bold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 uppercase tracking-wide"
@@ -60,7 +66,7 @@ const SectionCTA = ({
             <ShoppingBag className="w-5 h-5" />
             {buttonText}
           </button>
-          <p className="text-xs text-muted-foreground mt-3">Frete grátis • Troca garantida • Pagamento seguro</p>
+          <p className="text-xs text-muted-foreground mt-3">Frete grátis • Troca garantida • Loja com CNPJ</p>
         </div>
       </div>
     </div>
