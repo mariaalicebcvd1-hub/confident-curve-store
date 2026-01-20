@@ -49,8 +49,8 @@ const SectionCTA = ({
       <div className="container mx-auto px-4">
         <div className="text-center max-w-xl mx-auto bg-card rounded-2xl p-8 border border-border shadow-sm">
           <div className="inline-flex items-center justify-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-3">
-            Preço especial no PIX
-            <span className="text-foreground/80 font-semibold normal-case">(desconto do PIX)</span>
+            PIX à vista
+            <span className="text-foreground/80 font-semibold normal-case">(pagamento no PIX)</span>
           </div>
 
           <h3 className="text-xl lg:text-2xl font-black text-foreground mb-2">
