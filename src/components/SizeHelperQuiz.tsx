@@ -50,6 +50,13 @@ function recommendSize({ heightCm, weightKg }: FormValues): "P" | "M" | "G" | "G
   return "XG";
 }
 
+function nextSize(size: "P" | "M" | "G" | "GG" | "XG"): "P" | "M" | "G" | "GG" | "XG" | null {
+  const order = ["P", "M", "G", "GG", "XG"] as const;
+  const idx = order.indexOf(size);
+  if (idx < 0) return null;
+  return order[idx + 1] ?? null;
+}
+
 export function SizeHelperQuiz({
   onSelectSize,
 }: {
@@ -58,6 +65,8 @@ export function SizeHelperQuiz({
   const [open, setOpen] = React.useState(false);
   const [result, setResult] = React.useState<"P" | "M" | "G" | "GG" | "XG" | null>(null);
   const applyBtnRef = React.useRef<HTMLButtonElement | null>(null);
+
+  const comfortSize = React.useMemo(() => (result ? nextSize(result) : null), [result]);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -187,7 +196,17 @@ export function SizeHelperQuiz({
 
                 <div className="mt-3 rounded-xl border border-border bg-background/60 p-3">
                   <p className="text-xs text-muted-foreground leading-relaxed">
-                    <span aria-hidden>✅</span> Dica: se gosta de peça mais soltinha, prefira <span className="font-semibold">1 tamanho acima</span>.
+                    <span aria-hidden>✅</span>{" "}
+                    {comfortSize ? (
+                      <>
+                        Dica: se gosta de peça mais soltinha, prefira <span className="font-semibold">{comfortSize}</span>.
+                      </>
+                    ) : (
+                      <>
+                        Dica: você está no maior tamanho disponível. Se você prefere mais soltinha, pode escolher o <span className="font-semibold">XG</span>
+                        com mais conforto — e se ficar mais firme do que você gosta, a troca é simples.
+                      </>
+                    )}
                   </p>
                 </div>
               </div>
