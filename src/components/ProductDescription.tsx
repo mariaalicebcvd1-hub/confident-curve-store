@@ -148,16 +148,17 @@ const ProductDescription = () => {
         {/* CTA Section */}
         <div className="mt-12 text-center bg-card rounded-2xl p-8 border border-border">
           <div className="inline-flex items-center justify-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-3">
-            PIX vale mais a pena
-            <span className="text-foreground/80 font-semibold normal-case">(economiza R$ 7,80)</span>
+            Preço especial no PIX
+            <span className="text-foreground/80 font-semibold normal-case">(desconto do PIX)</span>
           </div>
 
           <h3 className="text-xl lg:text-2xl font-black text-foreground mb-2">
-            SÓ NO PIX: R$ 69,90 <span className="text-muted-foreground font-bold">(kit com 3)</span>
+            De <span className="line-through text-muted-foreground">R$ 179,90</span> por <span className="text-success">R$ 69,90</span> no PIX <span className="text-muted-foreground font-bold">(kit com 3)</span>
           </h3>
 
           <p className="text-muted-foreground mb-2 max-w-2xl mx-auto">
             No cartão: <strong className="text-foreground">R$ 77,70</strong> ou em até <strong className="text-foreground">12x de R$ 6,47</strong> sem juros.
+            <span className="text-muted-foreground"> No PIX você paga menos.</span>
           </p>
 
           <p className="text-sm text-foreground font-semibold mb-6 max-w-2xl mx-auto">

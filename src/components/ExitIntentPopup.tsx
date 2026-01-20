@@ -169,15 +169,12 @@ const ExitIntentPopup = () => {
             {/* Preço */}
             <div className="pt-1">
               <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wide">
-                PIX vale mais a pena
-                <span className="text-foreground/80 font-semibold normal-case">(economiza R$ 7,80)</span>
+                Preço especial no PIX
+                <span className="text-foreground/80 font-semibold normal-case">(desconto do PIX)</span>
               </div>
 
               <p className="text-sm sm:text-base font-bold text-foreground mt-2">
-                Leve <span className="text-primary">3 calcinhas</span> por:
-              </p>
-              <p className="text-2xl sm:text-3xl font-black text-success">
-                R$ 69,90 <span className="text-sm font-bold text-muted-foreground">no PIX</span>
+                De <span className="line-through text-muted-foreground">R$ 179,90</span> por <span className="text-success">R$ 69,90</span> no PIX
               </p>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                 No cartão: <strong className="text-foreground">R$ 77,70</strong> ou <strong className="text-foreground">12x de R$ 6,47</strong> sem juros
