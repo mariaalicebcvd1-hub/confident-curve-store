@@ -77,24 +77,29 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       </div>
 
       {/* Price */}
-      <div className="bg-gradient-hero rounded-xl p-4 sm:p-5 space-y-3 border border-border">
-        <div className="flex flex-wrap items-baseline justify-center sm:justify-start gap-2 sm:gap-3">
-          <span className="price-old text-base sm:text-lg">R$ 179,90</span>
-          <span className="price-new text-2xl sm:text-3xl">R$ 69,90</span>
-          <span className="badge-discount text-xs">De R$ 179,90 → Agora: R$ 69,90 no Pix (só R$ 23 cada)</span>
-        </div>
-
-        <p className="text-xs text-muted-foreground text-center sm:text-left">
-          Cada peça sai por <strong className="text-foreground">menos de R$ 24</strong>, com conforto real,
-          troca grátis e envio com rastreio.
+      <div className="space-y-2">
+        <p className="text-lg sm:text-xl font-black text-foreground text-center sm:text-left">
+          De <span className="line-through text-muted-foreground">R$ 179,90</span> → Agora:{" "}
+          <span className="text-success">R$ 69,90</span> no Pix
         </p>
 
-        <div className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm">
-          <CreditCard className="w-4 h-4 text-muted-foreground" />
-          <span className="text-muted-foreground">
-            💳 Ou <strong className="text-foreground">R$ 77,70</strong> no cartão (12x de{" "}
-            <strong className="text-foreground">R$ 6,47</strong> sem juros)
-          </span>
+        <div className="bg-gradient-hero rounded-xl p-4 sm:p-5 space-y-3 border border-border">
+          <div className="inline-flex items-center justify-center sm:justify-start gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+            NO PIX <span className="text-foreground/80 font-semibold normal-case">(só R$ 23 cada)</span>
+          </div>
+
+          <p className="text-xs text-muted-foreground text-center sm:text-left">
+            Cada peça sai por <strong className="text-foreground">menos de R$ 24</strong>, com conforto real,
+            troca grátis e envio com rastreio.
+          </p>
+
+          <div className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm">
+            <CreditCard className="w-4 h-4 text-muted-foreground" />
+            <span className="text-muted-foreground">
+              💳 Ou <strong className="text-foreground">R$ 77,70</strong> no cartão (12x de{" "}
+              <strong className="text-foreground">R$ 6,47</strong> sem juros)
+            </span>
+          </div>
         </div>
       </div>
 
