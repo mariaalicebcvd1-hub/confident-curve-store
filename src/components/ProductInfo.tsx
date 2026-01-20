@@ -61,12 +61,14 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
       <div className="text-center sm:text-left">
         
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground leading-tight">
-          Modela, Empina e Não Marca
+          Barriga mais lisa.
           <br />
-          <span className="text-primary">— sem sufocar</span>
+          Bumbum mais alto.
+          <br />
+          <span className="text-primary">Sem marcar — sem sufocar.</span>
         </h1>
         <p className="text-sm text-muted-foreground mt-2">
-          Some a barriga, levanta o bumbum e fica invisível na roupa. Você usa o dia todo sem desconforto.
+          Modelagem de verdade (corte + tecido): você veste, se olha no espelho e já sente a diferença.
         </p>
         
         <div className="mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-start gap-2">
@@ -86,10 +88,10 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
         {/* Topo do card */}
         <div className="text-center sm:text-left space-y-2">
           <p className="inline-flex items-center justify-center rounded-full border border-primary/25 bg-background/60 backdrop-blur px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-primary">
-            ⚡ Direto da fábrica — sem revenda
+            ⚡ Direto da fábrica (sem revenda no meio)
           </p>
           <p className="text-sm sm:text-base font-semibold text-foreground">
-            3 unidades (pra usar e trocar sem stress)
+            Kit com 3 (pra usar, trocar e não ficar na mão)
           </p>
         </div>
 
@@ -103,7 +105,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
             <span className="text-base sm:text-lg font-extrabold text-foreground"> no Pix</span>
           </p>
           <p className="text-xs sm:text-sm text-muted-foreground font-semibold">
-            Sem repasse de revenda: você paga pelo produto, não pela promessa.
+            Sem “história” no preço: é custo de fábrica + envio + suporte. Simples.
           </p>
 
           <div className="pt-1">
