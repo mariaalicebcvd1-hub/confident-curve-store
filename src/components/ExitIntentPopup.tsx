@@ -169,18 +169,20 @@ const ExitIntentPopup = () => {
             {/* Preço */}
             <div className="pt-1">
               <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wide">
-                PIX à vista
-                <span className="text-foreground/80 font-semibold normal-case">(pagamento no PIX)</span>
+                ⚡ Oferta Especial de Lançamento
               </div>
 
-              <p className="text-sm sm:text-base font-bold text-foreground mt-2">
-                De <span className="line-through text-muted-foreground">R$ 179,90</span> por <span className="text-success">R$ 69,90</span> no PIX
+              <p className="text-sm sm:text-base font-black text-foreground mt-2">
+                Kit com 3 Calcinhas Modeladoras por <span className="text-success">R$ 69,90</span> no Pix
               </p>
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                No cartão: <strong className="text-foreground">R$ 77,70</strong> ou <strong className="text-foreground">12x de R$ 6,47</strong> sem juros
+                Modela sem apertar, empina com conforto e não marca na roupa
               </p>
               <p className="text-xs sm:text-sm text-foreground font-semibold mt-2">
-                Cada peça sai por <span className="font-black">menos de R$ 24</span> • troca grátis • rastreio
+                De <span className="line-through text-muted-foreground">R$ 179,90</span> → Agora: <span className="font-black text-success">R$ 69,90</span> no Pix <span className="text-muted-foreground">(só R$ 23 cada)</span>
+              </p>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                💳 Ou <strong className="text-foreground">R$ 77,70</strong> no cartão (12x de <strong className="text-foreground">R$ 6,47</strong> sem juros)
               </p>
             </div>
           </div>

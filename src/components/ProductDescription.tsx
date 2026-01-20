@@ -148,21 +148,23 @@ const ProductDescription = () => {
         {/* CTA Section */}
         <div className="mt-12 text-center bg-card rounded-2xl p-8 border border-border">
           <div className="inline-flex items-center justify-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-3">
-            PIX à vista
-            <span className="text-foreground/80 font-semibold normal-case">(pagamento no PIX)</span>
+            ⚡ Oferta Especial de Lançamento
           </div>
 
           <h3 className="text-xl lg:text-2xl font-black text-foreground mb-2">
-            De <span className="line-through text-muted-foreground">R$ 179,90</span> por <span className="text-success">R$ 69,90</span> no PIX <span className="text-muted-foreground font-bold">(kit com 3)</span>
+            Kit com 3 Calcinhas Modeladoras por <span className="text-success">R$ 69,90</span> no Pix
           </h3>
 
           <p className="text-muted-foreground mb-2 max-w-2xl mx-auto">
-            No cartão: <strong className="text-foreground">R$ 77,70</strong> ou em até <strong className="text-foreground">12x de R$ 6,47</strong> sem juros.
-            <span className="text-muted-foreground"> No PIX você paga menos.</span>
+            Modela sem apertar, empina com conforto e não marca na roupa
           </p>
 
-          <p className="text-sm text-foreground font-semibold mb-6 max-w-2xl mx-auto">
-            Cada peça sai por <strong className="text-foreground font-black">menos de R$ 24</strong> — conforto real, troca grátis e envio com rastreio.
+          <p className="text-sm text-foreground font-semibold mb-4 max-w-2xl mx-auto">
+            De <span className="line-through">R$ 179,90</span> → Agora: <span className="font-black text-success">R$ 69,90</span> no Pix <span className="text-muted-foreground">(só R$ 23 cada)</span>
+          </p>
+
+          <p className="text-sm text-muted-foreground mb-6 max-w-2xl mx-auto">
+            💳 Ou <strong className="text-foreground">R$ 77,70</strong> no cartão (12x de <strong className="text-foreground">R$ 6,47</strong> sem juros)
           </p>
 
           <button 
