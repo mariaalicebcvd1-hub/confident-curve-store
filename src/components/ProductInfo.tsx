@@ -81,7 +81,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
         {/* Topo do card */}
         <div className="text-center sm:text-left space-y-1">
           <p className="inline-flex items-center justify-center rounded-md border border-primary/20 bg-background/60 backdrop-blur px-2 py-1 text-[11px] font-bold uppercase tracking-wide text-primary">
-            ⚡ Oferta de lançamento
+            ⚡ LANÇAMENTO EXCLUSIVO – 70% OFF HOJE
           </p>
           <p className="text-sm sm:text-base font-semibold text-foreground">
             Kit com 3 Calcinhas Modeladoras
