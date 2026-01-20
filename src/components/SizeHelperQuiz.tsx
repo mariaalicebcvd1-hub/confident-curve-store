@@ -103,7 +103,7 @@ export function SizeHelperQuiz({
                 Com base nos dados de +2.000 clientes, sugerimos o tamanho mais provável pra você acertar de primeira — sem medo de errar.
               </DialogDescription>
             </div>
-            <div className="shrink-0 self-start rounded-full border border-border bg-secondary/40 px-3 py-1 text-xs font-semibold text-foreground">
+            <div className="shrink-0 self-center sm:self-start rounded-full border border-border bg-secondary/40 px-3 py-1 text-xs font-semibold text-foreground">
               Rápido & privado
             </div>
           </div>
