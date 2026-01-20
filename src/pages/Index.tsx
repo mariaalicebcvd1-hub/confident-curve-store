@@ -81,9 +81,9 @@ const Index = () => {
 
       {/* CTA após avaliações */}
       <SectionCTA 
-        title="Kit com 3 por R$ 69,90"
-        subtitle="Cada calcinha sai por R$ 23,30 — menos que metade do preço comum."
-        priceHighlight="No PIX: apenas R$ 62,91"
+        title="SÓ NO PIX: R$ 69,90 (kit com 3)"
+        subtitle="No cartão: R$ 77,70 ou em até 12x de R$ 6,47 sem juros. Cada peça sai por menos de R$ 24."
+        priceHighlight="Frete grátis • troca grátis • rastreio"
         trackingLabel="cta_after_reviews"
       />
 
@@ -93,8 +93,8 @@ const Index = () => {
       {/* CTA após garantias */}
       <SectionCTA 
         title="Teste sem risco por 30 dias"
-        subtitle="Não gostou? Devolve e recebe o dinheiro de volta. Sem burocracia."
-        buttonText="QUERO MEU KIT POR R$ 69,90"
+        subtitle="SÓ NO PIX: R$ 69,90 (kit com 3). No cartão: R$ 77,70 ou 12x de R$ 6,47 sem juros."
+        buttonText="ESCOLHER COR E TAMANHO"
         trackingLabel="cta_after_trust"
       />
 
@@ -103,10 +103,10 @@ const Index = () => {
 
       {/* CTA final */}
       <SectionCTA 
-        title="Ainda pensando? Compra e testa."
-        subtitle="3 calcinhas por R$ 69,90. Se não gostar, devolve. Simples assim."
+        title="SÓ NO PIX: R$ 69,90 (kit com 3)"
+        subtitle="No cartão: R$ 77,70 ou em até 12x de R$ 6,47 sem juros. Compra segura e você pode testar por 30 dias."
         priceHighlight="Frete grátis + rastreio por WhatsApp"
-        buttonText="QUERO MEU KIT AGORA"
+        buttonText="ESCOLHER MINHA COR E TAMANHO"
         trackingLabel="cta_after_faq"
       />
 

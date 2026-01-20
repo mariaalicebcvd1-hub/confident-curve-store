@@ -158,7 +158,7 @@ const ExitIntentPopup = () => {
               </div>
               <div className="flex items-center gap-2 text-xs sm:text-sm">
                 <Sparkles className="w-4 h-4 text-success flex-shrink-0" />
-                <span className="font-semibold">10% OFF pagando no PIX</span>
+                <span className="font-semibold">PIX: R$ 69,90 (kit com 3)</span>
               </div>
               <div className="flex items-center gap-2 text-xs sm:text-sm">
                 <Heart className="w-4 h-4 text-success flex-shrink-0" />
@@ -169,10 +169,13 @@ const ExitIntentPopup = () => {
             {/* Preço */}
             <div className="pt-1">
               <p className="text-sm sm:text-base font-bold text-foreground">
-                Leve <span className="text-primary">3 calcinhas</span> por apenas
+                Leve <span className="text-primary">3 calcinhas</span> por:
               </p>
               <p className="text-2xl sm:text-3xl font-black text-success">
-                R$ 79,11 <span className="text-sm font-bold text-muted-foreground">no PIX</span>
+                R$ 69,90 <span className="text-sm font-bold text-muted-foreground">no PIX</span>
+              </p>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                No cartão: <strong className="text-foreground">R$ 77,70</strong> ou <strong className="text-foreground">12x de R$ 6,47</strong> sem juros
               </p>
             </div>
           </div>

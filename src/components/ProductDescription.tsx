@@ -148,13 +148,14 @@ const ProductDescription = () => {
         {/* CTA Section */}
         <div className="mt-12 text-center bg-card rounded-2xl p-8 border border-border">
           <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-3">
-            3 Calcinhas por R$ 69,90
+            SÓ NO PIX: R$ 69,90 (kit com 3 calcinhas)
           </h3>
           <p className="text-muted-foreground mb-2 max-w-2xl mx-auto">
-            Cada uma sai por <strong className="text-foreground">R$ 23,30</strong> — menos que metade do preço de modeladoras comuns.
+            No cartão: <strong className="text-foreground">R$ 77,70</strong> ou em até <strong className="text-foreground">12x de R$ 6,47</strong> sem juros.
           </p>
           <p className="text-sm text-muted-foreground mb-6 max-w-2xl mx-auto">
-            E você tem <strong className="text-foreground">30 dias pra testar</strong>. Não gostou? Troca ou devolução sem burocracia.
+            Cada peça sai por <strong className="text-foreground">menos de R$ 24</strong> e você tem <strong className="text-foreground">30 dias pra testar</strong>.
+            Não gostou? Troca ou devolução sem burocracia.
           </p>
           <button 
             onClick={() => {

@@ -11,8 +11,8 @@ interface SectionCTAProps {
 }
 
 const SectionCTA = ({ 
-  title = "Kit com 3 Calcinhas por R$ 69,90",
-  subtitle = "Cada uma sai por R$ 23,30 — menos que metade do preço comum.",
+  title = "SÓ NO PIX: R$ 69,90 (kit com 3)",
+  subtitle = "No cartão: R$ 77,70 ou em até 12x de R$ 6,47 sem juros. Cada peça sai por menos de R$ 24.",
   priceHighlight,
   buttonText = "ESCOLHER MINHA COR E TAMANHO",
   variant = "default",
