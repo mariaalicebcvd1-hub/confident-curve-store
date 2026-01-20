@@ -162,45 +162,62 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
         </div>
       </div>
 
-      {/* Color Selection */}
-      <div id="product-options">
-        <p className="font-semibold mb-3 text-center sm:text-left">
-          Cor: <span className="text-primary">{selectedColorData?.name}</span>
-        </p>
+      {/* Options (make it impossible to miss) */}
+      <section
+        id="product-options"
+        aria-label="Escolha sua cor e tamanho"
+        className="rounded-2xl border border-border bg-secondary/30 p-4 sm:p-5"
+      >
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-4">
+          <div>
+            <p className="text-sm font-extrabold text-foreground">Escolha aqui 👇</p>
+            <p className="text-xs text-muted-foreground">
+              Pra comprar sem erro, selecione <strong className="text-foreground">cor</strong> e <strong className="text-foreground">tamanho</strong>.
+            </p>
+          </div>
+        </div>
 
-        <ToggleGroup
-          type="single"
-          value={selectedColor}
-          onValueChange={(v) => {
-            if (!v) return;
-            onColorChange(v as ColorKey);
-          }}
-          className="flex flex-wrap justify-center sm:justify-start gap-2"
-        >
-          {colors.map((color) => (
-            <ToggleGroupItem
-              key={color.key}
-              value={color.key}
-              aria-label={`Cor ${color.name}`}
-              className="h-10 px-3 rounded-full data-[state=on]:border-primary data-[state=on]:bg-primary/10"
-            >
-              <span
-                className="h-3 w-3 rounded-full border border-border"
-                style={{
-                  background:
-                    color.value === "mixed"
-                      ? "linear-gradient(135deg, #1a1a1a 33%, #d4b896 33%, #d4b896 66%, #e8b4b8 66%)"
-                      : color.value,
-                }}
-              />
-              <span className="ml-2 text-sm font-semibold">{color.name}</span>
-            </ToggleGroupItem>
-          ))}
-        </ToggleGroup>
-      </div>
+        {/* Color Selection */}
+        <div>
+          <p className="font-semibold mb-2 text-center sm:text-left">
+            Cor: <span className="text-primary">{selectedColorData?.name}</span>
+          </p>
 
-      {/* Size Selection */}
-      <div>
+          <ToggleGroup
+            type="single"
+            value={selectedColor}
+            onValueChange={(v) => {
+              if (!v) return;
+              onColorChange(v as ColorKey);
+            }}
+            className="flex flex-wrap justify-center sm:justify-start gap-2"
+          >
+            {colors.map((color) => (
+              <ToggleGroupItem
+                key={color.key}
+                value={color.key}
+                aria-label={`Cor ${color.name}`}
+                className="h-11 px-4 rounded-full border border-border bg-background shadow-sm hover:bg-secondary data-[state=on]:border-primary data-[state=on]:bg-primary/10"
+              >
+                <span
+                  className="h-4 w-4 rounded-full border border-border ring-1 ring-border"
+                  style={{
+                    background:
+                      color.value === "mixed"
+                        ? "linear-gradient(135deg, #1a1a1a 33%, #d4b896 33%, #d4b896 66%, #e8b4b8 66%)"
+                        : color.value,
+                  }}
+                />
+                <span className="ml-2 text-sm font-bold">{color.name}</span>
+              </ToggleGroupItem>
+            ))}
+          </ToggleGroup>
+        </div>
+
+        <div className="h-4" />
+
+        {/* Size Selection */}
+        <div>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
           <p className="font-semibold text-center sm:text-left">
             Tamanho:{" "}
@@ -225,7 +242,7 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
               key={size}
               value={size}
               aria-label={`Tamanho ${size}`}
-              className="h-11 w-14 rounded-xl text-sm font-extrabold data-[state=on]:border-primary data-[state=on]:bg-primary/10"
+              className="h-11 w-14 rounded-xl border border-border bg-background shadow-sm hover:bg-secondary text-sm font-extrabold data-[state=on]:border-primary data-[state=on]:bg-primary/10"
             >
               {size}
             </ToggleGroupItem>
@@ -237,6 +254,8 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
             Escolha um tamanho pra gente liberar a compra com segurança.
           </p>
         )}
+
+        </div>
         
         {/* Size Guide */}
         <div className="mt-4 bg-secondary/50 rounded-xl p-4 border border-border">
@@ -253,7 +272,7 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
             decoding="async"
           />
         </div>
-      </div>
+      </section>
 
       {/* Quantity */}
       <div>
