@@ -166,6 +166,10 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
             <strong className="text-foreground">R$ 6,47</strong> sem juros)
           </span>
         </div>
+
+        <p className="text-xs text-muted-foreground text-center sm:text-left">
+          Frete grátis • Loja com CNPJ • Rastreio por WhatsApp
+        </p>
       </div>
 
       {/* Options (make it impossible to miss) */}
