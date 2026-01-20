@@ -4,7 +4,7 @@ import UrgencyBanner from "@/components/UrgencyBanner";
 import ProductGallery, { ColorKey, colorFirstImageIndex } from "@/components/ProductGallery";
 import ProductInfo from "@/components/ProductInfo";
 import ProductDescription from "@/components/ProductDescription";
-
+import SectionCTA from "@/components/SectionCTA";
 import Reviews from "@/components/Reviews";
 import TrustSection from "@/components/TrustSection";
 import FAQ from "@/components/FAQ";
@@ -79,11 +79,34 @@ const Index = () => {
       {/* Reviews Section */}
       <Reviews />
 
+      {/* CTA após avaliações */}
+      <SectionCTA 
+        title="Gostou do que leu?"
+        subtitle="Escolha sua cor e tamanho — se não servir, a troca é por nossa conta."
+        trackingLabel="cta_after_reviews"
+      />
+
       {/* Trust & Guarantee Section */}
       <TrustSection />
 
+      {/* CTA após garantias */}
+      <SectionCTA 
+        title="Quer testar sem risco?"
+        subtitle="30 dias pra trocar ou devolver. Escolha sua cor agora."
+        buttonText="VER CORES DISPONÍVEIS"
+        trackingLabel="cta_after_trust"
+      />
+
       {/* FAQ Section */}
       <FAQ />
+
+      {/* CTA final */}
+      <SectionCTA 
+        title="Ainda tem dúvida? Compra e testa."
+        subtitle="Se não gostar, é só devolver. A gente resolve pelo WhatsApp."
+        buttonText="QUERO MEU KIT COM 3"
+        trackingLabel="cta_after_faq"
+      />
 
       {/* Footer */}
       <Footer />
