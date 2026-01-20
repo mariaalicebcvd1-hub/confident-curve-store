@@ -83,9 +83,6 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
           <span className="inline-flex items-center rounded-md border border-primary/20 bg-background/60 backdrop-blur px-2 py-1 text-[11px] font-bold uppercase tracking-wide text-primary">
             Pix à vista
           </span>
-          <span className="text-[11px] font-semibold text-muted-foreground whitespace-nowrap">
-            no Pix <span className="text-foreground font-bold">• R$ 23 cada</span>
-          </span>
         </div>
 
         {/* Main price line */}
@@ -94,6 +91,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
           <span className="text-muted-foreground font-black">→</span>
           <span className="price-new">R$ 69,90</span>
           <span className="text-sm font-bold text-foreground">(kit com 3)</span>
+          <span className="text-sm font-semibold text-muted-foreground">• R$ 23 cada</span>
         </div>
 
         <p className="text-xs text-muted-foreground text-center sm:text-left">
