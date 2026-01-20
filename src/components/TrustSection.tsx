@@ -4,26 +4,26 @@ import { CHECKOUT_URL } from "@/lib/constants";
 const guarantees = [
   {
     icon: RefreshCw,
-    title: "30 Dias pra Trocar",
-    description: "Não serviu ou não gostou? A gente troca ou devolve o dinheiro. Sem burocracia.",
+    title: "30 Dias Pra Testar",
+    description: "Não serviu ou não gostou? A gente troca ou devolve o dinheiro. Sem perguntas chatas, sem burocracia.",
     highlight: true,
   },
   {
     icon: Truck,
-    title: "Frete Grátis",
-    description: "Entrega pra todo Brasil. Você acompanha pelo rastreio.",
+    title: "Frete Grátis + Rastreio",
+    description: "Entrega pra todo Brasil. Você acompanha cada passo pelo WhatsApp ou e-mail.",
     highlight: false,
   },
   {
     icon: Lock,
-    title: "Pagamento Seguro",
-    description: "Site protegido com criptografia. Seus dados estão seguros.",
+    title: "Site 100% Seguro",
+    description: "Criptografia SSL (o cadeado do navegador). Seus dados protegidos como em banco.",
     highlight: false,
   },
   {
     icon: Building2,
     title: "Loja Real com CNPJ",
-    description: "Empresa brasileira registrada. Nota fiscal em todos os pedidos.",
+    description: "Empresa brasileira registrada. Nota fiscal em todos os pedidos. Nada de importação duvidosa.",
     highlight: false,
   },
 ];
@@ -41,10 +41,10 @@ const TrustSection = () => {
         {/* Header */}
         <div className="text-center mb-10">
           <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-3">
-            Compre com Tranquilidade
+            Por Que Você Pode Confiar
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Entendemos que comprar online pode gerar dúvidas. Por isso, garantimos uma experiência segura do início ao fim.
+            Sabemos que comprar online gera dúvidas — especialmente com tanto golpe por aí. Por isso, garantimos uma experiência segura do início ao fim.
           </p>
         </div>
 
@@ -61,7 +61,7 @@ const TrustSection = () => {
             >
               {item.highlight && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-success text-white px-3 py-1 rounded-full text-xs font-bold">
-                  GARANTIA
+                  SEM RISCO
                 </div>
               )}
               <div className={`w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center ${

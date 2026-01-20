@@ -12,38 +12,38 @@ import { CHECKOUT_URL } from "@/lib/constants";
 const features = [
   {
     icon: Heart,
-    title: "Levanta o Bumbum de Verdade",
-    description: "O corte foi pensado pra dar aquele up natural no bumbum. Não é mágica — é o design do tecido que abraça e sustenta. Você nota a diferença na hora que veste.",
+    title: "Empina o Bumbum de Verdade",
+    description: "O corte traseiro foi desenhado pra erguer e sustentar. Não é enchimento, não é mágica — é o formato do tecido que abraça e levanta. O resultado você vê na hora que veste.",
     image: featureEspelho,
   },
   {
     icon: Shirt,
-    title: "Suaviza a Barriga Sem Apertar",
-    description: "O cós alto vai até a cintura e dá aquela ajudinha pra deixar a silhueta mais uniforme. Não é cinta — você respira normal e fica confortável o dia todo.",
+    title: "Segura a Barriga Sem Apertar",
+    description: "O cós alto vai até a cintura e suaviza toda a região abdominal. Mas não é cinta — você respira, senta e trabalha normalmente. Zero desconforto.",
     image: featureGif2,
   },
   {
     icon: Shield,
-    title: "Não Marca na Roupa",
-    description: "As costuras são finas e o tecido é liso, então não aparece aquela marca chata no vestido ou na calça justa. Pode usar com o que quiser.",
+    title: "Zero Marca na Roupa",
+    description: "Costura fina + tecido liso = nada de marquinha no vestido justo ou na calça de alfaiataria. Invisível por baixo de qualquer roupa.",
     image: featureConfiante,
   },
   {
     icon: Leaf,
     title: "Tecido que Respira",
-    description: "O material deixa a pele respirar, então dá pra usar o dia todo sem ficar abafado. Ideal pra quem trabalha fora ou fica muito tempo sentada.",
+    description: "O material deixa a pele respirar o dia inteiro. Sem abafar, sem esquentar. Ideal pra quem trabalha fora ou fica muito tempo sentada.",
     image: featureFrescor,
   },
   {
     icon: Hand,
-    title: "Confortável de Verdade",
-    description: "Não rola, não sobe, não aperta. É o tipo de calcinha que você esquece que tá usando — mas com o benefício extra de modelar.",
+    title: "Conforto Real",
+    description: "Não rola, não sobe, não aperta. É o tipo de calcinha que você esquece que tá usando — mas continua modelando.",
     image: featureDetalhe,
   },
   {
     icon: CheckCircle,
     title: "Silhueta Mais Definida",
-    description: "Cintura mais marcada, bumbum mais empinado, barriga mais suave. É um resultado sutil, mas que faz diferença no caimento da roupa.",
+    description: "Cintura mais marcada, bumbum mais arredondado, barriga mais plana. É um efeito sutil, mas que faz diferença no caimento de qualquer roupa.",
     image: featureSilhueta,
   },
 ];
@@ -55,14 +55,11 @@ const ProductDescription = () => {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-4 leading-tight">
-            Como Funciona na Prática?
+            Por Que Funciona de Verdade?
           </h2>
           <p className="text-muted-foreground leading-relaxed">
-            Sem promessa milagrosa. O segredo tá no corte e no tecido: o design foi feito pra 
-            <strong className="text-foreground"> levantar o bumbum</strong>, 
-            <strong className="text-foreground"> suavizar a barriga</strong> e 
-            <strong className="text-foreground"> não marcar na roupa</strong>. 
-            Simples assim.
+            Sem promessa milagrosa. O segredo está no <strong className="text-foreground">corte estratégico</strong> e no <strong className="text-foreground">tecido de alta elasticidade</strong>. 
+            O design ergue o bumbum, suaviza a barriga e não marca — sem apertar, sem incomodar.
           </p>
         </div>
 
@@ -70,24 +67,24 @@ const ProductDescription = () => {
         <div className="bg-card rounded-2xl p-6 lg:p-8 shadow-sm border border-border mb-12 overflow-hidden">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div className="space-y-4">
-              <span className="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-medium">Diferencial principal</span>
+              <span className="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-medium">O que diferencia das outras</span>
               <h3 className="text-xl lg:text-2xl font-bold text-foreground">
-                Cós Alto que Modela Sem Apertar
+                Cós Alto que Modela Sem Sufocar
               </h3>
               <p className="text-muted-foreground leading-relaxed">
                 O cós vai até embaixo do sutiã e suaviza toda a região da barriga. 
-                <strong className="text-foreground"> Não é cinta</strong> — você consegue sentar, trabalhar e fazer suas atividades normalmente. 
-                E o melhor: não enrola e não desce.
+                <strong className="text-foreground"> Não é cinta desconfortável</strong> — você consegue sentar, trabalhar e fazer suas atividades normalmente. 
+                E diferente de cintas caras, essa não enrola, não desce e não marca.
               </p>
               <div className="flex flex-wrap gap-3">
                 <span className="bg-secondary text-foreground px-3 py-1.5 rounded-full text-sm">
-                  Suaviza a barriga
+                  Barriga mais lisa
                 </span>
                 <span className="bg-secondary text-foreground px-3 py-1.5 rounded-full text-sm">
                   Não enrola
                 </span>
                 <span className="bg-secondary text-foreground px-3 py-1.5 rounded-full text-sm">
-                  Confortável o dia todo
+                  Usa o dia todo
                 </span>
               </div>
             </div>
@@ -152,21 +149,23 @@ const ProductDescription = () => {
         {/* CTA Section */}
         <div className="mt-12 text-center bg-card rounded-2xl p-8 border border-border">
           <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-3">
-            Quer experimentar?
+            Quer testar sem compromisso?
           </h3>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Se não gostar ou o tamanho não servir, você tem 30 dias pra trocar ou devolver. 
-            A gente resolve pelo WhatsApp, sem burocracia.
+            Você tem <strong className="text-foreground">30 dias pra decidir</strong>. Se não gostar ou o tamanho não servir, é só chamar no WhatsApp — troca ou devolução sem burocracia.
           </p>
-          <a 
-            href={CHECKOUT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button 
+            onClick={() => {
+              const productOptions = document.getElementById('product-options');
+              if (productOptions) {
+                productOptions.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }}
             className="btn-compra inline-flex items-center gap-2 bg-success text-white px-6 py-3 rounded-lg font-bold hover:bg-success/90 transition-colors"
           >
-            Ver Oferta do Kit com 3
-          </a>
-          <p className="text-xs text-muted-foreground mt-3">Frete grátis • Troca garantida • Pagamento seguro</p>
+            Escolher Minha Cor e Tamanho
+          </button>
+          <p className="text-xs text-muted-foreground mt-3">Frete grátis • Troca garantida • CNPJ ativo</p>
         </div>
       </div>
     </section>

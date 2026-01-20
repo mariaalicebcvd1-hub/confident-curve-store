@@ -82,7 +82,7 @@ const Index = () => {
       {/* CTA após avaliações */}
       <SectionCTA 
         title="Gostou do que leu?"
-        subtitle="Escolha sua cor e tamanho — se não servir, a troca é por nossa conta."
+        subtitle="Escolha sua cor e tamanho — se não servir, troca grátis."
         trackingLabel="cta_after_reviews"
       />
 
@@ -92,7 +92,7 @@ const Index = () => {
       {/* CTA após garantias */}
       <SectionCTA 
         title="Quer testar sem risco?"
-        subtitle="30 dias pra trocar ou devolver. Escolha sua cor agora."
+        subtitle="30 dias pra devolver se não gostar. Dinheiro de volta, sem burocracia."
         buttonText="VER CORES DISPONÍVEIS"
         trackingLabel="cta_after_trust"
       />
@@ -102,8 +102,8 @@ const Index = () => {
 
       {/* CTA final */}
       <SectionCTA 
-        title="Ainda tem dúvida? Compra e testa."
-        subtitle="Se não gostar, é só devolver. A gente resolve pelo WhatsApp."
+        title="Ainda em dúvida? Compra e testa."
+        subtitle="Se não gostar, devolve. Simples assim. A gente resolve pelo WhatsApp."
         buttonText="QUERO MEU KIT COM 3"
         trackingLabel="cta_after_faq"
       />

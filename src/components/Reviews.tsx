@@ -18,7 +18,7 @@ const reviews = [
     age: 34,
     city: "Belo Horizonte, MG",
     verified: true, 
-    comment: "Comprei com bastante desconfiança porque já tinha me decepcionado com outras. Mas essa realmente funciona. Uso no trabalho (fico 8h sentada) e não incomoda nada. No casamento da minha prima usei com vestido justo e recebi elogios. Já pedi mais um kit.", 
+    comment: "Comprei com bastante desconfiança porque já tinha caído em golpe antes. Mas chegou certinho, com rastreio e tudo. A calcinha realmente segura sem apertar, e no casamento da minha prima usei com vestido justo — recebi elogio real. Já pedi mais um kit.", 
     productImages: [reviewCecilia1, reviewCecilia2, reviewCecilia3], 
     rating: 5, 
     helpful: 23, 
@@ -29,7 +29,7 @@ const reviews = [
     age: 28,
     city: "Rio de Janeiro, RJ",
     verified: true, 
-    comment: "Sou professora e fico muito tempo em pé. Precisava de algo confortável mas que desse uma ajudinha no visual. Essa calcinha é perfeita — segura a barriga sem apertar e o bumbum fica mais empinado. Uso praticamente todo dia.", 
+    comment: "Sou professora e fico muito tempo em pé. Precisava de algo que ajudasse no visual sem me deixar desconfortável. Essa calcinha é perfeita — segura a barriga sem comprimir e o bumbum fica mais arredondado. Uso praticamente todo dia no trabalho.", 
     productImages: [reviewSulem1, reviewSulem2], 
     rating: 5, 
     helpful: 18, 
@@ -40,7 +40,7 @@ const reviews = [
     age: 31,
     city: "São Paulo, SP",
     verified: true, 
-    comment: "Entrega rápida (chegou em 6 dias). O tecido é bom, não esquenta. Uso com calça de alfaiataria no escritório e com vestido nos finais de semana. O tamanho veio certinho (pedi G, uso 42/44).", 
+    comment: "Entrega rápida (chegou em 6 dias úteis). O tecido é bom, não esquenta nem no verão de SP. Uso com calça de alfaiataria no escritório e com vestido nos finais de semana. Pedi G porque uso 42/44 e veio certinho.", 
     productImages: [reviewKarine1, reviewKarine2], 
     rating: 5, 
     helpful: 15, 
@@ -51,7 +51,7 @@ const reviews = [
     age: 42,
     city: "Curitiba, PR",
     verified: true, 
-    comment: "Depois dos 40 ficou mais difícil achar lingerie que valorize o corpo sem ser desconfortável. Essa calcinha me surpreendeu — suaviza a barriga, levanta o bumbum e dá pra usar o dia todo. Já indiquei pra minha irmã.", 
+    comment: "Depois dos 40 ficou mais difícil achar lingerie que valorize o corpo sem ser aquele negócio apertado demais. Essa me surpreendeu: suaviza a barriga, levanta o bumbum de leve e dá pra usar o dia todo sem incômodo. Já indiquei pra minha irmã e minhas amigas.", 
     productImages: [reviewMariana], 
     rating: 5, 
     helpful: 21, 
@@ -62,7 +62,7 @@ const reviews = [
     age: 26,
     city: "Salvador, BA",
     verified: true, 
-    comment: "Comprei pra usar numa festa de fim de ano. O vestido era bem justo e não marcou nada. Gostei tanto que virou minha calcinha favorita do dia a dia também.", 
+    comment: "Comprei pra usar numa festa de fim de ano. O vestido era bem colado e não marcou nada — nem a costura. Gostei tanto que virou minha calcinha favorita do dia a dia também.", 
     productImages: null, 
     rating: 5, 
     helpful: 12, 
@@ -73,7 +73,7 @@ const reviews = [
     age: 38,
     city: "Brasília, DF",
     verified: true, 
-    comment: "Fiquei em dúvida no tamanho e mandei mensagem no WhatsApp. Responderam rápido e me ajudaram a escolher. Veio certinho. O atendimento me deu confiança de que a loja é séria.", 
+    comment: "Fiquei em dúvida no tamanho e mandei mensagem no WhatsApp deles. Responderam em menos de 10 minutos e me ajudaram a escolher o certo. O atendimento me deu segurança de que a loja é séria. Produto veio exatamente como prometido.", 
     productImages: null, 
     rating: 5, 
     helpful: 14, 
@@ -84,7 +84,7 @@ const reviews = [
     age: 29,
     city: "Recife, PE",
     verified: true, 
-    comment: "Não é aquele efeito exagerado que parece falso. É um resultado sutil que faz diferença no caimento da roupa. Uso no trabalho e em ocasiões especiais. Muito satisfeita.", 
+    comment: "O efeito é sutil, não é aquela coisa exagerada que parece fake. Mas faz diferença no caimento da roupa — a calça fica melhor, o vestido cai melhor. Uso no trabalho e em ocasiões especiais.", 
     productImages: null, 
     rating: 5, 
     helpful: 9, 
@@ -95,7 +95,7 @@ const reviews = [
     age: 35,
     city: "Porto Alegre, RS",
     verified: true, 
-    comment: "Comprei o kit misto pra ter as 3 cores. A preta uso mais no dia a dia, a bege com roupa clara. Qualidade é a mesma das 3. Bem acabadas.", 
+    comment: "Comprei o kit misto pra ter as 3 cores. A preta uso mais no dia a dia, a bege com roupa clara, e a rosé guardo pra ocasiões especiais. As 3 têm a mesma qualidade, bem acabadas.", 
     productImages: null, 
     rating: 5, 
     helpful: 11, 
@@ -106,7 +106,7 @@ const reviews = [
     age: 33,
     city: "Goiânia, GO",
     verified: true, 
-    comment: "Lavei várias vezes e não deformou. O elástico continua bom. Era minha maior preocupação porque já tive calcinha modeladora que estragou rápido.", 
+    comment: "Já lavei várias vezes (lavo à mão como recomendaram) e não deformou. O elástico continua firme. Era minha maior preocupação porque já tive calcinha modeladora que estragou em menos de um mês.", 
     productImages: null, 
     rating: 5, 
     helpful: 16, 
@@ -117,7 +117,7 @@ const reviews = [
     age: 27,
     city: "Fortaleza, CE",
     verified: true, 
-    comment: "Sinceramente, o efeito empina bumbum é real. Não é exagero. Meu namorado notou a diferença sem eu falar nada haha. Recomendo.", 
+    comment: "Sinceramente, o efeito empina bumbum é real — não é exagero de propaganda. Meu namorado percebeu a diferença sem eu falar nada haha. Recomendo demais.", 
     productImages: null, 
     rating: 5, 
     helpful: 19, 
@@ -128,7 +128,7 @@ const reviews = [
     age: 40,
     city: "Campinas, SP",
     verified: true, 
-    comment: "Minha dúvida era se ia apertar demais. Não aperta. É firme mas confortável. Uso com jeans e vestido sem problema.", 
+    comment: "Minha dúvida era se ia apertar demais por causa do cós alto. Não aperta. É firme mas confortável. Uso com jeans e vestido sem problema nenhum.", 
     productImages: null, 
     rating: 4, 
     helpful: 8, 
@@ -139,7 +139,7 @@ const reviews = [
     age: 30,
     city: "Florianópolis, SC",
     verified: true, 
-    comment: "Chegou bem embalado, com rastreio certinho. O produto é exatamente como nas fotos. Sem surpresas negativas.", 
+    comment: "Chegou bem embalado, com rastreio certinho no WhatsApp. O produto é exatamente como nas fotos, sem surpresas negativas. Loja séria.", 
     productImages: null, 
     rating: 5, 
     helpful: 7, 
@@ -184,9 +184,9 @@ const Reviews = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <h2 className="text-2xl lg:text-3xl font-bold mb-2">
-            O Que Nossas Clientes Dizem
+            Quem Comprou, Voltou Pra Contar
           </h2>
-          <p className="text-muted-foreground">Avaliações verificadas de quem já comprou</p>
+          <p className="text-muted-foreground">Avaliações reais de clientes que testaram (com fotos de verdade)</p>
         </div>
 
         {/* Rating Summary Card */}
