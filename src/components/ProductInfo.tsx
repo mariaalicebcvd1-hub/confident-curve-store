@@ -1,5 +1,5 @@
 import React from "react";
-import { Star, Truck, ShieldCheck, CreditCard, Check, Minus, Plus, ShoppingCart, Ruler, MessageCircle } from "lucide-react";
+import { Star, Truck, ShieldCheck, CreditCard, Check, Minus, Plus, ShoppingCart, Ruler, MessageCircle, RotateCcw } from "lucide-react";
 import { ColorKey } from "./ProductGallery";
 import tabelaMedidas from "@/assets/tabela-medidas.avif";
 import { trackEventDirect } from "@/hooks/useTracking";
@@ -70,13 +70,15 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
         </p>
         
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 mt-3">
-          <div className="flex items-center gap-1 review-stars">
+          <div className="flex items-center gap-1 review-stars" aria-label="Avaliação média 4.8">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-current" />
             ))}
           </div>
-          <span className="font-semibold text-sm sm:text-base">4.8</span>
-          <span className="text-muted-foreground text-sm">(2.341 avaliações reais)</span>
+          <p className="text-sm sm:text-base">
+            <span className="font-semibold">4.8</span>
+            <span className="text-muted-foreground"> de 2.341 brasileiras satisfeitas</span>
+          </p>
         </div>
       </div>
 
@@ -98,7 +100,7 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
             De <span className="line-through">R$ 179,90</span>
           </p>
           <p className="text-xl sm:text-2xl font-black text-foreground leading-tight">
-            Agora: <span className="text-success">R$ 69,90</span> no Pix
+            Agora: <span className="text-success">R$ 69,90</span> no Pix <span className="text-muted-foreground font-semibold">(direto da fábrica)</span>
           </p>
           <p className="text-sm sm:text-base font-semibold text-muted-foreground">
             Só <span className="text-foreground">R$ 23</span> por peça
@@ -108,15 +110,15 @@ const ProductInfo = ({ selectedColor, onColorChange }: ProductInfoProps) => {
         {/* Valor lógico + confiança */}
         <ul className="space-y-2">
           <li className="flex items-start gap-2 text-sm">
-            <Check className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
-            <span>Troca grátis e rastreio</span>
+            <RotateCcw className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
+            <span>Troca grátis</span>
           </li>
           <li className="flex items-start gap-2 text-sm">
-            <Check className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
-            <span>Loja com CNPJ</span>
+            <Truck className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
+            <span>Frete com rastreio</span>
           </li>
           <li className="flex items-start gap-2 text-sm">
-            <Check className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
+            <ShieldCheck className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
             <span>Teste por 30 dias ou seu dinheiro de volta</span>
           </li>
         </ul>
