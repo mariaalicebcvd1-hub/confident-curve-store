@@ -171,7 +171,7 @@ const Index = () => {
 
       {/* CTA após avaliações */}
       <SectionCTA 
-        title="De R$ 179,90 por R$ 69,90 no PIX — kit com 3 (R$ 23 cada)"
+        title="De R$ 179,90 por R$ 69,90 no PIX (kit com 3)"
         subtitle="No cartão: R$ 77,70 ou em até 12x de R$ 6,47 sem juros. No PIX você paga menos."
         priceHighlight="Frete grátis • troca grátis • rastreio"
         trackingLabel="cta_after_reviews"
@@ -184,7 +184,7 @@ const Index = () => {
       {/* CTA após garantias */}
       <SectionCTA 
         title="Teste sem risco por 30 dias"
-        subtitle="De R$ 179,90 por R$ 69,90 no PIX — kit com 3 (R$ 23 cada). No cartão: R$ 77,70 ou 12x de R$ 6,47 sem juros."
+        subtitle="De R$ 179,90 por R$ 69,90 no PIX (kit com 3). No cartão: R$ 77,70 ou 12x de R$ 6,47 sem juros."
         buttonText="QUERO A MINHA AGORA"
         trackingLabel="cta_after_trust"
         onOpenOptionsDrawer={() => smartCTA("cta_after_trust")}
@@ -195,7 +195,7 @@ const Index = () => {
 
       {/* CTA final */}
       <SectionCTA 
-        title="De R$ 179,90 por R$ 69,90 no PIX — kit com 3 (R$ 23 cada)"
+        title="De R$ 179,90 por R$ 69,90 no PIX (kit com 3)"
         subtitle="No cartão: R$ 77,70 ou em até 12x de R$ 6,47 sem juros. Compra segura e você pode testar por 30 dias."
         priceHighlight="Frete grátis + rastreio por WhatsApp"
         buttonText="QUERO A MINHA AGORA"
