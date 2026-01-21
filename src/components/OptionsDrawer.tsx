@@ -110,6 +110,8 @@ export function OptionsDrawer({
                 if (!v) return;
                 onSelectColor(v as ColorKey);
               }}
+              variant="chipPill"
+              size="lg"
               className="flex flex-wrap justify-center gap-2"
             >
               {colorOptions.map((c) => (
@@ -117,7 +119,7 @@ export function OptionsDrawer({
                   key={c.key}
                   value={c.key}
                   aria-label={`Cor ${c.label}`}
-                  className="h-11 px-4 rounded-full border border-border bg-background shadow-sm text-foreground hover:text-foreground data-[state=on]:border-primary data-[state=on]:bg-primary/10 data-[state=on]:text-foreground"
+                  className="h-11 px-4"
                 >
                   <span
                     className="h-4 w-4 rounded-full border border-border ring-1 ring-border"
@@ -153,6 +155,8 @@ export function OptionsDrawer({
                 if (!v) return;
                 handleSelectSizeValue(v as (typeof sizeOptions)[number]["value"]);
               }}
+              variant="chipTile"
+              size="lg"
               className="flex flex-wrap justify-center gap-2"
             >
               {sizeOptions.map((s) => (
@@ -160,7 +164,7 @@ export function OptionsDrawer({
                   key={s.value}
                   value={s.value}
                   aria-label={`Tamanho ${s.label}`}
-                  className="h-11 w-14 rounded-xl border border-border bg-background shadow-sm text-foreground hover:text-foreground text-sm font-extrabold data-[state=on]:border-primary data-[state=on]:bg-primary/10 data-[state=on]:text-foreground"
+                  className="h-11 w-14 text-sm font-extrabold"
                 >
                   {s.label}
                 </ToggleGroupItem>
