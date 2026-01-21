@@ -119,7 +119,10 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
         {/* Preço */}
         <div className="space-y-1 text-center sm:text-left">
           <p className="text-sm text-muted-foreground">
-            De <span className="line-through">R$ 179,90</span>
+            De{" "}
+            <span className="line-through decoration-2 decoration-destructive/60 text-muted-foreground font-semibold">
+              R$ 179,90
+            </span>
           </p>
           <p className="text-2xl sm:text-3xl font-black text-foreground leading-tight">
             R$ <span className="text-success">69,90</span>
@@ -200,6 +203,8 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
               if (!v) return;
               onColorChange(v as ColorKey);
             }}
+            variant="chipPill"
+            size="lg"
             className="flex flex-wrap justify-center sm:justify-start gap-2"
           >
             {colors.map((color) => (
@@ -207,7 +212,7 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
                 key={color.key}
                 value={color.key}
                 aria-label={`Cor ${color.name}`}
-                  className="h-11 px-4 rounded-full border border-border bg-background shadow-sm text-foreground hover:bg-secondary hover:text-foreground data-[state=on]:border-primary data-[state=on]:bg-primary/10 data-[state=on]:text-foreground"
+                className="h-11 px-4"
               >
                 <span
                   className="h-4 w-4 rounded-full border border-border ring-1 ring-border"
@@ -245,6 +250,8 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
             if (!v) return;
             handleSelectSizeLabel(v as (typeof sizes)[number]);
           }}
+          variant="chipTile"
+          size="lg"
           className="flex flex-wrap justify-center sm:justify-start gap-2"
         >
           {sizes.map((size) => (
@@ -252,7 +259,7 @@ const ProductInfo = ({ selectedColor, onColorChange, selectedSizeIndex, onSizeCh
               key={size}
               value={size}
               aria-label={`Tamanho ${size}`}
-              className="h-11 w-14 rounded-xl border border-border bg-background shadow-sm text-foreground hover:bg-secondary hover:text-foreground text-sm font-extrabold data-[state=on]:border-primary data-[state=on]:bg-primary/10 data-[state=on]:text-foreground"
+              className="h-11 w-14 text-sm font-extrabold"
             >
               {size}
             </ToggleGroupItem>

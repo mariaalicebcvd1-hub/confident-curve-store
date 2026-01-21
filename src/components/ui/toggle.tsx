@@ -11,6 +11,10 @@ const toggleVariants = cva(
       variant: {
         default: "bg-transparent",
         outline: "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
+        chipPill:
+          "border border-border bg-background shadow-sm text-foreground hover:bg-secondary hover:text-foreground data-[state=on]:border-primary data-[state=on]:bg-primary data-[state=on]:text-primary-foreground rounded-full",
+        chipTile:
+          "border border-border bg-background shadow-sm text-foreground hover:bg-secondary hover:text-foreground data-[state=on]:border-primary data-[state=on]:bg-primary data-[state=on]:text-primary-foreground rounded-xl",
       },
       size: {
         default: "h-10 px-3",
