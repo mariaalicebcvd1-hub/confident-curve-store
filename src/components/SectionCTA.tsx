@@ -52,6 +52,12 @@ const SectionCTA = ({
   trackingLabel = "section_cta",
   onOpenOptionsDrawer,
 }: SectionCTAProps) => {
+  // Evita repetição quando alguma seção passa preço/parcelamento direto na copy.
+  const combinedCopy = `${title} ${subtitle} ${priceHighlight ?? ""}`.toLowerCase();
+  const hasPixPriceInCopy = combinedCopy.includes("r$ 69,90") || combinedCopy.includes("69,90");
+  const hasOldPriceInCopy = combinedCopy.includes("r$ 179,90") || combinedCopy.includes("179,90");
+  const hasCardPriceInCopy = combinedCopy.includes("r$ 77,70") || combinedCopy.includes("77,70") || combinedCopy.includes("12x");
+
   const handleClick = () => {
     trackEventDirect('click', 'Section CTA → Color Selection', trackingLabel);
 
@@ -101,20 +107,28 @@ const SectionCTA = ({
 
           <p className="text-muted-foreground mb-2">{emphasizeOfferText(subtitle)}</p>
 
-          <p className="text-sm text-foreground font-semibold mb-4">
-            De <span className="line-through">R$ 179,90</span> → Agora:{" "}
-            <span className="font-black text-success">R$ 69,90</span> no Pix{" "}
-            <span className="text-muted-foreground">• R$ 23 cada</span>
-          </p>
+          {!(hasOldPriceInCopy && hasPixPriceInCopy) && (
+            <p className="text-sm text-foreground font-semibold mb-4">
+              De{" "}
+              <span className="line-through decoration-2 decoration-destructive/60 text-muted-foreground font-semibold">
+                R$ 179,90
+              </span>{" "}
+              → Agora:{" "}
+              <span className="font-black text-success">R$ 69,90</span> no Pix{" "}
+              <span className="text-muted-foreground">• R$ 23 cada</span>
+            </p>
+          )}
 
           {priceHighlight && (
             <p className="text-sm text-success font-semibold mb-4">{emphasizeOfferText(priceHighlight)}</p>
           )}
 
-          <p className="text-sm text-muted-foreground mb-5">
-            💳 Ou <strong className="text-foreground">R$ 77,70</strong> no cartão (12x de{" "}
-            <strong className="text-foreground">R$ 6,47</strong> sem juros)
-          </p>
+          {!hasCardPriceInCopy && (
+            <p className="text-sm text-muted-foreground mb-5">
+              💳 Ou <strong className="text-foreground">R$ 77,70</strong> no cartão (12x de{" "}
+              <strong className="text-foreground">R$ 6,47</strong> sem juros)
+            </p>
+          )}
 
           <button
             onClick={handleClick}
