@@ -4,6 +4,7 @@ import { trackEventDirect } from "@/hooks/useTracking";
 function emphasizeOfferText(text: string) {
   // Destaques pensados para tráfego frio: preço/valor e pontos de confiança.
   const tokens = [
+    "R$ 179,90",
     "R$ 69,90",
     "R$ 77,70",
     "R$ 6,47",
@@ -25,6 +26,17 @@ function emphasizeOfferText(text: string) {
   return parts.map((part, i) => {
     const isMatch = tokens.some((t) => t.toLowerCase() === part.toLowerCase());
     if (!isMatch) return <span key={i}>{part}</span>;
+
+    if (part.toLowerCase() === "r$ 179,90") {
+      return (
+        <span
+          key={i}
+          className="line-through decoration-2 decoration-destructive/60 text-muted-foreground font-semibold"
+        >
+          {part}
+        </span>
+      );
+    }
     return (
       <strong key={i} className="text-foreground font-black">
         {part}
